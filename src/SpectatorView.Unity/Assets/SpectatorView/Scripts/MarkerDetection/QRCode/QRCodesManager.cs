@@ -13,7 +13,7 @@ using Windows.Perception.Spatial;
 using Windows.Perception.Spatial.Preview;
 #endif
 
-using QRCodesTrackerPlugin;
+using Microsoft.MixedReality.QR;
 namespace Microsoft.MixedReality.SpectatorView
 {
     public static class QRCodeEventArgs
@@ -41,15 +41,15 @@ namespace Microsoft.MixedReality.SpectatorView
         public bool AutoStartQRTracking = true;
 
         public bool IsTrackerRunning { get; private set; }
-        public QRTrackerStartResult StartResult { get; private set; }
+        public QRCodeWatcherStartResult StartResult { get; private set; }
 
         public event EventHandler<bool> QRCodesTrackingStateChanged;
-        public event EventHandler<QRCodeEventArgs<QRCodesTrackerPlugin.QRCode>> QRCodeAdded;
-        public event EventHandler<QRCodeEventArgs<QRCodesTrackerPlugin.QRCode>> QRCodeUpdated;
-        public event EventHandler<QRCodeEventArgs<QRCodesTrackerPlugin.QRCode>> QRCodeRemoved;
+        public event EventHandler<QRCodeEventArgs<QRCode>> QRCodeAdded;
+        public event EventHandler<QRCodeEventArgs<QRCode>> QRCodeUpdated;
+        public event EventHandler<QRCodeEventArgs<QRCode>> QRCodeRemoved;
 
-        private SortedDictionary<System.Guid, QRCodesTrackerPlugin.QRCode> qrCodesList = new SortedDictionary<System.Guid, QRCodesTrackerPlugin.QRCode>();
-        private QRTracker qrTracker;
+        private SortedDictionary<System.Guid, QRCode> qrCodesList = new SortedDictionary<System.Guid, QRCode>();
+        private QRCodeWatcher qrWatcher;
 
         private static QRCodesManager qrCodesManager;
         public static QRCodesManager FindOrCreateQRCodesManager(GameObject gameObject)
@@ -183,7 +183,7 @@ namespace Microsoft.MixedReality.SpectatorView
             {
                 foreach (var ite in qrCodesList)
                 {
-                    if (ite.Value.Code == qrCodeData)
+                    if (ite.Value.Data == qrCodeData)
                     {
                         return ite.Key;
                     }
@@ -192,11 +192,11 @@ namespace Microsoft.MixedReality.SpectatorView
             return new Guid();
         }
 
-        public IList<QRCodesTrackerPlugin.QRCode> GetList()
+        public IList<QRCode> GetList()
         {
             lock (qrCodesList)
             {
-                return new List<QRCodesTrackerPlugin.QRCode>(qrCodesList.Values);
+                return new List<QRCode>(qrCodesList.Values);
             }
         }
 
@@ -213,21 +213,21 @@ namespace Microsoft.MixedReality.SpectatorView
             }
         }
 
-        public QRTrackerStartResult StartQRTracking()
+        public QRCodeWatcherStartResult StartQRTracking()
         {
-            if (qrTracker == null)
+            if (qrWatcher == null)
             {
                 Debug.Log("Creating qr tracker");
-                qrTracker = new QRTracker();
-                qrTracker.Added += QrTracker_Added;
-                qrTracker.Updated += QrTracker_Updated;
-                qrTracker.Removed += QrTracker_Removed;
+                qrWatcher = new QRCodeWatcher();
+                qrWatcher.Added += QrWatcher_Added;
+                qrWatcher.Updated += QrWatcher_Updated;
+                qrWatcher.Removed += QrWatcher_Removed;
             }
 
             if (!IsTrackerRunning)
             {
-                StartResult = (qrTracker.Start());
-                if (StartResult == QRTrackerStartResult.Success)
+                StartResult = (qrWatcher.Start());
+                if (StartResult == QRCodeWatcherStartResult.Success)
                 {
                     IsTrackerRunning = true;
                     QRCodesTrackingStateChanged?.Invoke(this, true);
@@ -246,8 +246,8 @@ namespace Microsoft.MixedReality.SpectatorView
             if (IsTrackerRunning)
             {
                 IsTrackerRunning = false;
-                qrTracker.Stop();
-                StartResult = QRTrackerStartResult.DeviceNotConnected;
+                qrWatcher.Stop();
+                StartResult = QRCodeWatcherStartResult.DeviceNotConnected;
                 QRCodesTrackingStateChanged?.Invoke(this, false);
 
                 lock (qrCodesList)
@@ -257,40 +257,40 @@ namespace Microsoft.MixedReality.SpectatorView
             }
         }
 
-        private void QrTracker_Removed(QRCodeRemovedEventArgs args)
+        private void QrWatcher_Removed(object sender, QRCodeRemovedEventArgs args)
         {
             lock (qrCodesList)
             {
-                qrCodesList.Remove(args.Code.Id);
+                qrCodesList.Remove(args.Code.NodeId);
             }
 
-            Debug.Log("QR Code Lost: " + args.Code.Code);
+            Debug.Log("QR Code Lost: " + args.Code.Data);
             QRCodeRemoved?.Invoke(this, QRCodeEventArgs.Create(args.Code));
         }
 
-        private void QrTracker_Updated(QRCodeUpdatedEventArgs args)
+        private void QrWatcher_Updated(object sender, QRCodeUpdatedEventArgs args)
         {
             lock (qrCodesList)
             {
-                if (!qrCodesList.ContainsKey(args.Code.Id))
+                if (!qrCodesList.ContainsKey(args.Code.NodeId))
                 {
-                    Debug.LogWarning("QRCode updated that was not previously being observed: " + args.Code.Code);
+                    Debug.LogWarning("QRCode updated that was not previously being observed: " + args.Code.Data);
                 }
 
-                qrCodesList[args.Code.Id] = args.Code;
+                qrCodesList[args.Code.NodeId] = args.Code;
             }
 
             QRCodeUpdated?.Invoke(this, QRCodeEventArgs.Create(args.Code));
         }
 
-        private void QrTracker_Added(QRCodeAddedEventArgs args)
+        private void QrWatcher_Added(object sender, QRCodeAddedEventArgs args)
         {
             lock (qrCodesList)
             {
-                qrCodesList[args.Code.Id] = args.Code;
+                qrCodesList[args.Code.NodeId] = args.Code;
             }
 
-            Debug.Log("QR Code Added: " + args.Code.Code);
+            Debug.Log("QR Code Added: " + args.Code.Data);
             QRCodeAdded?.Invoke(this, QRCodeEventArgs.Create(args.Code));
         }
     }

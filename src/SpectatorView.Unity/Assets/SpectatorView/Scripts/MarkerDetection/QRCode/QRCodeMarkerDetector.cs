@@ -119,43 +119,43 @@ namespace Microsoft.MixedReality.SpectatorView
             }
         }
 
-        private void QRCodeAdded(object sender, QRCodeEventArgs<QRCodesTrackerPlugin.QRCode> e)
+        private void QRCodeAdded(object sender, QRCodeEventArgs<Microsoft.MixedReality.QR.QRCode> e)
         {
-            if (TryGetMarkerId(e.Data.Code, out var markerId))
+            if (TryGetMarkerId(e.Data.Data, out var markerId))
             {
                 lock (_contentLock)
                 {
-                    _markerIds[e.Data.Id] = markerId;
-                    _markerSizes[markerId] = e.Data.PhysicalSizeMeters;
+                    _markerIds[e.Data.NodeId] = markerId;
+                    _markerSizes[markerId] = e.Data.PhysicalSideLength;
                     _processMarkers = true;
                 }
             }
         }
 
-        private void QRCodeUpdated(object sender, QRCodeEventArgs<QRCodesTrackerPlugin.QRCode> e)
+        private void QRCodeUpdated(object sender, QRCodeEventArgs<Microsoft.MixedReality.QR.QRCode> e)
         {
-            if (TryGetMarkerId(e.Data.Code, out var markerId))
+            if (TryGetMarkerId(e.Data.Data, out var markerId))
             {
                 lock (_contentLock)
                 {
-                    _markerIds[e.Data.Id] = markerId;
-                    _markerSizes[markerId] = e.Data.PhysicalSizeMeters;
+                    _markerIds[e.Data.NodeId] = markerId;
+                    _markerSizes[markerId] = e.Data.PhysicalSideLength;
                     _processMarkers = true;
                 }
             }
         }
 
-        private void QRCodeRemoved(object sender, QRCodeEventArgs<QRCodesTrackerPlugin.QRCode> e)
+        private void QRCodeRemoved(object sender, QRCodeEventArgs<Microsoft.MixedReality.QR.QRCode> e)
         {
             lock (_contentLock)
             {
-                if (_markerIds.TryGetValue(e.Data.Id, out var markerId))
+                if (_markerIds.TryGetValue(e.Data.NodeId, out var markerId))
                 {
                     _markerSizes.Remove(markerId);
                 }
 
-                _markerIds.Remove(e.Data.Id);
-                _markerCoordinateSystems.Remove(e.Data.Id);
+                _markerIds.Remove(e.Data.NodeId);
+                _markerCoordinateSystems.Remove(e.Data.NodeId);
                 _processMarkers = true;
             }
         }
