@@ -439,7 +439,7 @@ ULONG STDMETHODCALLTYPE DeckLinkDevice::Release(void)
 
 bool DeckLinkDevice::Init(ID3D11ShaderResourceView* colorSRV, ID3D11Texture2D* outputTexture, bool useCPU, bool passthroughOutput)
 {
-    IDeckLinkAttributes*            deckLinkAttributes = NULL;
+    IDeckLinkProfileAttributes*     deckLinkProfileAttributes = NULL;
     IDeckLinkDisplayModeIterator*   displayModeIterator = NULL;
     IDeckLinkDisplayMode*           displayMode = NULL;
     BSTR                            deviceNameBSTR = NULL;
@@ -476,14 +476,14 @@ bool DeckLinkDevice::Init(ID3D11ShaderResourceView* colorSRV, ID3D11Texture2D* o
     }
 
     // Check if input mode detection is supported.
-    if (m_deckLink->QueryInterface(IID_IDeckLinkAttributes, (void**)&deckLinkAttributes) == S_OK)
+    if (m_deckLink->QueryInterface(IID_IDeckLinkProfile, (void**)&deckLinkProfileAttributes) == S_OK)
     {
-        if (deckLinkAttributes->GetFlag(BMDDeckLinkSupportsInputFormatDetection, &m_supportsFormatDetection) != S_OK)
+        if (deckLinkProfileAttributes->GetFlag(BMDDeckLinkSupportsInputFormatDetection, &m_supportsFormatDetection) != S_OK)
         {
             m_supportsFormatDetection = false;
         }
 
-        deckLinkAttributes->Release();
+        deckLinkProfileAttributes->Release();
     }
 
     return true;
