@@ -29,6 +29,8 @@ namespace Microsoft.MixedReality.SpectatorView
 
         private class LocalizationSession : DisposableBase, ISpatialLocalizationSession
         {
+            public IPeerConnection Peer => null;
+
             private readonly MarkerDetectorSpatialLocalizer localizer;
             private readonly MarkerDetectorLocalizationSettings settings;
             private readonly MarkerDetectorCoordinateService coordinateService;

@@ -65,6 +65,8 @@ namespace Microsoft.MixedReality.SpectatorView
 
         private class LocalizationSession : DisposableBase, ISpatialLocalizationSession
         {
+            public IPeerConnection Peer => null;
+
             private readonly WorldAnchorSpatialLocalizer localizer;
             private readonly WorldAnchorSpatialLocalizationSettings settings;
 

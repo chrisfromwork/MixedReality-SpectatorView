@@ -4,6 +4,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Microsoft.MixedReality.SpectatorView
@@ -16,6 +17,8 @@ namespace Microsoft.MixedReality.SpectatorView
         /// </summary>
         public abstract Guid PeerSpatialLocalizerId { get; }
 
-        public abstract void RunLocalization(SpatialCoordinateSystemParticipant participant);
+        public abstract Task<bool> TryRunLocalizationAsync(SpatialCoordinateSystemParticipant participant);
+
+        public abstract Task<bool> TryResetLocalizationAsync(SpatialCoordinateSystemParticipant participant);
     }
 }
