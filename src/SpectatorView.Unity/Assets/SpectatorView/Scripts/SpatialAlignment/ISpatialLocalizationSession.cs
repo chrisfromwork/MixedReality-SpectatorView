@@ -14,6 +14,8 @@ namespace Microsoft.MixedReality.SpectatorView
 {
     public interface ISpatialLocalizationSession : IDisposable
     {
+        IPeerConnection Peer { get; }
+
         Task<ISpatialCoordinate> LocalizeAsync(CancellationToken cancellationToken);
 
         void OnDataReceived(BinaryReader reader);

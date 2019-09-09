@@ -1,7 +1,9 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using Microsoft.MixedReality.SpatialAlignment;
 using System;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Microsoft.MixedReality.SpectatorView
@@ -54,13 +56,27 @@ namespace Microsoft.MixedReality.SpectatorView
             }
         }
 
-        public override void RunLocalization(SpatialCoordinateSystemParticipant participant)
+        public override async Task<bool> TryRunLocalizationAsync(SpatialCoordinateSystemParticipant participant)
+        {
+            return await TryRunLocalizationImplAsync(participant);
+        }
+
+        public override async Task<bool> TryResetLocalizationAsync(SpatialCoordinateSystemParticipant participant)
+        {
+            return await TryRunLocalizationImplAsync(participant);
+        }
+
+        private async Task<bool> TryRunLocalizationImplAsync(SpatialCoordinateSystemParticipant participant)
         {
             DebugLog($"Marker-based localization started for: {participant?.SocketEndpoint?.Address ?? "IPAddress unknown"} with marker type {markerType}");
 
             // Note: We need to send the remote localization message prior to starting marker visual localization. The MarkerVisualSpatialLocalizer won't return until localization has completed.
-            SpatialCoordinateSystemManager.Instance.RunRemoteLocalizationAsync(participant.SocketEndpoint, PeerSpatialLocalizerId, new MarkerVisualDetectorLocalizationSettings());
-            SpatialCoordinateSystemManager.Instance.LocalizeAsync(participant.SocketEndpoint, LocalSpatialLocalizerId, new MarkerVisualLocalizationSettings());
+            if (await SpatialCoordinateSystemManager.Instance.RunRemoteLocalizationAsync(participant.SocketEndpoint, PeerSpatialLocalizerId, new MarkerVisualDetectorLocalizationSettings()))
+            {
+                return await SpatialCoordinateSystemManager.Instance.LocalizeAsync(participant.SocketEndpoint, LocalSpatialLocalizerId, new MarkerVisualLocalizationSettings());
+            }
+
+            return await Task.FromResult(false);
         }
 
         private void DebugLog(string message)

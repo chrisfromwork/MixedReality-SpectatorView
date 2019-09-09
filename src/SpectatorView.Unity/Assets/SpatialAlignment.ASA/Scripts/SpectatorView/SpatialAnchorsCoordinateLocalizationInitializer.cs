@@ -4,6 +4,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Microsoft.MixedReality.SpectatorView
@@ -19,12 +20,25 @@ namespace Microsoft.MixedReality.SpectatorView
 
         public override Guid PeerSpatialLocalizerId => SpatialAnchorsLocalizer.Id;
 
-        public override void RunLocalization(SpatialCoordinateSystemParticipant participant)
+        public override async Task<bool> TryRunLocalizationAsync(SpatialCoordinateSystemParticipant participant)
         {
-            SpatialCoordinateSystemManager.Instance.LocalizeAsync(participant.SocketEndpoint, SpatialAnchorsLocalizer.Id, configuration);
+            return await TryRunLocalizationImplAsync(participant);
+        }
 
-            configuration.IsCoordinateCreator = true;
-            SpatialCoordinateSystemManager.Instance.RunRemoteLocalizationAsync(participant.SocketEndpoint, SpatialAnchorsLocalizer.Id, configuration);
+        public override async Task<bool> TryResetLocalizationAsync(SpatialCoordinateSystemParticipant participant)
+        {
+            return await TryRunLocalizationImplAsync(participant);
+        }
+
+        private async Task<bool> TryRunLocalizationImplAsync(SpatialCoordinateSystemParticipant participant)
+        {
+            if (await SpatialCoordinateSystemManager.Instance.LocalizeAsync(participant.SocketEndpoint, SpatialAnchorsLocalizer.Id, configuration))
+            {
+                configuration.IsCoordinateCreator = true;
+                return await SpatialCoordinateSystemManager.Instance.RunRemoteLocalizationAsync(participant.SocketEndpoint, SpatialAnchorsLocalizer.Id, configuration);
+            }
+
+            return false;
         }
     }
 }

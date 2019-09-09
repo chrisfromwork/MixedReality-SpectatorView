@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using Microsoft.MixedReality.SpatialAlignment;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -70,6 +71,13 @@ namespace Microsoft.MixedReality.SpectatorView
         protected Text _countdownText;
 
         /// <summary>
+        /// Text that shows the user the current localization state
+        /// </summary>
+        [Tooltip("Text that shows the user the current localization state")]
+        [SerializeField]
+        protected Text _localizationStateText;
+
+        /// <summary>
         /// Length of time (in seconds) for countdown to start recording
         /// </summary>
         [Tooltip("Length of time (in seconds) for countdown to start recording")]
@@ -124,6 +132,8 @@ namespace Microsoft.MixedReality.SpectatorView
             {
                 UpdateRecordingUI();
             }
+
+            UpdateLocalizationStateUI();
         }
 
         public void OnRecordClick()
@@ -189,6 +199,11 @@ namespace Microsoft.MixedReality.SpectatorView
             }
         }
 
+        public void OnResetLocalizationClick()
+        {
+            SpectatorView.Instance.TryResetLocalizationAsync().FireAndForget();
+        }
+
         private void UpdateRecordingUI()
         {
             _updateRecordingUI = false;
@@ -220,6 +235,15 @@ namespace Microsoft.MixedReality.SpectatorView
                     }
                     _countdownText.text = countdownVal.ToString();
                 }
+            }
+        }
+
+        private void UpdateLocalizationStateUI()
+        {
+            if (_localizationStateText != null &&
+                SpatialCoordinateSystemManager.IsInitialized)
+            {
+                _localizationStateText.text = $"Localization State: {SpatialCoordinateSystemManager.Instance.State}";
             }
         }
 

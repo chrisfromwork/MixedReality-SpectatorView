@@ -92,6 +92,18 @@ namespace Microsoft.MixedReality.SpectatorView
                     _overlayChildren.Add(overlayChild);
                 }
             }
+
+            foreach(var child in _overlayChildren)
+            {
+                if (_showingUI)
+                {
+                    child.Show();
+                }
+                else
+                {
+                    child.Hide();
+                }
+            }
         }
 
         private void Update()
@@ -111,7 +123,8 @@ namespace Microsoft.MixedReality.SpectatorView
                     _uiToggledForTouch = true;
                 }
             }
-            else
+            else if (_touching ||
+                _uiToggledForTouch)
             {
                 _touching = false;
                 _uiToggledForTouch = false;
@@ -144,6 +157,7 @@ namespace Microsoft.MixedReality.SpectatorView
 
         private void UpdateUI()
         {
+            Debug.Log($"Updating UI: {Time.time}, Showing UI: {_showingUI}");
             if (_children != null)
             {
                 foreach (var child in _overlayChildren)
