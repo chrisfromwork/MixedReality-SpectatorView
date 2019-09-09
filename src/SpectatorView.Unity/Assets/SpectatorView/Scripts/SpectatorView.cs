@@ -124,7 +124,7 @@ namespace Microsoft.MixedReality.SpectatorView
 
         private GameObject settingsGameObject;
 
-#if UNITY_ANDROID || UNITY_IOS
+#if UNITY_ANDROID || UNITY_IOS || UNITY_EDITOR
         private GameObject mobileRecordingServiceVisual = null;
         private IRecordingService recordingService = null;
         private IRecordingServiceVisual recordingServiceVisual = null;
@@ -204,7 +204,7 @@ namespace Microsoft.MixedReality.SpectatorView
         {
             Destroy(settingsGameObject);
 
-#if UNITY_ANDROID || UNITY_IOS
+#if UNITY_ANDROID || UNITY_IOS || UNITY_EDITOR
             Destroy(mobileRecordingServiceVisual);
 
             if (mobileNetworkConfigurationVisual != null)
@@ -288,7 +288,7 @@ namespace Microsoft.MixedReality.SpectatorView
 
         private void SetupNetworkConfigurationVisual()
         {
-#if UNITY_ANDROID || UNITY_IOS
+#if UNITY_ANDROID || UNITY_IOS || UNITY_EDITOR
             if (mobileNetworkConfigurationVisual == null)
             {
                 if (networkConfigurationVisual != null)
@@ -327,7 +327,7 @@ namespace Microsoft.MixedReality.SpectatorView
 
         private void OnNetworkConfigurationUpdated(object sender, string ipAddress)
         {
-#if UNITY_ANDROID || UNITY_IOS
+#if UNITY_ANDROID || UNITY_IOS || UNITY_EDITOR
             this.userIpAddress = ipAddress;
             if (networkConfigurationVisual != null)
             {
@@ -342,7 +342,7 @@ namespace Microsoft.MixedReality.SpectatorView
 
         private bool ShouldUseNetworkConfigurationVisual()
         {
-#if UNITY_ANDROID || UNITY_IOS
+#if UNITY_ANDROID || UNITY_IOS || UNITY_EDITOR
             if (NetworkConfigurationSettings.IsInitialized)
             {
                 return NetworkConfigurationSettings.Instance.EnableMobileNetworkConfigurationVisual;
