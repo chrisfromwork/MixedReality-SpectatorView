@@ -173,8 +173,11 @@ namespace Microsoft.MixedReality.SpectatorView
                 Quaternion rotation = Quaternion.identity;
                 if (Coordinate != null)
                 {
+                    var worldPos = Coordinate.WorldToCoordinateSpace(Vector3.zero);
+                    var worldRot = Coordinate.WorldToCoordinateSpace(Quaternion.identity);
                     position = Coordinate.CoordinateToWorldSpace(Vector3.zero);
                     rotation = Coordinate.CoordinateToWorldSpace(Quaternion.identity);
+                    Debug.Log($"Sending known coordinate, world position:{worldPos.ToString("G4")} world rotation:{worldRot.ToString("G4")}, coordinate to origin position:{position.ToString("G4")}, coordinate to origin rotation:{rotation.ToString("G4")}");
                 }
 
                 message.Write(position);

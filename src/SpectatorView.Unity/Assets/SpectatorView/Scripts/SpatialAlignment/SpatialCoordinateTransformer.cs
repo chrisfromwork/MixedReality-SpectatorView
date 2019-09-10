@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using Microsoft.MixedReality.SpatialAlignment;
@@ -42,7 +42,10 @@ namespace Microsoft.MixedReality.SpectatorView
 
         private void Update()
         {
-            if (currentParticipant != null && sharedCoordinateOrigin != null && currentParticipant.Coordinate != null && currentParticipant.PeerSpatialCoordinateIsLocated)
+            if (currentParticipant != null &&
+                sharedCoordinateOrigin != null &&
+                currentParticipant.Coordinate != null &&
+                currentParticipant.PeerSpatialCoordinateIsLocated)
             {
                 // Obtain a position and rotation that transforms this application's local world origin to the shared spatial coordinate space.
                 var localWorldToCoordinatePosition = currentParticipant.Coordinate.WorldToCoordinateSpace(Vector3.zero);
@@ -53,9 +56,27 @@ namespace Microsoft.MixedReality.SpectatorView
                 var peerCoordinateToWorldRotation = currentParticipant.PeerSpatialCoordinateWorldRotation;
 
                 // Create a transform that converts the local world space to the peer world space (peer coordinate to peer world * local world to local shared coordinate).
-                sharedCoordinateOrigin.position = peerCoordinateToWorldPosition + localWorldToCoordinatePosition;
-                sharedCoordinateOrigin.rotation = peerCoordinateToWorldRotation * localWorldToCoordinateRotation;
-                DebugLog($"Updated transform, Position: {sharedCoordinateOrigin.position.ToString("G4")}, Rotation: {sharedCoordinateOrigin.rotation.ToString("G4")}");
+                var position = peerCoordinateToWorldPosition + localWorldToCoordinatePosition;
+                var rotation = peerCoordinateToWorldRotation * localWorldToCoordinateRotation;
+
+                if (sharedCoordinateOrigin.position != position ||
+                    sharedCoordinateOrigin.rotation != rotation)
+                {
+                    DebugLog($"World To Coordinate, Position:{localWorldToCoordinatePosition.ToString("G4")}, Rotation:{localWorldToCoordinateRotation.ToString("G4")}");
+                    DebugLog($"Peer Coordinate To World, Position:{peerCoordinateToWorldPosition.ToString("G4")}, Rotation:{peerCoordinateToWorldRotation.ToString("G4")}");
+
+                    sharedCoordinateOrigin.position = position;
+                    sharedCoordinateOrigin.rotation = rotation;
+                    DebugLog($"Updated transform, Position: {sharedCoordinateOrigin.position.ToString("G4")}, Rotation: {sharedCoordinateOrigin.rotation.ToString("G4")}");
+                }
+            }
+            else if (sharedCoordinateOrigin != null &&
+                    (sharedCoordinateOrigin.position != Vector3.zero ||
+                    sharedCoordinateOrigin.rotation != Quaternion.identity))
+            {
+                DebugLog($"Resetting spatial coordinate transform.");
+                sharedCoordinateOrigin.position = Vector3.zero;
+                sharedCoordinateOrigin.rotation = Quaternion.identity;
             }
         }
 
