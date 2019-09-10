@@ -53,34 +53,35 @@ namespace Microsoft.MixedReality.SpectatorView
         {
             get
             {
-                if (currentLocalizationSession != null)
-                {
-                    return LocalizationState.Localizing;
-                }
+                // if (currentLocalizationSession != null)
+                // {
+                //     return LocalizationState.Localizing;
+                // }
 
-                if (participants.Count > 0)
-                {
-                    bool allLocalized = true;
-                    foreach (var participantPair in participants)
-                    {
-                        if (participantPair.Value.Coordinate == null)
-                        {
-                            allLocalized = false;
-                            break;
-                        }
-                    }
+                // if (participants.Count > 0)
+                // {
+                //     bool allLocalized = true;
+                //     foreach (var participantPair in participants)
+                //     {
+                //         if (participantPair.Value.Coordinate == null)
+                //         {
+                //             allLocalized = false;
+                //             break;
+                //         }
+                //     }
 
-                    if (allLocalized)
-                    {
-                        return LocalizationState.Localized;
-                    }
-                    else
-                    {
-                        return LocalizationState.Unexpected;
-                    }
-                }
+                //     if (allLocalized)
+                //     {
+                //         return LocalizationState.Localized;
+                //     }
+                //     else
+                //     {
+                //         return LocalizationState.Unexpected;
+                //     }
+                // }
 
-                return LocalizationState.None;
+                // return LocalizationState.None;
+                return LocalizationState.Unexpected;
             }
         }
 
@@ -197,9 +198,9 @@ namespace Microsoft.MixedReality.SpectatorView
                 }
             }
 
-            // Reset any previously used coordinates
-            participant.Coordinate = null;
-            participant.EnsureStateChangesAreBroadcast();
+            // // Reset any previously used coordinates
+            // participant.Coordinate = null;
+            // participant.EnsureStateChangesAreBroadcast();
 
             if (!localizers.TryGetValue(spatialLocalizerID, out ISpatialLocalizer localizer))
             {
@@ -359,9 +360,9 @@ namespace Microsoft.MixedReality.SpectatorView
                 return;
             }
 
-            // Reset any previously used coordinates
-            participant.Coordinate = null;
-            participant.EnsureStateChangesAreBroadcast();
+            // // Reset any previously used coordinates
+            // participant.Coordinate = null;
+            // participant.EnsureStateChangesAreBroadcast();
 
             bool localizationSuccessful = await RunLocalizationSessionAsync(localizer, settings, participant);
 

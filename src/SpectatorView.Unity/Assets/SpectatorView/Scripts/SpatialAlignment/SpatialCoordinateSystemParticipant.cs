@@ -43,16 +43,7 @@ namespace Microsoft.MixedReality.SpectatorView
             {
                 if (coordinate != value)
                 {
-                    if (value == null)
-                    {
-                        Debug.Log("SpatialCoordinateSystemParticipant: Coordinate reset.");
-                        ResetCoordinate();
-                    }
-                    else
-                    {
-                        Debug.Log("SpatialCoordinateSystemParticipant: Coordinate updated.");
-                        coordinate = value;
-                    }
+                    coordinate = value;
 
                     if (debugCoordinateLocalizer != null)
                     {
@@ -173,11 +164,8 @@ namespace Microsoft.MixedReality.SpectatorView
                 Quaternion rotation = Quaternion.identity;
                 if (Coordinate != null)
                 {
-                    var worldPos = Coordinate.WorldToCoordinateSpace(Vector3.zero);
-                    var worldRot = Coordinate.WorldToCoordinateSpace(Quaternion.identity);
                     position = Coordinate.CoordinateToWorldSpace(Vector3.zero);
                     rotation = Coordinate.CoordinateToWorldSpace(Quaternion.identity);
-                    Debug.Log($"Sending known coordinate, world position:{worldPos.ToString("G4")} world rotation:{worldRot.ToString("G4")}, coordinate to origin position:{position.ToString("G4")}, coordinate to origin rotation:{rotation.ToString("G4")}");
                 }
 
                 message.Write(position);
@@ -216,8 +204,6 @@ namespace Microsoft.MixedReality.SpectatorView
             PeerIsLocatingSpatialCoordinate = reader.ReadBoolean();
             PeerSpatialCoordinateWorldPosition = reader.ReadVector3();
             PeerSpatialCoordinateWorldRotation = reader.ReadQuaternion();
-
-            Debug.Log($"Peer sent coordinate message: HasTracking:{PeerDeviceHasTracking}, IsLocated:{PeerSpatialCoordinateIsLocated}, IsLocating:{PeerIsLocatingSpatialCoordinate}, WorldPosition:{PeerSpatialCoordinateWorldPosition.ToString("G4")}, WorldRotation:{PeerSpatialCoordinateWorldRotation.ToString("G4")}");
         }
 
         internal void SendSupportedLocalizersMessage(SocketEndpoint endpoint, ICollection<Guid> supportedLocalizers)
@@ -248,14 +234,14 @@ namespace Microsoft.MixedReality.SpectatorView
             peerSupportedLocalizersTaskSource.TrySetResult(supportedLocalizers);
         }
 
-        private void ResetCoordinate()
-        {
-            coordinate = null;
-            PeerDeviceHasTracking = false;
-            PeerSpatialCoordinateIsLocated = false;
-            PeerIsLocatingSpatialCoordinate = false;
-            PeerSpatialCoordinateWorldPosition = Vector3.zero;
-            PeerSpatialCoordinateWorldRotation = Quaternion.identity;
-        }
+        // private void ResetCoordinate()
+        // {
+        //     coordinate = null;
+        //     PeerDeviceHasTracking = false;
+        //     PeerSpatialCoordinateIsLocated = false;
+        //     PeerIsLocatingSpatialCoordinate = false;
+        //     PeerSpatialCoordinateWorldPosition = Vector3.zero;
+        //     PeerSpatialCoordinateWorldRotation = Quaternion.identity;
+        // }
     }
 }
