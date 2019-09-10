@@ -153,10 +153,6 @@ namespace Microsoft.MixedReality.SpectatorView
                 }
             }
 
-            // // Reset any previously used coordinates
-            // participant.Coordinate = null;
-            // participant.EnsureStateChangesAreBroadcast();
-
             if (!localizers.TryGetValue(spatialLocalizerID, out ISpatialLocalizer localizer))
             {
                 Debug.LogError($"Could not find a ISpatialLocalizer for spatialLocalizerID {spatialLocalizerID}");
@@ -314,10 +310,6 @@ namespace Microsoft.MixedReality.SpectatorView
                 SendLocalizationCompleteCommand(socketEndpoint, localizationSuccessful: false);
                 return;
             }
-
-            // // Reset any previously used coordinates
-            // participant.Coordinate = null;
-            // participant.EnsureStateChangesAreBroadcast();
 
             bool localizationSuccessful = await RunLocalizationSessionAsync(localizer, settings, participant);
 

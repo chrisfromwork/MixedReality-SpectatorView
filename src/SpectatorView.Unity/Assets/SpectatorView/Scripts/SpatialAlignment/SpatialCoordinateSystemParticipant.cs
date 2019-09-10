@@ -233,15 +233,5 @@ namespace Microsoft.MixedReality.SpectatorView
 
             peerSupportedLocalizersTaskSource.TrySetResult(supportedLocalizers);
         }
-
-        // private void ResetCoordinate()
-        // {
-        //     coordinate = null;
-        //     PeerDeviceHasTracking = false;
-        //     PeerSpatialCoordinateIsLocated = false;
-        //     PeerIsLocatingSpatialCoordinate = false;
-        //     PeerSpatialCoordinateWorldPosition = Vector3.zero;
-        //     PeerSpatialCoordinateWorldRotation = Quaternion.identity;
-        // }
     }
 }
