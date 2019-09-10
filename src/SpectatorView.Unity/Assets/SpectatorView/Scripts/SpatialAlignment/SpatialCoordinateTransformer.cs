@@ -78,6 +78,8 @@ namespace Microsoft.MixedReality.SpectatorView
                 sharedCoordinateOrigin.position = Vector3.zero;
                 sharedCoordinateOrigin.rotation = Quaternion.identity;
             }
+
+            DebugLog($"Camera position: {Camera.main.transform.position}, rotation: {Camera.main.transform.rotation}, scale: {Camera.main.transform.localScale}, lossyScale: {Camera.main.transform.lossyScale}, localPosition: {Camera.main.transform.localPosition}, localRotation: {Camera.main.transform.localRotation}");
         }
 
         private void OnParticipantDisconnected(SpatialCoordinateSystemParticipant participant)

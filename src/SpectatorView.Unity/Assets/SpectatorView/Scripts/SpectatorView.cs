@@ -169,8 +169,6 @@ namespace Microsoft.MixedReality.SpectatorView
                     break;
                 case Role.Spectator:
                     {
-                        SetupRecordingService();
-
                         if (spectatorDebugVisualPrefab != null)
                         {
                             SpatialCoordinateSystemManager.Instance.debugVisual = spectatorDebugVisualPrefab;
@@ -193,6 +191,8 @@ namespace Microsoft.MixedReality.SpectatorView
                     }
                     break;
             }
+
+            SetupRecordingService();
         }
 
         private void Update()

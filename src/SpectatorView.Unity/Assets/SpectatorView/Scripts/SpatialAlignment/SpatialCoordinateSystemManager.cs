@@ -12,14 +12,6 @@ namespace Microsoft.MixedReality.SpectatorView
 {
     public class SpatialCoordinateSystemManager : Singleton<SpatialCoordinateSystemManager>
     {
-        public enum LocalizationState
-        {
-            None,
-            Localizing,
-            Localized,
-            Unexpected
-        }
-
         /// <summary>
         /// Check for debug logging.
         /// </summary>
@@ -48,43 +40,6 @@ namespace Microsoft.MixedReality.SpectatorView
         public event Action<SpatialCoordinateSystemParticipant> ParticipantConnected;
 
         public event Action<SpatialCoordinateSystemParticipant> ParticipantDisconnected;
-
-        public LocalizationState State
-        {
-            get
-            {
-                // if (currentLocalizationSession != null)
-                // {
-                //     return LocalizationState.Localizing;
-                // }
-
-                // if (participants.Count > 0)
-                // {
-                //     bool allLocalized = true;
-                //     foreach (var participantPair in participants)
-                //     {
-                //         if (participantPair.Value.Coordinate == null)
-                //         {
-                //             allLocalized = false;
-                //             break;
-                //         }
-                //     }
-
-                //     if (allLocalized)
-                //     {
-                //         return LocalizationState.Localized;
-                //     }
-                //     else
-                //     {
-                //         return LocalizationState.Unexpected;
-                //     }
-                // }
-
-                // return LocalizationState.None;
-                return LocalizationState.Unexpected;
-            }
-        }
-
 
         internal const string CoordinateStateMessageHeader = "COORDSTATE";
         internal const string SupportedLocalizersMessageHeader = "SUPPORTLOC";
