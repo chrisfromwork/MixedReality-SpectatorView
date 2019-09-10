@@ -245,7 +245,7 @@ namespace Microsoft.MixedReality.SpectatorView
 
         private void SetupRecordingService()
         {
-#if UNITY_ANDROID || UNITY_IOS
+#if UNITY_ANDROID || UNITY_IOS || UNITY_EDITOR
             GameObject recordingVisualPrefab = defaultMobileRecordingServiceVisualPrefab;
             if (MobileRecordingSettings.IsInitialized && MobileRecordingSettings.Instance.OverrideMobileRecordingServicePrefab != null)
             {
@@ -285,6 +285,9 @@ namespace Microsoft.MixedReality.SpectatorView
             return true;
 #elif UNITY_IOS
             recordingService = new iOSRecordingService();
+            return true;
+#elif UNITY_EDITOR
+            recordingService = null;
             return true;
 #else
             recordingService = null;

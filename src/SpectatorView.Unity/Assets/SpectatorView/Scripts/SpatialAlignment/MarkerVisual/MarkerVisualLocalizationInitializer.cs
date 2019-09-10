@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using Microsoft.MixedReality.SpatialAlignment;
@@ -71,12 +71,9 @@ namespace Microsoft.MixedReality.SpectatorView
             DebugLog($"Marker-based localization started for: {participant?.SocketEndpoint?.Address ?? "IPAddress unknown"} with marker type {markerType}");
 
             // Note: We need to send the remote localization message prior to starting marker visual localization. The MarkerVisualSpatialLocalizer won't return until localization has completed.
-            if (await SpatialCoordinateSystemManager.Instance.RunRemoteLocalizationAsync(participant.SocketEndpoint, PeerSpatialLocalizerId, new MarkerVisualDetectorLocalizationSettings()))
-            {
-                return await SpatialCoordinateSystemManager.Instance.LocalizeAsync(participant.SocketEndpoint, LocalSpatialLocalizerId, new MarkerVisualLocalizationSettings());
-            }
-
-            return await Task.FromResult(false);
+            // We also want to not wait for remote localiztion to complete. Otherwise, we will never show the marker visual.
+            SpatialCoordinateSystemManager.Instance.RunRemoteLocalizationAsync(participant.SocketEndpoint, PeerSpatialLocalizerId, new MarkerVisualDetectorLocalizationSettings()).FireAndForget();
+            return await SpatialCoordinateSystemManager.Instance.LocalizeAsync(participant.SocketEndpoint, LocalSpatialLocalizerId, new MarkerVisualLocalizationSettings());
         }
 
         private void DebugLog(string message)

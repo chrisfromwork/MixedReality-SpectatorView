@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System;
@@ -148,6 +148,14 @@ namespace Microsoft.MixedReality.SpectatorView
         public Task<bool> RunRemoteLocalizationAsync(SocketEndpoint socketEndpoint, Guid spatialLocalizerID, ISpatialLocalizationSettings settings)
         {
             DebugLog($"Initiating remote localization: {socketEndpoint.Address}, {spatialLocalizerID.ToString()}");
+
+            if (remoteLocalizationSessions.TryGetValue(socketEndpoint, out var currentCompletionSource))
+            {
+                DebugLog("Canceling existing remote localization session: {socketEndpoint.Address}");
+                currentCompletionSource.TrySetCanceled();
+                remoteLocalizationSessions.Remove(socketEndpoint);
+            }
+
             TaskCompletionSource<bool> taskCompletionSource = new TaskCompletionSource<bool>();
             remoteLocalizationSessions.Add(socketEndpoint, taskCompletionSource);
 
@@ -176,7 +184,7 @@ namespace Microsoft.MixedReality.SpectatorView
             if (currentLocalizationSession != null)
             {
                 if (participant == currentLocalizationSession.Peer &&
-                    !remoteLocalizationSessions.TryGetValue(socketEndpoint, out var taskCompletionSource) &&
+                    remoteLocalizationSessions.TryGetValue(socketEndpoint, out var taskCompletionSource) &&
                     taskCompletionSource.TrySetCanceled())
                 {
                     DebugLog($"Current localization session for {socketEndpoint.Address} was canceled based on a new localization request.");
@@ -304,6 +312,7 @@ namespace Microsoft.MixedReality.SpectatorView
                 return;
             }
 
+            Debug.Log($"Localization completed message received: {socketEndpoint.Address}");
             remoteLocalizationSessions.Remove(socketEndpoint);
             taskSource.SetResult(localizationSuccessful);
         }
@@ -320,7 +329,7 @@ namespace Microsoft.MixedReality.SpectatorView
             if (currentLocalizationSession != null)
             {
                 if (participant == currentLocalizationSession.Peer &&
-                    !remoteLocalizationSessions.TryGetValue(socketEndpoint, out var taskCompletionSource) &&
+                    remoteLocalizationSessions.TryGetValue(socketEndpoint, out var taskCompletionSource) &&
                     taskCompletionSource.TrySetCanceled())
                 {
                     DebugLog($"Current localization session for {socketEndpoint.Address} was canceled based on a new localization request.");

@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using Microsoft.MixedReality.SpatialAlignment;
@@ -43,7 +43,16 @@ namespace Microsoft.MixedReality.SpectatorView
             {
                 if (coordinate != value)
                 {
-                    coordinate = value;
+                    if (value == null)
+                    {
+                        Debug.Log("SpatialCoordinateSystemParticipant: Coordinate reset.");
+                        ResetCoordinate();
+                    }
+                    else
+                    {
+                        Debug.Log("SpatialCoordinateSystemParticipant: Coordinate updated.");
+                        coordinate = value;
+                    }
 
                     if (debugCoordinateLocalizer != null)
                     {
@@ -204,6 +213,8 @@ namespace Microsoft.MixedReality.SpectatorView
             PeerIsLocatingSpatialCoordinate = reader.ReadBoolean();
             PeerSpatialCoordinateWorldPosition = reader.ReadVector3();
             PeerSpatialCoordinateWorldRotation = reader.ReadQuaternion();
+
+            Debug.Log($"Peer sent coordinate message: HasTracking:{PeerDeviceHasTracking}, IsLocated:{PeerSpatialCoordinateIsLocated}, IsLocating:{PeerIsLocatingSpatialCoordinate}, WorldPosition:{PeerSpatialCoordinateWorldPosition.ToString("G4")}, WorldRotation:{PeerSpatialCoordinateWorldRotation.ToString("G4")}");
         }
 
         internal void SendSupportedLocalizersMessage(SocketEndpoint endpoint, ICollection<Guid> supportedLocalizers)
@@ -232,6 +243,16 @@ namespace Microsoft.MixedReality.SpectatorView
             }
 
             peerSupportedLocalizersTaskSource.TrySetResult(supportedLocalizers);
+        }
+
+        private void ResetCoordinate()
+        {
+            coordinate = null;
+            PeerDeviceHasTracking = false;
+            PeerSpatialCoordinateIsLocated = false;
+            PeerIsLocatingSpatialCoordinate = false;
+            PeerSpatialCoordinateWorldPosition = Vector3.zero;
+            PeerSpatialCoordinateWorldRotation = Quaternion.identity;
         }
     }
 }

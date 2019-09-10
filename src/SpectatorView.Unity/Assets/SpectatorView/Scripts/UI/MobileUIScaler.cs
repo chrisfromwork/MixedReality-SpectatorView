@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
@@ -12,7 +12,7 @@ namespace Microsoft.MixedReality.SpectatorView
     {
         private void Awake()
         {
-#if UNITY_IOS || UNITY_ANDROID
+#if UNITY_IOS || UNITY_ANDROID || UNITY_EDITOR
             float designDpi = 424;
             float dpi = Screen.dpi;
 
