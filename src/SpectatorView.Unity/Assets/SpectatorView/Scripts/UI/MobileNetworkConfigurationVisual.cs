@@ -68,7 +68,12 @@ namespace Microsoft.MixedReality.SpectatorView
             {
                 DebugLog("Unable to obtain ip address from field.");
                 ipAddressField.text = ipAddress;
+
+                if (errorText == null)
+                {
                 errorText.text = "Invalid IP Address specified.";
+                }
+                
                 return;
             }
 
