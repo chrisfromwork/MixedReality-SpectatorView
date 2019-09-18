@@ -933,7 +933,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8122803902584282555
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1099,7 +1099,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8122803902635850144
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1140,7 +1140,6 @@ MonoBehaviour:
   _previewButton: {fileID: 8122803901102352704}
   _countdownImage: {fileID: 8122803902626311211}
   _countdownText: {fileID: 8122803902054301775}
-  _localizationStateText: {fileID: 0}
   _countdownLength: 3
 --- !u!1 &8122803902756140955
 GameObject:
