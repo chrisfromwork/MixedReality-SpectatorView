@@ -102,7 +102,6 @@ namespace Microsoft.MixedReality.SpectatorView
 
             // Use the local position and local rotation to avoid reapplying parent transforms.
             markerCoordinate.WorldToCoordinate = Matrix4x4.TRS(cameraTransform.localPosition, cameraTransform.localRotation, Vector3.one) * cameraToMarker;
-
             DebugLog($"Hiding marker");
             markerCoordinate.HideMarker();
         }

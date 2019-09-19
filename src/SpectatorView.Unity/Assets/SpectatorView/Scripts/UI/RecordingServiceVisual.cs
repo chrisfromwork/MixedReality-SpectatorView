@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using Microsoft.MixedReality.SpatialAlignment;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -188,11 +187,6 @@ namespace Microsoft.MixedReality.SpectatorView
             {
                 Debug.LogError("Recording wasn't available to show");
             }
-        }
-
-        public void OnResetLocalizationClick()
-        {
-            SpectatorView.Instance.TryResetLocalizationAsync().FireAndForget();
         }
 
         private void UpdateRecordingUI()

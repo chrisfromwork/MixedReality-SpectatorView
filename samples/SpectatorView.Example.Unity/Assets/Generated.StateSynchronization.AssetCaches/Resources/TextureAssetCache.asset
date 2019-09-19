@@ -265,3 +265,6 @@ MonoBehaviour:
   - AssetId:
       m_storage: 1cfad1ce-e2d3-4703-b93a-a320d20db41a
     Asset: {fileID: 2800000, guid: bcdf3dcffa0c744c9adf933757702ab6, type: 3}
+  - AssetId:
+      m_storage: 17c05185-e19a-42cc-ba73-669281d50580
+    Asset: {fileID: 2800000, guid: bf9754ad42af2404ebd68d80e8eb971d, type: 3}

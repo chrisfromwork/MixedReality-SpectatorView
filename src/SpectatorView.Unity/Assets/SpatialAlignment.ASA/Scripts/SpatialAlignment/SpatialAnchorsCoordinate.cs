@@ -7,6 +7,43 @@ using UnityEngine;
 
 namespace Microsoft.MixedReality.SpatialAlignment
 {
+    internal class SimulatedCoordinate : SpatialCoordinateUnityBase<int>
+    {
+        public override LocatedState State => LocatedState.Tracking;
+        private Matrix4x4 transform;
+        private const int coordinateId = 0;
+
+        internal SimulatedCoordinate(Vector3 translation, Quaternion rotation) : base(coordinateId)
+        {
+            transform = Matrix4x4.TRS(translation, rotation, Vector3.one);
+        }
+
+        /// <inheritdoc/>
+        protected override Vector3 CoordinateToWorldSpace(Vector3 vector)
+        {
+            return transform.MultiplyPoint(vector);
+        }
+
+        /// <inheritdoc/>
+        protected override Quaternion CoordinateToWorldSpace(Quaternion quaternion)
+        {
+            return transform.rotation * quaternion;
+        }
+
+        /// <inheritdoc/>
+        protected override Vector3 WorldToCoordinateSpace(Vector3 vector)
+        {
+            return transform.inverse.MultiplyPoint(vector);
+        }
+
+        /// <inheritdoc/>
+        protected override Quaternion WorldToCoordinateSpace(Quaternion quaternion)
+        {
+            return Quaternion.Inverse(transform.rotation) * quaternion;
+        }
+    }
+
+
     /// <summary>
     /// The Spatial Coordinate based on Azure Spatial Anchors service.
     /// </summary>

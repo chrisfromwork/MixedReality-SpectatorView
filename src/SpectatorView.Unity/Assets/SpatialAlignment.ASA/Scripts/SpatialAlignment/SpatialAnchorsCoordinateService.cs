@@ -229,6 +229,9 @@ namespace Microsoft.MixedReality.SpatialAlignment
         /// <inheritdoc/>
         protected override async Task<ISpatialCoordinate> TryCreateCoordinateAsync(Vector3 worldPosition, Quaternion worldRotation, CancellationToken cancellationToken)
         {
+#if UNITY_EDITOR
+            return await Task.FromResult(new SimulatedCoordinate(worldPosition, worldRotation));
+#else
             await EnsureInitializedAsync().Unless(cancellationToken);
 
             RequestSessionStart();
@@ -270,6 +273,7 @@ namespace Microsoft.MixedReality.SpatialAlignment
             {
                 ReleaseSessionStartRequest();
             }
+#endif
         }
 
         /// <inheritdoc/>

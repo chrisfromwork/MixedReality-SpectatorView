@@ -132,7 +132,7 @@ namespace Microsoft.MixedReality.SpectatorView
                 return;
             }
 
-            var coordinate = new SpatialCoordinate(new Marker(idsToLocate[0], UnityEngine.Vector3.zero, UnityEngine.Quaternion.identity));
+            var coordinate = new SpatialCoordinate(new Marker(idsToLocate[0], Vector3.zero, Quaternion.Euler(0, 180, 0)));
             DebugLog("Created artificial coordinate at origin for debugging in the editor");
             await Task.Delay(TimeSpan.FromSeconds(1), cancellationToken).IgnoreCancellation();
             OnNewCoordinate(coordinate.Id, coordinate);

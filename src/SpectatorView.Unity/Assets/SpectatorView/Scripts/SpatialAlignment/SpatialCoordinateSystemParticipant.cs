@@ -92,7 +92,7 @@ namespace Microsoft.MixedReality.SpectatorView
         /// <summary>
         /// Gets the last-reported tracking status of the peer device.
         /// </summary>
-        public bool PeerDeviceHasTracking { get; internal set; }
+        public DeviceTrackingState PeerDeviceTrackingState { get; internal set; }
 
         /// <summary>
         /// Gets the last-reported status of whether or not the peer's spatial coordinate is located and tracking.
@@ -147,16 +147,10 @@ namespace Microsoft.MixedReality.SpectatorView
             using (MemoryStream stream = new MemoryStream())
             using (BinaryWriter message = new BinaryWriter(stream))
             {
+                var trackingState = SpatialCoordinateSystemManager.Instance.TrackingState;
+
                 message.Write(SpatialCoordinateSystemManager.CoordinateStateMessageHeader);
-#if UNITY_WSA
-                bool isTracking = UnityEngine.XR.WSA.WorldManager.state == UnityEngine.XR.WSA.PositionalLocatorState.Active;
-#else
-                // For Android, this should refer to GoogleARCore.Session.Status == GoogleARCore.SessionStatus.Tracking, but that requires
-                // an eventual dependency between SpectatorView and GoogleARCore. For now, always report that tracking is enabled
-                // for other platforms.
-                bool isTracking = true;
-#endif
-                message.Write(isTracking);
+                message.Write((int)trackingState);
                 message.Write(Coordinate != null && (Coordinate.State == LocatedState.Tracking || Coordinate.State == LocatedState.Resolved));
                 message.Write(IsLocatingSpatialCoordinate);
 
@@ -199,7 +193,7 @@ namespace Microsoft.MixedReality.SpectatorView
 
         internal void ReadCoordinateStateMessage(BinaryReader reader)
         {
-            PeerDeviceHasTracking = reader.ReadBoolean();
+            PeerDeviceTrackingState = (DeviceTrackingState) reader.ReadInt32();
             PeerSpatialCoordinateIsLocated = reader.ReadBoolean();
             PeerIsLocatingSpatialCoordinate = reader.ReadBoolean();
             PeerSpatialCoordinateWorldPosition = reader.ReadVector3();

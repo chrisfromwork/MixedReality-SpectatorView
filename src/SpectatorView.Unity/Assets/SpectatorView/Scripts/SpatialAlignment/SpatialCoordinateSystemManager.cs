@@ -7,9 +7,17 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Microsoft.MixedReality.SpectatorView
 {
+    public enum DeviceTrackingState
+    {
+        HasTracking,
+        LostTracking,
+        Unknown
+    }
+
     public class SpatialCoordinateSystemManager : Singleton<SpatialCoordinateSystemManager>
     {
         /// <summary>
@@ -37,6 +45,96 @@ namespace Microsoft.MixedReality.SpectatorView
         [Tooltip("Debug visual scale.")]
         public float debugVisualScale = 1.0f;
 
+        public bool AllLocalCoordinatesFound
+        {
+            get
+            {
+                bool allFound = participants.Count > 0;
+                foreach(var participantPair in participants)
+                {
+                    if (participantPair.Value.Coordinate == null ||
+                        participantPair.Value.IsLocatingSpatialCoordinate)
+                    {
+                        allFound = false;
+                        break;
+                    }
+                }
+
+                return allFound;
+            }
+        }
+
+        public bool AllPeerCoordinatesFound
+        {
+            get
+            {
+                if (participants.Count == 0)
+                {
+                    return true;
+                }
+
+                bool allFound = true;
+                foreach (var participantPair in participants)
+                {
+                    if (!participantPair.Value.PeerSpatialCoordinateIsLocated ||
+                        participantPair.Value.PeerIsLocatingSpatialCoordinate)
+                    {
+                        allFound = false;
+                        break;
+                    }
+                }
+
+                return allFound;
+            }
+        }
+        
+        public DeviceTrackingState TrackingState
+        {
+            get
+            {
+                if (!lookedForObservers)
+                {
+                    List<GameObject> roots = new List<GameObject>();
+                    SceneManager.GetActiveScene().GetRootGameObjects(roots);
+
+                    var observers = new List<ITrackingObserver>();
+                    foreach(var root in roots)
+                    {
+                        var tempObservers = root.GetComponentsInChildren<ITrackingObserver>();
+                        if (tempObservers != null)
+                        {
+                            foreach (var observer in tempObservers)
+                            {
+                                observers.Add(observer);
+                            }
+                        }
+                    }
+
+                    if (observers.Count == 0)
+                    {
+                        Debug.LogWarning("No ITrackingObservers found in the scene.");
+                    }
+                    else if (observers.Count > 1)
+                    {
+                        Debug.LogWarning("Multiple ITrackingObservers found in the scene.");
+                    }
+
+                    trackingObserver = (observers != null) && (observers.Count) > 0 ? observers[0] : null;
+                    lookedForObservers = true;
+                }
+
+                if (trackingObserver == null)
+                {
+                    return DeviceTrackingState.Unknown;
+                }
+
+                return trackingObserver.IsTracking ?
+                    DeviceTrackingState.HasTracking :
+                    DeviceTrackingState.LostTracking;
+            }
+        }
+
+
         public event Action<SpatialCoordinateSystemParticipant> ParticipantConnected;
 
         public event Action<SpatialCoordinateSystemParticipant> ParticipantDisconnected;
@@ -50,6 +148,8 @@ namespace Microsoft.MixedReality.SpectatorView
         private Dictionary<SocketEndpoint, SpatialCoordinateSystemParticipant> participants = new Dictionary<SocketEndpoint, SpatialCoordinateSystemParticipant>();
         private HashSet<INetworkManager> networkManagers = new HashSet<INetworkManager>();
         private ISpatialLocalizationSession currentLocalizationSession = null;
+        private bool lookedForObservers = false;
+        private ITrackingObserver trackingObserver = null;
 
         public IReadOnlyCollection<ISpatialLocalizer> Localizers
         {

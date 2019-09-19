@@ -452,6 +452,12 @@ namespace Microsoft.MixedReality.SpectatorView
                     {
                         DebugLog($"Succeeded in localizing experience with participant: {participant.SocketEndpoint.Address}");
                     }
+
+                    return result;
+                }
+                else
+                {
+                    DebugLog($"Localization initializer {initializers[i].GetType().Name} not supported by peer.");
                 }
             }
 
