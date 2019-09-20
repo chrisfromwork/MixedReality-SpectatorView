@@ -71,12 +71,6 @@ namespace Microsoft.MixedReality.SpectatorView
                     DebugLog($"Updated transform, Position: {sharedCoordinateOrigin.position.ToString("G4")}, Rotation: {sharedCoordinateOrigin.rotation.ToString("G4")}");
                 }
             }
-
-            if (Camera.main != null &&
-                Camera.main.transform != null)
-            {
-                DebugLog($"Camera position: {Camera.main.transform.position}, rotation: {Camera.main.transform.rotation}, scale: {Camera.main.transform.localScale}, lossyScale: {Camera.main.transform.lossyScale}, localPosition: {Camera.main.transform.localPosition}, localRotation: {Camera.main.transform.localRotation}");
-            }
         }
 
         private void OnParticipantDisconnected(SpatialCoordinateSystemParticipant participant)
