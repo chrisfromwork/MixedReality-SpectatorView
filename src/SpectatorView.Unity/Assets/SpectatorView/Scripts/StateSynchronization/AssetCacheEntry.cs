@@ -9,7 +9,7 @@ namespace Microsoft.MixedReality.SpectatorView
     [Serializable]
     internal class AssetId
     {
-        public static AssetId Empty { get; } = new AssetId(System.Guid.Empty, -1);
+        public static AssetId Empty { get; } = new AssetId(System.Guid.Empty, -1, -1, -1, string.Empty);
 
         public StringGuid Guid => guid;
 
@@ -21,10 +21,24 @@ namespace Microsoft.MixedReality.SpectatorView
         [SerializeField]
         private long fileIdentifier;
 
-        public AssetId(StringGuid guid, long fileIdentifier)
+        [SerializeField]
+        private int instanceID;
+
+        [SerializeField]
+        private int hashCode;
+
+        public string Name => name;
+
+        [SerializeField]
+        private string name;
+
+        public AssetId(StringGuid guid, long fileIdentifier, int instanceID, int hashCode, string name)
         {
             this.guid = guid;
             this.fileIdentifier = fileIdentifier;
+            this.instanceID = instanceID;
+            this.hashCode = hashCode;
+            this.name = name;
         }
 
         public override bool Equals(object obj)
@@ -40,7 +54,6 @@ namespace Microsoft.MixedReality.SpectatorView
 
         public override int GetHashCode()
         {
-            Debug.Log($"{FileIdentifier} {FileIdentifier.GetHashCode()} {Guid.ToString()} {Guid.ToString().GetHashCode()}");
             return FileIdentifier.GetHashCode() ^ Guid.ToString().GetHashCode();
         }
 
@@ -56,12 +69,17 @@ namespace Microsoft.MixedReality.SpectatorView
                 return false;
             }
 
-            return (lhs.Guid.ToString() == rhs.Guid.ToString()) && (lhs.FileIdentifier == rhs.FileIdentifier);
+            return (lhs.Guid.ToString() == rhs.Guid.ToString()) && (lhs.FileIdentifier == rhs.FileIdentifier) && (lhs.name == rhs.name);
         }
 
         public static bool operator !=(AssetId lhs, AssetId rhs)
         {
             return !(lhs == rhs);
+        }
+
+        public override string ToString()
+        {
+            return $"{guid} {fileIdentifier} {name}";
         }
     }
 

@@ -231,6 +231,11 @@ namespace Microsoft.MixedReality.SpectatorView
             }
             else
             {
+                if (assetId != AssetId.Empty)
+                {
+                    Debug.LogError($"Unable to find asset: {assetId}");
+                }
+
                 return default(TAsset);
             }
         }
@@ -240,10 +245,16 @@ namespace Microsoft.MixedReality.SpectatorView
             TAssetEntry assetEntry;
             if (asset != null && LookupByAsset.TryGetValue(asset, out assetEntry))
             {
+                Debug.Log($"Found asset id: {asset} {asset.name} {assetEntry.AssetId}");
                 return assetEntry.AssetId;
             }
             else
             {
+                if (asset != null)
+                {
+                    Debug.LogError($"Unable to find asset: {asset} {asset.name}");
+                }
+
                 return AssetId.Empty;
             }
         }
@@ -277,7 +288,7 @@ namespace Microsoft.MixedReality.SpectatorView
                     {
                         oldAssets.Add(asset, new TAssetEntry
                         {
-                            AssetId = new AssetId(new Guid(guid), localid),
+                            AssetId = new AssetId(new Guid(guid), localid, asset.GetInstanceID(), asset.GetHashCode(), asset.name),
                             Asset = asset
                         });
                     }
