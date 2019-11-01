@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 834de04ea6edd92448b61c536ba937ae, type: 3}
+  m_Name: shl_adjustBoxScaleWidget_16mmx2mm_MeshAssetCache
+  m_EditorClassIdentifier: 
+  AssetCacheEntries:
+  - AssetId:
+      guid:
+        m_storage: 36fc2837-fda8-9a64-7990-5d3bc90d9ff8
+      fileIdentifier: 4300000
+      name: shl_adjustBoxScaleWidget_16mmx2mm
+    Asset: {fileID: 4300000, guid: 36fc2837fda89a6479905d3bc90d9ff8, type: 3}
+  - AssetId:
+      guid:
+        m_storage: 996a0d31-1bfd-b214-1a2b-73de067df64d
+      fileIdentifier: 4300000
+      name: shl_adjustBoxScaleWidget_16mmx2mm
+    Asset: {fileID: 4300000, guid: 996a0d311bfdb2141a2b73de067df64d, type: 3}
