@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 834de04ea6edd92448b61c536ba937ae, type: 3}
+  m_Name: ic_launcher_APP_TextureAssetCache
+  m_EditorClassIdentifier: 
+  AssetCacheEntries:
+  - AssetId:
+      guid:
+        m_storage: 2e6ca3c8-f061-c498-999f-c725a892986c
+      fileIdentifier: 2800000
+      name: ic_launcher_APP
+    Asset: {fileID: 2800000, guid: 2e6ca3c8f061c498999fc725a892986c, type: 3}
+  - AssetId:
+      guid:
+        m_storage: 8847dee5-697a-04f7-49b9-ec611224ac4d
+      fileIdentifier: 2800000
+      name: ic_launcher_APP
+    Asset: {fileID: 2800000, guid: 8847dee5697a04f749b9ec611224ac4d, type: 3}
+  - AssetId:
+      guid:
+        m_storage: bb353ac5-08e7-c420-1a26-0e00d69e1daf
+      fileIdentifier: 2800000
+      name: ic_launcher_APP
+    Asset: {fileID: 2800000, guid: bb353ac508e7c4201a260e00d69e1daf, type: 3}
+  - AssetId:
+      guid:
+        m_storage: d0b89fa4-7caf-144e-49c3-ef040cbda163
+      fileIdentifier: 2800000
+      name: ic_launcher_APP
+    Asset: {fileID: 2800000, guid: d0b89fa47caf144e49c3ef040cbda163, type: 3}
+  - AssetId:
+      guid:
+        m_storage: ed706df7-5463-c46c-6b50-36d99ca2e8bb
+      fileIdentifier: 2800000
+      name: ic_launcher_APP
+    Asset: {fileID: 2800000, guid: ed706df75463c46c6b5036d99ca2e8bb, type: 3}
+  - AssetId:
+      guid:
+        m_storage: f0043074-2d79-7440-1a53-e2867631536b
+      fileIdentifier: 2800000
+      name: ic_launcher_APP
+    Asset: {fileID: 2800000, guid: f00430742d7974401a53e2867631536b, type: 3}

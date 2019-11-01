@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: AudioClipAssetCache
   m_EditorClassIdentifier: 
   assets:
-  - AssetId:
-      guid:
+  - Name: C
+    Ids:
+    - guid:
         m_storage: 269b9f0f-a8c9-30b4-ea7a-e2bf7b250820
       fileIdentifier: 8300000
-    Asset: {fileID: 8300000, guid: 269b9f0fa8c930b4ea7ae2bf7b250820, type: 3}
+      name: C
