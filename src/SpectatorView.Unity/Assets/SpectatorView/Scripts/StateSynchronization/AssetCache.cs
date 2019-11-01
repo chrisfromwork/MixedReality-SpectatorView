@@ -1,8 +1,6 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-#define UNITY_EDITOR
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +9,6 @@ using System.IO;
 using UnityEngine.SceneManagement;
 using System.Reflection;
 using System.Runtime.InteropServices.WindowsRuntime;
-using UnityEditor.VersionControl;
 using System.Runtime.CompilerServices;
 #if UNITY_EDITOR
 using UnityEditor;
@@ -40,7 +37,7 @@ namespace Microsoft.MixedReality.SpectatorView
     internal abstract class AssetCache : ScriptableObject
     {
         const string assetCacheDirectory = "Generated.StateSynchronization.AssetCaches";
-        const string assetsFolderName = "AssetCacheContent";
+        protected const string assetsFolderName = "AssetCacheContent";
 
         public static TAssetCache LoadAssetCache<TAssetCache>()
             where TAssetCache : AssetCache
@@ -212,12 +209,36 @@ namespace Microsoft.MixedReality.SpectatorView
     {
         const string assetContentExtension = ".asset";
 
+#pragma warning disable 414
         [SerializeField]
         private NameEntry[] assets = null;
+#pragma warning restore 414
 
+        private Dictionary<string, List<AssetId>> LookupByName
+        {
+            get
+            {
+                if (lookupByName == null)
+                {
+                    lookupByName = new Dictionary<string, List<AssetId>>();
+                    if (assets != null)
+                    {
+                        for (int i = 0; i < assets.Length; i++)
+                        {
+                            lookupByName[assets[i].Name] = assets[i].Ids.ToList();
+                        }
+                    }
+                }
+
+                return lookupByName;
+            }
+        }
+
+#pragma warning disable 414
         private Dictionary<string, List<AssetId>> lookupByName;
-        private Dictionary<AssetId, AssetCacheEntry> lookupByAssetId;
-        private Dictionary<TAsset, AssetCacheEntry> lookupByAsset;
+        private Dictionary<AssetId, AssetCacheEntry> lookupByAssetId = new Dictionary<AssetId, AssetCacheEntry>();
+        private Dictionary<TAsset, AssetCacheEntry> lookupByAsset = new Dictionary<TAsset, AssetCacheEntry>();
+#pragma warning restore 414
 
         public TAsset GetAsset(AssetId assetId)
         {
@@ -225,7 +246,7 @@ namespace Microsoft.MixedReality.SpectatorView
                 assetId == AssetId.Empty ||
                 assetId.Name == string.Empty)
             {
-                Debug.Log($"Invalid assetId {assetId}");
+                Debug.Log($"Invalid asset request for {this.GetType().Name}");
                 return default(TAsset);
             }
 
@@ -254,7 +275,7 @@ namespace Microsoft.MixedReality.SpectatorView
                 asset.name == null ||
                 asset.name == string.Empty)
             {
-                Debug.Log($"Invalid asset {asset}");
+                Debug.Log($"Invalid asset request for {this.GetType().Name}");
                 return AssetId.Empty;
             }
 
@@ -279,27 +300,29 @@ namespace Microsoft.MixedReality.SpectatorView
 
         private bool TryLoadAssets(string name)
         {
-            if (!lookupByName.TryGetValue(name, out var assetsIds))
+            Debug.Log($"{name} {LookupByName}");
+            if (!LookupByName.TryGetValue(name, out var assetsIds))
             {
                 Debug.LogError($"AssetId name unknown, may need to update asset caches: {name}");
                 return false;
             }
 
-            var assetCacheContent = Resources.Load<AssetCacheContent>(GetAssetCachesContentPath($"{name}_{this.GetType().Name}", assetContentExtension));
+            string assetPath = $"{assetsFolderName}/{GetValidAssetName(name)}_{this.GetType().Name}";
+            Debug.Log($"Loading asset path {assetPath}");
+            var assetCacheContent = Resources.Load<AssetCacheContent>(assetPath);
             if (assetCacheContent == null ||
                 assetCacheContent.AssetCacheEntries == null ||
                 assetCacheContent.AssetCacheEntries.Length == 0)
             {
-                Debug.LogError($"AssetCacheContent not found or empty for {name}");
+                Debug.LogError($"AssetCacheContent not found or empty for {name} {assetCacheContent}");
                 return false;
             }
 
-            foreach (var item in assetCacheContent.AssetCacheEntries)
+            foreach (var entry in assetCacheContent.AssetCacheEntries)
             {
-                var entry = item as AssetCacheEntry;
                 if (entry == null)
                 {
-                    Debug.LogError($"Content in asset cache entries was unexpected type: {item.GetType().Name}, expected: {typeof(AssetCacheEntry).Name}");
+                    Debug.LogError($"Content in asset cache entries was null: {assetPath}");
                     continue;
                 }
                 else
@@ -364,7 +387,7 @@ namespace Microsoft.MixedReality.SpectatorView
                     oldAssets[assetId.Name].Add(assetId);
                 }
 
-                var entry = ScriptableObject.CreateInstance<AssetCacheEntry>();
+                var entry = new AssetCacheEntry();
                 entry.Asset = asset;
                 entry.AssetId = assetId;
                 lookupByAsset[asset] = entry;
@@ -411,7 +434,7 @@ namespace Microsoft.MixedReality.SpectatorView
 
             foreach(var nameEntry in assets)
             {
-                string assetName = GetAssetCachesContentPath($"{nameEntry.Name}_{this.GetType().Name}", assetContentExtension);
+                string assetName = GetAssetCachesContentPath($"{GetValidAssetName(nameEntry.Name)}_{this.GetType().Name}", assetContentExtension);
                 AssetCacheContent content = ScriptableObject.CreateInstance<AssetCacheContent>();
                 List<AssetCacheEntry> assetCacheEntries = new List<AssetCacheEntry>();
                 foreach (var assetId in nameEntry.Ids)
@@ -423,8 +446,6 @@ namespace Microsoft.MixedReality.SpectatorView
                     }
 
                     assetCacheEntries.Add(entry);
-                    var entryName = GetAssetCachesContentPath($"{nameEntry.Name}_{this.GetType().Name}_Entry", assetContentExtension);
-                    AssetDatabase.CreateAsset(entry, entryName);
                 }
 
                 content.AssetCacheEntries = assetCacheEntries.ToArray();
@@ -432,6 +453,16 @@ namespace Microsoft.MixedReality.SpectatorView
                 AssetDatabase.CreateAsset(content, assetName);
             }
 #endif
+        }
+
+        string GetValidAssetName(string name)
+        {
+            if (name == null)
+            {
+                return null;
+            }
+
+            return name.Replace(":", "_");
         }
     }
 }

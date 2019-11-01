@@ -76,7 +76,8 @@ namespace Microsoft.MixedReality.SpectatorView
         }
     }
 
-    internal class AssetCacheEntry : ScriptableObject
+    [Serializable]
+    internal class AssetCacheEntry
     {
         [SerializeField]
         public AssetId AssetId;
