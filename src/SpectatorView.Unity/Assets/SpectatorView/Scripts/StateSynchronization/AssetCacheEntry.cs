@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Microsoft.MixedReality.SpectatorView
@@ -9,7 +10,7 @@ namespace Microsoft.MixedReality.SpectatorView
     [Serializable]
     internal class AssetId
     {
-        public static AssetId Empty { get; } = new AssetId(System.Guid.Empty, -1, -1, -1, string.Empty);
+        public static AssetId Empty { get; } = new AssetId(System.Guid.Empty, -1, string.Empty);
 
         public StringGuid Guid => guid;
 
@@ -21,23 +22,15 @@ namespace Microsoft.MixedReality.SpectatorView
         [SerializeField]
         private long fileIdentifier;
 
-        [SerializeField]
-        private int instanceID;
-
-        [SerializeField]
-        private int hashCode;
-
         public string Name => name;
 
         [SerializeField]
         private string name;
 
-        public AssetId(StringGuid guid, long fileIdentifier, int instanceID, int hashCode, string name)
+        public AssetId(StringGuid guid, long fileIdentifier, string name)
         {
             this.guid = guid;
             this.fileIdentifier = fileIdentifier;
-            this.instanceID = instanceID;
-            this.hashCode = hashCode;
             this.name = name;
         }
 
@@ -83,12 +76,12 @@ namespace Microsoft.MixedReality.SpectatorView
         }
     }
 
-    internal class AssetCacheEntry<T> where T : class
+    internal class AssetCacheEntry : ScriptableObject
     {
         [SerializeField]
         public AssetId AssetId;
 
         [SerializeField]
-        public T Asset;
+        public UnityEngine.Object Asset;
     }
 }

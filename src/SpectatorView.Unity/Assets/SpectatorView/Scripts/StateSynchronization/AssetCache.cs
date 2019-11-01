@@ -1,6 +1,8 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+#define UNITY_EDITOR
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,15 +10,37 @@ using UnityEngine;
 using System.IO;
 using UnityEngine.SceneManagement;
 using System.Reflection;
+using System.Runtime.InteropServices.WindowsRuntime;
+using UnityEditor.VersionControl;
+using System.Runtime.CompilerServices;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
 
 namespace Microsoft.MixedReality.SpectatorView
 {
+    [Serializable]
+    internal struct NameEntry
+    {
+        public string Name;
+        public AssetId[] Ids;
+
+        public NameEntry(string name, AssetId[] ids)
+        {
+            this.Name = name;
+            this.Ids = ids;
+        }
+
+        public override string ToString()
+        {
+            return $"{Name}";
+        }
+    }
+
     internal abstract class AssetCache : ScriptableObject
     {
         const string assetCacheDirectory = "Generated.StateSynchronization.AssetCaches";
+        const string assetsFolderName = "AssetCacheContent";
 
         public static TAssetCache LoadAssetCache<TAssetCache>()
             where TAssetCache : AssetCache
@@ -24,9 +48,14 @@ namespace Microsoft.MixedReality.SpectatorView
             return Resources.Load<TAssetCache>(typeof(TAssetCache).Name);
         }
 
-        public static string GetAssetPath(string assetName, string assetExtension)
+        public static string GetAssetCachePath(string assetName, string assetExtension)
         {
-            return $"Assets/{assetCacheDirectory}/Resources/" + assetName + assetExtension;
+            return $"Assets/{assetCacheDirectory}/Resources/{assetName}{assetExtension}";
+        }
+
+        public static string GetAssetCachesContentPath(string assetName, string assetExtension)
+        {
+            return $"Assets/{assetCacheDirectory}/Resources/{assetsFolderName}/{assetName}{assetExtension}";
         }
 
         public static void EnsureAssetDirectoryExists()
@@ -40,6 +69,10 @@ namespace Microsoft.MixedReality.SpectatorView
             {
                 AssetDatabase.CreateFolder($"Assets/{assetCacheDirectory}", "Resources");
             }
+            if (!AssetDatabase.IsValidFolder($"Assets/{assetCacheDirectory}/Resources/{assetsFolderName}"))
+            {
+                AssetDatabase.CreateFolder($"Assets/{assetCacheDirectory}/Resources", $"{assetsFolderName}");
+            }
 #endif
         }
 
@@ -47,7 +80,7 @@ namespace Microsoft.MixedReality.SpectatorView
             where TAssetCache : AssetCache
         {
 #if UNITY_EDITOR
-            string assetPathAndName = GetAssetPath(typeof(TAssetCache).Name, ".asset");
+            string assetPathAndName = GetAssetCachePath(typeof(TAssetCache).Name, ".asset");
 
             TAssetCache asset = AssetDatabase.LoadAssetAtPath<TAssetCache>(assetPathAndName);
             if (asset == null)
@@ -174,89 +207,109 @@ namespace Microsoft.MixedReality.SpectatorView
         }
     }
 
-    internal abstract class AssetCache<TAssetEntry, TAsset> : AssetCache, IAssetCache
-        where TAssetEntry : AssetCacheEntry<TAsset>, new()
+    internal abstract class AssetCache<TAsset> : AssetCache, IAssetCache
         where TAsset : UnityEngine.Object
     {
+        const string assetContentExtension = ".asset";
+
         [SerializeField]
-        private TAssetEntry[] assets = null;
+        private NameEntry[] assets = null;
 
-        private Dictionary<AssetId, TAssetEntry> lookupByAssetId;
-        private Dictionary<TAsset, TAssetEntry> lookupByAsset;
-
-        protected IDictionary<AssetId, TAssetEntry> LookupByAssetId
-        {
-            get
-            {
-                if (lookupByAssetId == null)
-                {
-                    if (assets == null)
-                    {
-                        lookupByAssetId = new Dictionary<AssetId, TAssetEntry>();
-                    }
-                    else
-                    {
-                        lookupByAssetId = assets.Where(a => a.Asset != null).ToDictionary(a => a.AssetId);
-                    }
-                }
-                return lookupByAssetId;
-            }
-        }
-
-        protected IDictionary<TAsset, TAssetEntry> LookupByAsset
-        {
-            get
-            {
-                if (lookupByAsset == null)
-                {
-                    if (assets == null)
-                    {
-                        lookupByAsset = new Dictionary<TAsset, TAssetEntry>();
-                    }
-                    else
-                    {
-                        lookupByAsset = assets.Where(a => a.Asset != null).ToDictionary(a => a.Asset);
-                    }
-                }
-                return lookupByAsset;
-            }
-        }
+        private Dictionary<string, List<AssetId>> lookupByName;
+        private Dictionary<AssetId, AssetCacheEntry> lookupByAssetId;
+        private Dictionary<TAsset, AssetCacheEntry> lookupByAsset;
 
         public TAsset GetAsset(AssetId assetId)
         {
-            TAssetEntry assetEntry;
-            if (LookupByAssetId.TryGetValue(assetId, out assetEntry))
+            if (assetId == null ||
+                assetId == AssetId.Empty ||
+                assetId.Name == string.Empty)
             {
-                return assetEntry.Asset;
-            }
-            else
-            {
-                if (assetId != AssetId.Empty)
-                {
-                    Debug.LogError($"Unable to find asset: {assetId}");
-                }
-
+                Debug.Log($"Invalid assetId {assetId}");
                 return default(TAsset);
             }
+
+            if (lookupByAssetId.TryGetValue(assetId, out var entry))
+            {
+                return (TAsset) entry.Asset;
+            }
+
+            if (!TryLoadAssets(assetId.Name))
+            {
+                return default(TAsset);
+            }
+
+            if (!lookupByAssetId.TryGetValue(assetId, out entry))
+            {
+                Debug.LogError($"Assets were loaded for {assetId.Name} but no associated asset cache entry was found for {assetId}");
+                return default(TAsset);
+            }
+
+            return (TAsset) entry.Asset;
         }
 
         public AssetId GetAssetId(TAsset asset)
         {
-            TAssetEntry assetEntry;
-            if (asset != null && LookupByAsset.TryGetValue(asset, out assetEntry))
+            if (asset == null ||
+                asset.name == null ||
+                asset.name == string.Empty)
             {
-                Debug.Log($"Found asset id: {asset} {asset.name} {assetEntry.AssetId}");
-                return assetEntry.AssetId;
-            }
-            else
-            {
-                if (asset != null)
-                {
-                    Debug.LogError($"Unable to find asset: {asset} {asset.name}");
-                }
-
+                Debug.Log($"Invalid asset {asset}");
                 return AssetId.Empty;
             }
+
+            if (lookupByAsset.TryGetValue(asset, out var entry))
+            {
+                return entry.AssetId;
+            }
+
+            if (!TryLoadAssets(asset.name))
+            {
+                return AssetId.Empty;
+            }
+
+            if (!lookupByAsset.TryGetValue(asset, out entry))
+            {
+                Debug.LogError($"Assets were loaded for {asset.name} but not associated asset cache entry was found for {asset}");
+                return AssetId.Empty;
+            }
+
+            return entry.AssetId;
+        }
+
+        private bool TryLoadAssets(string name)
+        {
+            if (!lookupByName.TryGetValue(name, out var assetsIds))
+            {
+                Debug.LogError($"AssetId name unknown, may need to update asset caches: {name}");
+                return false;
+            }
+
+            var assetCacheContent = Resources.Load<AssetCacheContent>(GetAssetCachesContentPath($"{name}_{this.GetType().Name}", assetContentExtension));
+            if (assetCacheContent == null ||
+                assetCacheContent.AssetCacheEntries == null ||
+                assetCacheContent.AssetCacheEntries.Length == 0)
+            {
+                Debug.LogError($"AssetCacheContent not found or empty for {name}");
+                return false;
+            }
+
+            foreach (var item in assetCacheContent.AssetCacheEntries)
+            {
+                var entry = item as AssetCacheEntry;
+                if (entry == null)
+                {
+                    Debug.LogError($"Content in asset cache entries was unexpected type: {item.GetType().Name}, expected: {typeof(AssetCacheEntry).Name}");
+                    continue;
+                }
+                else
+                {
+                    lookupByAsset[(TAsset)entry.Asset] = entry;
+                    lookupByAssetId[entry.AssetId] = entry;
+                }
+            }
+
+            return true;
         }
 
         protected abstract IEnumerable<TAsset> EnumerateAllAssets();
@@ -264,7 +317,7 @@ namespace Microsoft.MixedReality.SpectatorView
         public override void ClearAssetCache()
         {
 #if UNITY_EDITOR
-            assets = null;
+            lookupByName = null;
             lookupByAsset = null;
             lookupByAssetId = null;
 
@@ -272,37 +325,112 @@ namespace Microsoft.MixedReality.SpectatorView
 #endif
         }
 
+
         public override void UpdateAssetCache()
         {
 #if UNITY_EDITOR
-            Dictionary<TAsset, TAssetEntry> oldAssets = (assets ?? Array.Empty<TAssetEntry>()).Where(a => a.Asset != null).ToDictionary(a => a.Asset);
-
-            HashSet<TAsset> unvisitedAssets = new HashSet<TAsset>(assets == null ? Enumerable.Empty<TAsset>() : assets.Where(a => a.Asset != null).Select(a => a.Asset));
-
-            foreach (TAsset asset in EnumerateAllAssets())
+            Dictionary<string, List<AssetId>> oldAssets = lookupByName == null ? new Dictionary<string, List<AssetId>>() : lookupByName;
+            HashSet<Tuple<string, AssetId>> unvisitedIds = new HashSet<Tuple<string, AssetId>>();
+            lookupByAsset = new Dictionary<TAsset, AssetCacheEntry>();
+            lookupByAssetId = new Dictionary<AssetId, AssetCacheEntry>();
+            foreach (var listPair in oldAssets)
             {
-                unvisitedAssets.Remove(asset);
-                if (!oldAssets.ContainsKey(asset))
+                foreach(var id in listPair.Value)
                 {
-                    if (AssetDatabase.TryGetGUIDAndLocalFileIdentifier(asset, out string guid, out long localid))
-                    {
-                        oldAssets.Add(asset, new TAssetEntry
-                        {
-                            AssetId = new AssetId(new Guid(guid), localid, asset.GetInstanceID(), asset.GetHashCode(), asset.name),
-                            Asset = asset
-                        });
-                    }
-                    else
-                    {
-                        Debug.LogError($"Unable to obtain id for Asset: {asset.ToString()}");
-                    }
+                    unvisitedIds.Add(new Tuple<string, AssetId>(listPair.Key, id));
                 }
             }
 
-            CleanUpUnused(oldAssets, unvisitedAssets);
-            assets = oldAssets.Values.OrderBy(x => x.AssetId.FileIdentifier).ThenBy(x => x.AssetId.Guid).ToArray();
+            foreach (TAsset asset in EnumerateAllAssets())
+            {
+                if (asset.name == null ||
+                    asset.name == string.Empty ||
+                    !AssetDatabase.TryGetGUIDAndLocalFileIdentifier(asset, out string guid, out long localid))
+                {
+                    Debug.LogError($"Unable to identify asset: {asset}");
+                    continue;
+                }
 
+                var assetId = new AssetId(new Guid(guid), localid, asset.name);
+                unvisitedIds.Remove(new Tuple<string, AssetId>(assetId.Name, assetId));
+
+                if (!oldAssets.ContainsKey(assetId.Name))
+                {
+                    oldAssets[assetId.Name] = new List<AssetId>();
+                    oldAssets[assetId.Name].Add(assetId);
+                }
+                else if (!oldAssets[assetId.Name].Contains(assetId))
+                {
+                    oldAssets[assetId.Name].Add(assetId);
+                }
+
+                var entry = ScriptableObject.CreateInstance<AssetCacheEntry>();
+                entry.Asset = asset;
+                entry.AssetId = assetId;
+                lookupByAsset[asset] = entry;
+                lookupByAssetId[assetId] = entry;
+            }
+
+            foreach(var idPair in unvisitedIds)
+            {
+                if (oldAssets.TryGetValue(idPair.Item1, out List<AssetId> ids) &&
+                    ids.Contains(idPair.Item2))
+                {
+                    ids.Remove(idPair.Item2);
+                }
+            }
+
+            lookupByName = oldAssets;
+            var tempAssets = new List<NameEntry>();
+            foreach(var item in lookupByName)
+            {
+                tempAssets.Add(new NameEntry(item.Key, item.Value.OrderBy(a => a.Guid).ThenBy(a => a.FileIdentifier).ToArray()));
+            }
+            assets = tempAssets.OrderBy(a => a.Name).ToArray();
             EditorUtility.SetDirty(this);
+#endif
+        }
+
+        public virtual void SaveAssets()
+        {
+#if UNITY_EDITOR
+            EnsureAssetDirectoryExists();
+            if (assets == null ||
+                assets.Length == 0)
+            {
+                Debug.Log("Assets was null or empty, rerunning asset cache update");
+                UpdateAssetCache();
+            }
+
+            if (assets == null ||
+                assets.Length == 0)
+            {
+                Debug.Log("No assets were found.");
+                return;
+            }
+
+            foreach(var nameEntry in assets)
+            {
+                string assetName = GetAssetCachesContentPath($"{nameEntry.Name}_{this.GetType().Name}", assetContentExtension);
+                AssetCacheContent content = ScriptableObject.CreateInstance<AssetCacheContent>();
+                List<AssetCacheEntry> assetCacheEntries = new List<AssetCacheEntry>();
+                foreach (var assetId in nameEntry.Ids)
+                {
+                    if (!lookupByAssetId.TryGetValue(assetId, out var entry))
+                    {
+                        Debug.LogError($"AssetId did not have a registered Asset: {assetId}");
+                        continue;
+                    }
+
+                    assetCacheEntries.Add(entry);
+                    var entryName = GetAssetCachesContentPath($"{nameEntry.Name}_{this.GetType().Name}_Entry", assetContentExtension);
+                    AssetDatabase.CreateAsset(entry, entryName);
+                }
+
+                content.AssetCacheEntries = assetCacheEntries.ToArray();
+                Debug.Log($"Creating asset: {content} {assetName}");
+                AssetDatabase.CreateAsset(content, assetName);
+            }
 #endif
         }
     }

@@ -81,7 +81,7 @@ namespace Microsoft.MixedReality.SpectatorView
             var guid = message.ReadGuid();
             var fileId = message.ReadInt64();
             var name = message.ReadString();
-            return new AssetId(guid, fileId, -1, -1, name);
+            return new AssetId(guid, fileId, name);
         }
 
         public static bool ReadBoolean(this BinaryReader message)
