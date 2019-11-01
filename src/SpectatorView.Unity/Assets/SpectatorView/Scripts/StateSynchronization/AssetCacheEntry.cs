@@ -6,70 +6,22 @@ using UnityEngine;
 
 namespace Microsoft.MixedReality.SpectatorView
 {
+    /// <summary>
+    /// Wrapper class for items stored in a StateSynchronization Asset Cache
+    /// </summary>
     [Serializable]
-    internal class AssetId
+    public class AssetCacheEntry
     {
-        public static AssetId Empty { get; } = new AssetId(System.Guid.Empty, -1);
-
-        public StringGuid Guid => guid;
-
-        [SerializeField]
-        private StringGuid guid;
-
-        public long FileIdentifier => fileIdentifier;
-
-        [SerializeField]
-        private long fileIdentifier;
-
-        public AssetId(StringGuid guid, long fileIdentifier)
-        {
-            this.guid = guid;
-            this.fileIdentifier = fileIdentifier;
-        }
-
-        public override bool Equals(object obj)
-        {
-            AssetId assetId = obj as AssetId;
-            if (assetId == null)
-            {
-                return false;
-            }
-
-            return this == assetId;
-        }
-
-        public override int GetHashCode()
-        {
-            return FileIdentifier.GetHashCode() ^ Guid.ToString().GetHashCode();
-        }
-
-        public static bool operator ==(AssetId lhs, AssetId rhs)
-        {
-            if ((object)lhs == null && (object)rhs == null)
-            {
-                return true;
-            }
-            else if ((object)lhs == null && (object)rhs != null ||
-                (object)lhs != null && (object)rhs == null)
-            {
-                return false;
-            }
-
-            return (lhs.Guid.ToString() == rhs.Guid.ToString()) && (lhs.FileIdentifier == rhs.FileIdentifier);
-        }
-
-        public static bool operator !=(AssetId lhs, AssetId rhs)
-        {
-            return !(lhs == rhs);
-        }
-    }
-
-    internal class AssetCacheEntry<T> where T : class
-    {
+        /// <summary>
+        /// Unity asset id
+        /// </summary>
         [SerializeField]
         public AssetId AssetId;
 
+        /// <summary>
+        /// Unity asset
+        /// </summary>
         [SerializeField]
-        public T Asset;
+        public UnityEngine.Object Asset;
     }
 }

@@ -13,33 +13,45 @@ MonoBehaviour:
   m_Name: FontAssetCache
   m_EditorClassIdentifier: 
   assets:
-  - AssetId:
-      guid:
+  - Name: Arial
+    Ids:
+    - guid:
         m_storage: 00000000-0000-0000-e000-000000000000
       fileIdentifier: 10102
-    Asset: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-  - AssetId:
-      guid:
-        m_storage: 0fd94703-e1ea-496b-b999-9216ac3ece0d
+      name: Arial
+  - Name: Roboto-Regular
+    Ids:
+    - guid:
+        m_storage: f66655b3-8428-d407-69e9-e41ee237cbdc
       fileIdentifier: 12800000
-    Asset: {fileID: 12800000, guid: 0fd94703e1ea496bb9999216ac3ece0d, type: 3}
-  - AssetId:
-      guid:
-        m_storage: a99e8b1e-d115-4eb5-8270-cc6a18605657
-      fileIdentifier: 12800000
-    Asset: {fileID: 12800000, guid: a99e8b1ed1154eb58270cc6a18605657, type: 3}
-  - AssetId:
-      guid:
+      name: Roboto-Regular
+  - Name: selawk
+    Ids:
+    - guid:
         m_storage: e48b9205-5514-4c6d-a3ee-2ab03f0fda88
       fileIdentifier: 12800000
-    Asset: {fileID: 12800000, guid: e48b920555144c6da3ee2ab03f0fda88, type: 3}
-  - AssetId:
-      guid:
+      name: selawk
+  - Name: selawkb
+    Ids:
+    - guid:
+        m_storage: a99e8b1e-d115-4eb5-8270-cc6a18605657
+      fileIdentifier: 12800000
+      name: selawkb
+  - Name: selawkl
+    Ids:
+    - guid:
         m_storage: e65983ad-3f7b-44aa-81e7-26d5ffb472d7
       fileIdentifier: 12800000
-    Asset: {fileID: 12800000, guid: e65983ad3f7b44aa81e726d5ffb472d7, type: 3}
-  - AssetId:
-      guid:
+      name: selawkl
+  - Name: selawksb
+    Ids:
+    - guid:
         m_storage: e869342c-56e5-4acf-989b-2422b4b80dcc
       fileIdentifier: 12800000
-    Asset: {fileID: 12800000, guid: e869342c56e54acf989b2422b4b80dcc, type: 3}
+      name: selawksb
+  - Name: selawksl
+    Ids:
+    - guid:
+        m_storage: 0fd94703-e1ea-496b-b999-9216ac3ece0d
+      fileIdentifier: 12800000
+      name: selawksl
