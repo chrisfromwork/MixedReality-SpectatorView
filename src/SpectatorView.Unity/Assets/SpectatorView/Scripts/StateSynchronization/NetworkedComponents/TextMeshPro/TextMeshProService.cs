@@ -29,14 +29,14 @@ namespace Microsoft.MixedReality.SpectatorView
             StateSynchronizationSceneManager.Instance.RegisterService(this, new ComponentBroadcasterDefinition<TextMeshProBroadcaster>(typeof(TextMeshPro)));
         }
 
-        public Guid GetFontId(TMP_FontAsset font)
+        public AssetId GetFontId(TMP_FontAsset font)
         {
-            return fontAssets?.GetAssetId(font) ?? Guid.Empty;
+            return fontAssets?.GetAssetId(font) ?? AssetId.Empty;
         }
 
-        public TMP_FontAsset GetFont(Guid guid)
+        public TMP_FontAsset GetFont(AssetId assetId)
         {
-            return (TMP_FontAsset)fontAssets?.GetAsset(guid);
+            return (TMP_FontAsset)fontAssets?.GetAsset(assetId);
         }
 #endif
 
@@ -48,6 +48,11 @@ namespace Microsoft.MixedReality.SpectatorView
         public void ClearAssetCache()
         {
             TextMeshProFontAssetCache.GetOrCreateAssetCache<TextMeshProFontAssetCache>().ClearAssetCache();
+        }
+
+        public void SaveAssets()
+        {
+            TextMeshProFontAssetCache.GetOrCreateAssetCache<TextMeshProFontAssetCache>().SaveAssets();
         }
     }
 }
