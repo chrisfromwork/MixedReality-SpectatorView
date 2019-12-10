@@ -1,0 +1,201 @@
+{
+  "runtimeTarget": {
+    "name": ".NETStandard,Version=v2.0/",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETStandard,Version=v2.0": {},
+    ".NETStandard,Version=v2.0/": {
+      "Dependencies.msb4u/1.0.0": {
+        "dependencies": {
+          "Assembly-CSharp": "1.0.0",
+          "MSBuildForUnity": "1.0.0",
+          "Microsoft.MixedReality.PhotoCapture": "1.0.0",
+          "Microsoft.MixedReality.SpatialAlignment": "1.0.0",
+          "Microsoft.MixedReality.SpectatorView": "1.0.0",
+          "Microsoft.MixedReality.SpectatorView.Editor": "1.0.0",
+          "Microsoft.MixedReality.SpectatorView.Tests": "1.0.0",
+          "NETStandard.Library": "2.0.3",
+          "Unity.Analytics.DataPrivacy": "1.0.0",
+          "Unity.CollabProxy.Editor": "1.0.0",
+          "Unity.PackageManagerUI.Editor": "1.0.0",
+          "Unity.TextMeshPro": "1.0.0",
+          "Unity.TextMeshPro.Editor": "1.0.0",
+          "Unity.XR.WindowsMR": "1.0.0",
+          "Unity.XR.WindowsMR.Editor": "1.0.0"
+        },
+        "runtime": {
+          "Dependencies.msb4u.dll": {}
+        }
+      },
+      "Microsoft.NETCore.Platforms/1.1.0": {},
+      "NETStandard.Library/2.0.3": {
+        "dependencies": {
+          "Microsoft.NETCore.Platforms": "1.1.0"
+        }
+      },
+      "Assembly-CSharp/1.0.0": {
+        "runtime": {
+          "Assembly-CSharp.dll": {}
+        }
+      },
+      "Microsoft.MixedReality.PhotoCapture/1.0.0": {
+        "runtime": {
+          "Microsoft.MixedReality.PhotoCapture.dll": {}
+        }
+      },
+      "Microsoft.MixedReality.SpatialAlignment/1.0.0": {
+        "runtime": {
+          "Microsoft.MixedReality.SpatialAlignment.dll": {}
+        }
+      },
+      "Microsoft.MixedReality.SpectatorView/1.0.0": {
+        "runtime": {
+          "Microsoft.MixedReality.SpectatorView.dll": {}
+        }
+      },
+      "Microsoft.MixedReality.SpectatorView.Editor/1.0.0": {
+        "runtime": {
+          "Microsoft.MixedReality.SpectatorView.Editor.dll": {}
+        }
+      },
+      "Microsoft.MixedReality.SpectatorView.Tests/1.0.0": {
+        "runtime": {
+          "Microsoft.MixedReality.SpectatorView.Tests.dll": {}
+        }
+      },
+      "MSBuildForUnity/1.0.0": {
+        "runtime": {
+          "MSBuildForUnity.dll": {}
+        }
+      },
+      "Unity.Analytics.DataPrivacy/1.0.0": {
+        "runtime": {
+          "Unity.Analytics.DataPrivacy.dll": {}
+        }
+      },
+      "Unity.CollabProxy.Editor/1.0.0": {
+        "runtime": {
+          "Unity.CollabProxy.Editor.dll": {}
+        }
+      },
+      "Unity.PackageManagerUI.Editor/1.0.0": {
+        "runtime": {
+          "Unity.PackageManagerUI.Editor.dll": {}
+        }
+      },
+      "Unity.TextMeshPro/1.0.0": {
+        "runtime": {
+          "Unity.TextMeshPro.dll": {}
+        }
+      },
+      "Unity.TextMeshPro.Editor/1.0.0": {
+        "runtime": {
+          "Unity.TextMeshPro.Editor.dll": {}
+        }
+      },
+      "Unity.XR.WindowsMR/1.0.0": {
+        "runtime": {
+          "Unity.XR.WindowsMR.dll": {}
+        }
+      },
+      "Unity.XR.WindowsMR.Editor/1.0.0": {
+        "runtime": {
+          "Unity.XR.WindowsMR.Editor.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Dependencies.msb4u/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.NETCore.Platforms/1.1.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-kz0PEW2lhqygehI/d6XsPCQzD7ff7gUJaVGPVETX611eadGsA3A877GdSlU0LRVMCTH/+P3o2iDTak+S08V2+A==",
+      "path": "microsoft.netcore.platforms/1.1.0",
+      "hashPath": "microsoft.netcore.platforms.1.1.0.nupkg.sha512"
+    },
+    "NETStandard.Library/2.0.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-st47PosZSHrjECdjeIzZQbzivYBJFv6P2nv4cj2ypdI204DO+vZ7l5raGMiX4eXMJ53RfOIg+/s4DHVZ54Nu2A==",
+      "path": "netstandard.library/2.0.3",
+      "hashPath": "netstandard.library.2.0.3.nupkg.sha512"
+    },
+    "Assembly-CSharp/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.MixedReality.PhotoCapture/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.MixedReality.SpatialAlignment/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.MixedReality.SpectatorView/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.MixedReality.SpectatorView.Editor/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.MixedReality.SpectatorView.Tests/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "MSBuildForUnity/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Unity.Analytics.DataPrivacy/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Unity.CollabProxy.Editor/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Unity.PackageManagerUI.Editor/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Unity.TextMeshPro/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Unity.TextMeshPro.Editor/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Unity.XR.WindowsMR/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Unity.XR.WindowsMR.Editor/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
