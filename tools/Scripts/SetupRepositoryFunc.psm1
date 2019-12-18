@@ -16,8 +16,6 @@ function SetupRepository
 
     If (!$NoDownloads)
     {
-        DownloadQRCodePlugin
-    
         If ($iOS)
         {
             DownloadARKitPlugin
