@@ -33,7 +33,16 @@
   <Import Project="$(MSBuildForUnityGeneratedOutputDirectory)\$(MSBuildProjectName).g.props" />
   
   <ItemGroup>
-    <!--Add NuGet or Project references here-->
+    <PackageReference Include="Microsoft.MixedReality.QR" Version="0.5.2081" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="..\..\..\external\ARCore-Unity-SDK\Assets\GoogleARCore\**" CopyToOutputDirectory="PreserveNewest" LinkBase="GoogleARCore\"/>
+    <Content Include="..\..\..\external\ARKit-Unity-Plugin\**" CopyToOutputDirectory="PreserveNewest" LinkBase="ARKit-Unity-Plugin\"/>
+    <Content Include="..\..\..\external\Azure-Spatial-Anchors-Samples\Unity\Assets\AzureSpatialAnchorsPlugin\**" CopyToOutputDirectory="PreserveNewest" LinkBase="AzureSpatialAnchorsPlugin\"/>
+    <Content Include="..\..\..\external\Azure-Spatial-Anchors-Samples\Unity\Assets\android-logos\**" CopyToOutputDirectory="PreserveNewest" LinkBase="AzureSpatialAnchors.Resources\android-logos\"/>
+    <Content Include="..\..\..\external\Azure-Spatial-Anchors-Samples\Unity\Assets\logos\**" CopyToOutputDirectory="PreserveNewest" LinkBase="AzureSpatialAnchors.Resources\logos\"/>
+    <Content Include="..\..\..\external\Azure-Spatial-Anchors-Samples\Unity\Assets\Plugins\**" CopyToOutputDirectory="PreserveNewest" LinkBase="..\..\Plugins\"/>
   </ItemGroup>
 
   <Import Project="$(MSBuildForUnityGeneratedOutputDirectory)\$(MSBuildProjectName).g.targets" />
