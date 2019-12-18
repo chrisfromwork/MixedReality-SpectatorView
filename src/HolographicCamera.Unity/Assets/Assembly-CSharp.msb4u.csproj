@@ -28,7 +28,42 @@
   <Import Project="$(MSBuildForUnityGeneratedOutputDirectory)\$(MSBuildProjectName).g.props" />
 
   <ItemGroup>
-    <!--Add NuGet or Project references here-->
+    <PackageReference Include="Microsoft.MixedReality.QR" Version="0.5.2081" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="..\..\..\external\ARCore-Unity-SDK\Assets\GoogleARCore\**" CopyToOutputDirectory="PreserveNewest" LinkBase="GoogleARCore\"/>
+    <Content Include="..\..\..\external\ARKit-Unity-Plugin\**" CopyToOutputDirectory="PreserveNewest" LinkBase="ARKit-Unity-Plugin\"/>
+    <Content Include="..\..\..\external\Azure-Spatial-Anchors-Samples\Unity\Assets\AzureSpatialAnchorsPlugin\**" CopyToOutputDirectory="PreserveNewest" LinkBase="AzureSpatialAnchorsPlugin\"/>
+    <Content Include="..\..\..\external\Azure-Spatial-Anchors-Samples\Unity\Assets\android-logos\**" CopyToOutputDirectory="PreserveNewest" LinkBase="AzureSpatialAnchors.Resources\android-logos\"/>
+    <Content Include="..\..\..\external\Azure-Spatial-Anchors-Samples\Unity\Assets\logos\**" CopyToOutputDirectory="PreserveNewest" LinkBase="AzureSpatialAnchors.Resources\logos\"/>
+    <Content Include="..\..\..\external\Azure-Spatial-Anchors-Samples\Unity\Assets\Plugins\**" CopyToOutputDirectory="PreserveNewest" LinkBase="..\..\Plugins\"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\SpectatorView.Unity\Assets\PhotoCapture\Microsoft.MixedReality.PhotoCapture.msb4u.csproj">
+      <Private>true</Private>
+      <Properties>UnityPlatform=$(UnityPlatform);UnityConfiguration=$(UnityConfiguration)</Properties>
+    </ProjectReference>
+    <ProjectReference Include="..\..\SpectatorView.Unity\Assets\SpatialAlignment\Microsoft.MixedReality.SpatialAlignment.msb4u.csproj">
+      <Private>true</Private>
+      <Properties>UnityPlatform=$(UnityPlatform);UnityConfiguration=$(UnityConfiguration)</Properties>
+    </ProjectReference>
+    <ProjectReference Include="..\..\SpectatorView.Unity\Assets\SpectatorView\Microsoft.MixedReality.SpectatorView.msb4u.csproj">
+      <Private>true</Private>
+      <Properties>UnityPlatform=$(UnityPlatform);UnityConfiguration=$(UnityConfiguration)</Properties>
+    </ProjectReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="..\..\SpectatorView.Unity\Assets\SpectatorView.ARKit.meta" CopyToOutputDirectory="PreserveNewest"/>
+    <Content Include="..\..\SpectatorView.Unity\Assets\SpectatorView.ARKit\**" CopyToOutputDirectory="PreserveNewest" LinkBase="ARKit\"/>
+    <Content Include="..\..\SpectatorView.Unity\Assets\SpatialAlignment.ASA.meta" CopyToOutputDirectory="PreserveNewest"/>
+    <Content Include="..\..\SpectatorView.Unity\Assets\SpatialAlignment.ASA\**" CopyToOutputDirectory="PreserveNewest" LinkBase="SpatialAlignment.ASA\"/>
+    <Content Include="..\..\SpectatorView.Unity\Assets\SpectatorView.Native.meta" CopyToOutputDirectory="PreserveNewest"/>
+    <Content Include="..\..\SpectatorView.Unity\Assets\SpectatorView.Native\**" CopyToOutputDirectory="PreserveNewest" LinkBase="SpectatorView.Native\"/>
+    <Content Include="..\..\SpectatorView.Unity\Assets\SpectatorView.Helpers.meta" CopyToOutputDirectory="PreserveNewest"/>
+    <Content Include="..\..\SpectatorView.Unity\Assets\SpectatorView.Helpers\**" CopyToOutputDirectory="PreserveNewest" LinkBase="SpectatorView.Helpers\"/>
   </ItemGroup>
 
   <Import Project="$(MSBuildForUnityGeneratedOutputDirectory)\$(MSBuildProjectName).g.targets" />
