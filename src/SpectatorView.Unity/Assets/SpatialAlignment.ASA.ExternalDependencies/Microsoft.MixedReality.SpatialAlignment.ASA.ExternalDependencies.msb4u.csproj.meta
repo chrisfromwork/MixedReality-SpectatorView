@@ -1,8 +1,8 @@
 fileFormatVersion: 2
-guid: b0ad428592df0ae46bd91fd99fc96926
+guid: d70d16df38cd942429af8154582b5792
 ScriptedImporter:
   fileIDToRecycleName:
-    11400000: Assembly-CSharp.msb4u
+    11400000: Microsoft.MixedReality.SpatialAlignment.ASA.ExternalDependencies.msb4u
   externalObjects: {}
   userData: 
   assetBundleName: 

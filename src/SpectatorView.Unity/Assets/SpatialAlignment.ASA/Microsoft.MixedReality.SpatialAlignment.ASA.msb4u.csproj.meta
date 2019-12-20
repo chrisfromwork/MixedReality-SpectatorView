@@ -1,8 +1,8 @@
 fileFormatVersion: 2
-guid: 4a9815e0acafb6042b666860fd3cd359
+guid: a989f4778b4c2b844a0704c40ccdc806
 ScriptedImporter:
   fileIDToRecycleName:
-    11400000: Microsoft.MixedReality.SpectatorView.msb4u
+    11400000: Microsoft.MixedReality.SpatialAlignment.ASA.msb4u
   externalObjects: {}
   userData: 
   assetBundleName: 

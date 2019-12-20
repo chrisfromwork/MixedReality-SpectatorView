@@ -1,7 +1,6 @@
 {
     "name": "Microsoft.MixedReality.PhotoCapture",
-    "references": [
-    ],
+    "references": [],
     "optionalUnityReferences": [],
     "includePlatforms": [],
     "excludePlatforms": [],

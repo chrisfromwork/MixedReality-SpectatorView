@@ -1,3 +1,17 @@
-﻿{
-	"name": "Microsoft.MixedReality.SpatialAlignment.ASA.ExternalDependencies"
+{
+    "name": "Microsoft.MixedReality.SpatialAlignment.ASA.ExternalDependencies",
+    "references": [],
+    "optionalUnityReferences": [],
+    "includePlatforms": [
+        "Android",
+        "Editor",
+        "iOS",
+        "WSA"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": []
 }

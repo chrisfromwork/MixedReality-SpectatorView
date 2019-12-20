@@ -1,8 +1,8 @@
 fileFormatVersion: 2
-guid: 4a9815e0acafb6042b666860fd3cd359
+guid: 3f757455ebd970f4287589d59ccfa867
 ScriptedImporter:
   fileIDToRecycleName:
-    11400000: Microsoft.MixedReality.SpectatorView.msb4u
+    11400000: Microsoft.MixedReality.SpectatorView.ExternalDependencies.Android.msb4u
   externalObjects: {}
   userData: 
   assetBundleName: 

@@ -66,7 +66,7 @@ try {
     Set-Location "NuGet"
 
     ## Run MSBuild Generation
-    # RunUnityTask -taskName "MSBuildGeneration" -methodToExecute "Microsoft.Build.Unity.ProjectGeneration.MSBuildTools.RegenerateSDKProjects"
+    RunUnityTask -taskName "MSBuildGeneration" -methodToExecute "Microsoft.Build.Unity.ProjectGeneration.MSBuildTools.RegenerateSDKProjects"
 
     ## Build both InEditor and Player WindowsStandalone32 binaries to have needed content for asset retargeting.
     Write-Output "============ Building InEditor BuildWindowsStandalone32InEditor ============ "
