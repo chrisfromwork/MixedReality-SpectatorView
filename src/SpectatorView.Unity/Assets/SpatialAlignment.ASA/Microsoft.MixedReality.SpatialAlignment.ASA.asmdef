@@ -1,0 +1,16 @@
+{
+    "name": "Microsoft.MixedReality.SpatialAlignment.ASA",
+    "references": [
+        "Microsoft.MixedReality.SpatialAlignment",
+        "Microsoft.MixedReality.SpectatorView",
+        "Microsoft.MixedReality.SpatialAlignment.ASA.ExternalDependencies"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": []
+}

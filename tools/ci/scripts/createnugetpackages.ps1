@@ -16,6 +16,9 @@ param(
     [string]$UnityDirectory
 )
 
+Import-Module $PSScriptRoot\genericHelpers.psm1
+Import-Module $PSScriptRoot\spectatorViewHelpers.psm1
+
 Write-Verbose "Reconciling Unity binary:"
 if (-not $UnityDirectory) {
     throw "-UnityDirectory is a required flag"
@@ -57,11 +60,13 @@ $OriginalPath = Get-Location
 try {
     Set-Location (Split-Path $MyInvocation.MyCommand.Path)
     Set-Location "..\\..\\..\\src\\SpectatorView.Unity\\"
+    $projPath = Get-Location
+    
     New-Item -ItemType Directory "NuGet" -ErrorAction SilentlyContinue
     Set-Location "NuGet"
 
     ## Run MSBuild Generation
-    RunUnityTask -taskName "MSBuildGeneration" -methodToExecute "Microsoft.Build.Unity.ProjectGeneration.MSBuildTools.RegenerateSDKProjects"
+    # RunUnityTask -taskName "MSBuildGeneration" -methodToExecute "Microsoft.Build.Unity.ProjectGeneration.MSBuildTools.RegenerateSDKProjects"
 
     ## Build both InEditor and Player WindowsStandalone32 binaries to have needed content for asset retargeting.
     Write-Output "============ Building InEditor BuildWindowsStandalone32InEditor ============ "

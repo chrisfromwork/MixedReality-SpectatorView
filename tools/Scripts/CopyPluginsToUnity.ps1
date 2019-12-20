@@ -5,7 +5,7 @@ param(
 $RootDirectory = Join-Path -Path $PSScriptRoot -ChildPath "\..\..\src\SpectatorView.Native"
 $MetaFiles = Join-Path -Path $RootDirectory -ChildPath "UnityMetaFiles"
 
-$PluginDirectory = Join-Path -Path $PSScriptRoot -ChildPath "\..\..\src\SpectatorView.Unity\Assets\SpectatorView.Native\Plugins"
+$PluginDirectory = Join-Path -Path $PSScriptRoot -ChildPath "\..\..\src\SpectatorView.Unity\Assets\SpectatorView.ExternalDependencies\Plugins"
 $DesktopDirectory = Join-Path -Path $PluginDirectory -ChildPath "x64"
 $WSAx86Directory = Join-Path -Path $PluginDirectory -ChildPath "WSA\x86"
 $WSAARMDirectory = Join-Path -Path $PluginDirectory -ChildPath "WSA\ARM"

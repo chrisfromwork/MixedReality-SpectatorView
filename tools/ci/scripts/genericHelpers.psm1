@@ -56,7 +56,12 @@ function HideUnityAssetsDirectory
     {
        $Leaf = Split-Path -Path $Path -Leaf
        $NewLeaf = ".$Leaf"
+       Write-Output "Renaming $Path to $NewLeaf"
        Rename-Item -Path $Path -NewName $NewLeaf
+    }
+    Else
+    {
+      Write-Output "$Path wasn't found"
     }
 }
 
@@ -71,7 +76,12 @@ function IncludeUnityAssetsDirectory
     {
        $Leaf = Split-Path -Path $Path -Leaf
        $NewLeaf = $Leaf.TrimStart(".")
+       Write-Output "Renaming $Path to $NewLeaf"
        Rename-Item -Path $Path -NewName $NewLeaf
+    }
+    Else
+    {
+      Write-Output "$Path wasn't found"
     }
 }
 

@@ -1,0 +1,14 @@
+{
+    "name": "Microsoft.MixedReality.SpectatorView.ExternalDependencies.iOS",
+    "references": [],
+    "optionalUnityReferences": [],
+    "includePlatforms": [
+        "iOS"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": []
+}

@@ -102,7 +102,7 @@ function HideAndroidAssets
      $ProjectPath
    )
 
-   HideUnityAssetsDirectory -Path "$ProjectPath\Assets\GoogleARCore"
+   HideUnityAssetsDirectory -Path "$ProjectPath\Assets\SpectatorView.ExternalDependencies\GoogleARCore"
 }
 
 function IncludeAndroidAssets
@@ -112,7 +112,7 @@ function IncludeAndroidAssets
      $ProjectPath
    )
 
-   IncludeUnityAssetsDirectory -Path "$ProjectPath\Assets\.GoogleARCore"
+   IncludeUnityAssetsDirectory -Path "$ProjectPath\Assets\SpectatorView.ExternalDependencies\.GoogleARCore"
 }
 
 function HideIOSAssets
@@ -122,7 +122,7 @@ function HideIOSAssets
      $ProjectPath
    )
 
-   HideUnityAssetsDirectory -Path "$ProjectPath\Assets\ARKit-Unity-Plugin"
+   HideUnityAssetsDirectory -Path "$ProjectPath\Assets\SpectatorView.ExternalDependencies\ARKit-Unity-Plugin"
 }
 
 function IncludeIOSAssets
@@ -132,7 +132,7 @@ function IncludeIOSAssets
      $ProjectPath
    )
 
-   IncludeUnityAssetsDirectory -Path "$ProjectPath\Assets\.ARKit-Unity-Plugin"
+   IncludeUnityAssetsDirectory -Path "$ProjectPath\Assets\SpectatorView.ExternalDependencies\.ARKit-Unity-Plugin"
 }
 
 function HideASAAssets

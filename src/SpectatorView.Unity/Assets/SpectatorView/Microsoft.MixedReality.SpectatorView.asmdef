@@ -3,7 +3,10 @@
     "references": [
         "Microsoft.MixedReality.PhotoCapture",
         "Microsoft.MixedReality.SpatialAlignment",
-        "Unity.TextMeshPro"
+        "Unity.TextMeshPro",
+        "Microsoft.MixedReality.SpectatorView.ExternalDependencies",
+        "Microsoft.MixedReality.SpectatorView.ExternalDependencies.Android",
+        "Microsoft.MixedReality.SpectatorView.ExternalDependencies.iOS"
     ],
     "optionalUnityReferences": [],
     "includePlatforms": [],

@@ -1,0 +1,14 @@
+{
+    "name": "Microsoft.MixedReality.SpectatorView.ExternalDependencies.Android",
+    "references": [],
+    "optionalUnityReferences": [],
+    "includePlatforms": [
+        "Android"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": []
+}
