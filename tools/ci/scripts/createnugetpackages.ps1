@@ -69,18 +69,18 @@ try {
     RunUnityTask -taskName "MSBuildGeneration" -methodToExecute "Microsoft.Build.Unity.ProjectGeneration.MSBuildTools.RegenerateSDKProjects"
 
     ## Build both InEditor and Player WindowsStandalone32 binaries to have needed content for asset retargeting.
-    Write-Output "============ Building InEditor BuildWindowsStandalone32InEditor ============ "
-    dotnet msbuild ..\MSBuild\BuildProjects.proj -target:BuildWindowsStandalone32InEditor > "Logs\Build.InEditor.WindowsStandalone32.$($Version).log"
-    if ($lastexitcode -ge 1) {
-        Write-Error "Building InEditor BuildWindowsStandalone32InEditor Failed! See log file for more information $(Get-Location)\Logs\Build.InEditor.WindowsStandalone32.$($Version).log";
-        exit($lastexitcode)
-    }
-    Write-Output "============ Building Player WindowsStandalone32 ============ "
-    dotnet msbuild ..\MSBuild\BuildProjects.proj -target:BuildWindowsStandalone32Player > "Logs\Build.Player.WindowsStandalone32.$($Version).log"
-    if ($lastexitcode -ge 1) {
-        Write-Error "Building Player WindowsStandalone32 Failed! See log file for more information $(Get-Location)\Logs\Build.Player.WindowsStandalone32.$($Version).log";
-        exit($lastexitcode)
-    }
+    # Write-Output "============ Building InEditor BuildWindowsStandalone32InEditor ============ "
+    # dotnet msbuild ..\MSBuild\BuildProjects.proj -target:BuildWindowsStandalone32InEditor > "Logs\Build.InEditor.WindowsStandalone32.$($Version).log"
+    # if ($lastexitcode -ge 1) {
+    #     Write-Error "Building InEditor BuildWindowsStandalone32InEditor Failed! See log file for more information $(Get-Location)\Logs\Build.InEditor.WindowsStandalone32.$($Version).log";
+    #     exit($lastexitcode)
+    # }
+    # Write-Output "============ Building Player WindowsStandalone32 ============ "
+    # dotnet msbuild ..\MSBuild\BuildProjects.proj -target:BuildWindowsStandalone32Player > "Logs\Build.Player.WindowsStandalone32.$($Version).log"
+    # if ($lastexitcode -ge 1) {
+    #     Write-Error "Building Player WindowsStandalone32 Failed! See log file for more information $(Get-Location)\Logs\Build.Player.WindowsStandalone32.$($Version).log";
+    #     exit($lastexitcode)
+    # }
 
     ## Build desired package content.
     Write-Output "============ Building Player WSA ============ "
@@ -89,31 +89,36 @@ try {
         Write-Error "Building Player WSA Failed! See log file for more information $(Get-Location)\Logs\Build.Player.WSA.$($Version).log";
         exit($lastexitcode)
     }
-
-    # Write-Output "============ Building InEditor WSA ============ "
-    # dotnet msbuild ..\MSBuild\BuildProjects.proj -target:BuildWSAEditor > "Logs\Build.InEditor.WSA.$($Version).log"
-    # if ($lastexitcode -ge 1) {
-    #     Write-Error "Building InEditor WSA Failed! See log file for more information $(Get-Location)\Logs\Build.InEditor.WSA.$($ ).log";
-    #     exit($lastexitcode)
-    # }
-    # Write-Output "============ Building Player WindowsStandalone32 ============ "
-    # dotnet msbuild .\BuildSource.proj -target:BuildStandalonePlayer > "Logs\Build.Player.WindowsStandalone32.$($Version).log"
-    # if ($lastexitcode -ge 1) {
-    #     Write-Error "Building Player WindowsStandalone32 Failed! See log file for more information $(Get-Location)\Logs\Build.Player.WindowsStandalone32.$($Version).log";
-    #     exit($lastexitcode)
-    # }
-    # Write-Output "============ Building Player Android ============ "
-    # dotnet msbuild .\BuildSource.proj -target:BuildAndroidPlayer > "Logs\Build.Player.Android.$($Version).log"
-    # if ($lastexitcode -ge 1) {
-    #     Write-Error "Building Player Android Failed! See log file for more information $(Get-Location)\Logs\Build.Player.Android.$($Version).log";
-    #     exit($lastexitcode)
-    # }
-    # Write-Output "============ Building Player iOS  ============ "
-    # dotnet msbuild .\BuildSource.proj -target:BuildIOSPlayer > "Logs\Build.Player.iOS.$($Version).log"
-    # if ($lastexitcode -ge 1) {
-    #     Write-Error "Building Player iOS Failed! See log file for more information $(Get-Location)\Logs\Build.Player.iOS.$($Version).log";
-    #     exit($lastexitcode)
-    # }
+    Write-Output "============ Building Editor WSA ============ "
+    dotnet msbuild ..\MSBuild\BuildProjects.proj -target:BuildWSAInEditor  > "Logs\Build.InEditor.WSA.$($Version).log"
+    if ($lastexitcode -ge 1) {
+        Write-Error "Building Editor WSA Failed! See log file for more information $(Get-Location)\Logs\Build.InEditor.WSA.$($Version).log";
+        exit($lastexitcode)
+    }
+    Write-Output "============ Building Player Android ============ "
+    dotnet msbuild ..\MSBuild\BuildProjects.proj -target:BuildAndroidPlayer  > "Logs\Build.Player.Android.$($Version).log"
+    if ($lastexitcode -ge 1) {
+        Write-Error "Building Player Android Failed! See log file for more information $(Get-Location)\Logs\Build.Player.Android.$($Version).log";
+        exit($lastexitcode)
+    }
+    Write-Output "============ Building Editor Android ============ "
+    dotnet msbuild ..\MSBuild\BuildProjects.proj -target:BuildAndroidInEditor  > "Logs\Build.InEditor.Android.$($Version).log"
+    if ($lastexitcode -ge 1) {
+        Write-Error "Building Player Android Failed! See log file for more information $(Get-Location)\Logs\Build.InEditor.Android.$($Version).log";
+        exit($lastexitcode)
+    }
+    Write-Output "============ Building Player iOS ============ "
+    dotnet msbuild ..\MSBuild\BuildProjects.proj -target:BuildiOSPlayer  > "Logs\Build.Player.iOS.$($Version).log"
+    if ($lastexitcode -ge 1) {
+        Write-Error "Building Player iOS Failed! See log file for more information $(Get-Location)\Logs\Build.Player.iOS.$($Version).log";
+        exit($lastexitcode)
+    }
+    Write-Output "============ Building Editor iOS ============ "
+    dotnet msbuild ..\MSBuild\BuildProjects.proj -target:BuildiOSInEditor  > "Logs\Build.InEditor.iOS.$($Version).log"
+    if ($lastexitcode -ge 1) {
+        Write-Error "Building Player iOS Failed! See log file for more information $(Get-Location)\Logs\Build.InEditor.iOS.$($Version).log";
+        exit($lastexitcode)
+    }
 
     ## Run Asset regargetting:
     RunUnityTask -taskName "AssetRetargeting" -methodToExecute "Microsoft.Build.Unity.ProjectGeneration.AssetScriptReferenceRetargeter.RetargetAssets"

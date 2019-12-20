@@ -1,6 +1,9 @@
 {
     "name": "Microsoft.MixedReality.SpatialAlignment.ASA.ExternalDependencies",
-    "references": [],
+    "references": [
+        "Microsoft.MixedReality.SpectatorView.ExternalDependencies.Android",
+        "Microsoft.MixedReality.SpectatorView.ExternalDependencies.iOS"
+    ],
     "optionalUnityReferences": [],
     "includePlatforms": [
         "Android",
