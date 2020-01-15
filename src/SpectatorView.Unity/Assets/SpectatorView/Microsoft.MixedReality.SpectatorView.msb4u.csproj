@@ -28,8 +28,7 @@
   <Import Project="$(MSBuildForUnityGeneratedOutputDirectory)\$(MSBuildProjectName).g.props" />
 
   <ItemGroup>
-  <!-- Add your references here -->
-
+    <PackageReference Include="Microsoft.MixedReality.QR" Version="0.5.2082" />
   </ItemGroup>
 
   <Import Project="$(MSBuildForUnityGeneratedOutputDirectory)\$(MSBuildProjectName).g.targets" />
