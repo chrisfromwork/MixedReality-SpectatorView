@@ -4,7 +4,6 @@
         "Microsoft.MixedReality.PhotoCapture",
         "Microsoft.MixedReality.SpatialAlignment",
         "Microsoft.MixedReality.SpatialAlignment.ASA",
-        "Microsoft.MixedReality.SpectatorView.ExternalDependencies",
         "Unity.TextMeshPro",
         "Unity.XR.ARFoundation",
         "UnityEngine.UI"
