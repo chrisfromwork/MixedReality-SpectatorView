@@ -67,145 +67,134 @@ try {
     New-Item -ItemType Directory "NuGet" -ErrorAction SilentlyContinue
     Set-Location "NuGet"
 
-    ## Run MSBuild Generation
-    RunUnityTask -taskName "MSBuildGeneration" -methodToExecute "Microsoft.Build.Unity.ProjectGeneration.MSBuildTools.RegenerateSDKProjects"
+    # ## Run MSBuild Generation
+    # RunUnityTask -taskName "MSBuildGeneration" -methodToExecute "Microsoft.Build.Unity.ProjectGeneration.MSBuildTools.RegenerateSDKProjects"
 
-    ## Build desired package content.
-    Write-Output "============ Building Player WindowsStandalone32 ============ "
-    dotnet msbuild ..\MSBuild\BuildProjects.proj -target:BuildWindowsStandalone32Player > "Logs\Build.Player.WindowsStandalone32.$($Version).log"
-    if ($lastexitcode -ge 1) {
-        Write-Error "Building Player WindowsStandalone32 Failed! See log file for more information $(Get-Location)\Logs\Build.Player.WindowsStandalone32.$($Version).log";
-        exit($lastexitcode)
-    }
-    else
-    {
-        Write-Output "Build Succeeded"
-    }
+    # ## Build desired package content.
+    # Write-Output "============ Building InEditor WindowsStandalone32 ============ "
+    # dotnet msbuild ..\MSBuild\BuildProjects.proj -target:BuildWindowsStandalone32InEditor > "Logs\Build.InEditor.WindowsStandalone32.$($Version).log"
+    # if ($lastexitcode -ge 1) {
+    #     Write-Error "Building InEditor WindowsStandalone32 Failed! See log file for more information $(Get-Location)\Logs\Build.InEditor.WindowsStandalone32.$($Version).log";
+    #     exit($lastexitcode)
+    # }
+    # else
+    # {
+    #     Write-Output "Build Succeeded"
+    # }
 
-    Write-Output "============ Building InEditor WindowsStandalone32 ============ "
-    dotnet msbuild ..\MSBuild\BuildProjects.proj -target:BuildWindowsStandalone32InEditor > "Logs\Build.InEditor.WindowsStandalone32.$($Version).log"
-    if ($lastexitcode -ge 1) {
-        Write-Error "Building InEditor WindowsStandalone32 Failed! See log file for more information $(Get-Location)\Logs\Build.InEditor.WindowsStandalone32.$($Version).log";
-        exit($lastexitcode)
-    }
-    else
-    {
-        Write-Output "Build Succeeded"
-    }
-
-    Write-Output "============ Building Player WSA ============ "
-    dotnet msbuild ..\MSBuild\BuildProjects.proj -target:BuildWSAPlayer  > "Logs\Build.Player.WSA.$($Version).log"
-    if ($lastexitcode -ge 1) {
-        Write-Error "Building Player WSA Failed! See log file for more information $(Get-Location)\Logs\Build.Player.WSA.$($Version).log";
-        exit($lastexitcode)
-    }
-    else
-    {
-        Write-Output "Build Succeeded"
-    }
+    # Write-Output "============ Building Player WSA ============ "
+    # dotnet msbuild ..\MSBuild\BuildProjects.proj -target:BuildWSAPlayer  > "Logs\Build.Player.WSA.$($Version).log"
+    # if ($lastexitcode -ge 1) {
+    #     Write-Error "Building Player WSA Failed! See log file for more information $(Get-Location)\Logs\Build.Player.WSA.$($Version).log";
+    #     exit($lastexitcode)
+    # }
+    # else
+    # {
+    #     Write-Output "Build Succeeded"
+    # }
     
-    Write-Output "============ Building Editor WSA ============ "
-    dotnet msbuild ..\MSBuild\BuildProjects.proj -target:BuildWSAInEditor  > "Logs\Build.InEditor.WSA.$($Version).log"
-    if ($lastexitcode -ge 1) {
-        Write-Error "Building Editor WSA Failed! See log file for more information $(Get-Location)\Logs\Build.InEditor.WSA.$($Version).log";
-        exit($lastexitcode)
-    }
-    else
-    {
-        Write-Output "Build Succeeded"
-    }
+    # Write-Output "============ Building Editor WSA ============ "
+    # dotnet msbuild ..\MSBuild\BuildProjects.proj -target:BuildWSAInEditor  > "Logs\Build.InEditor.WSA.$($Version).log"
+    # if ($lastexitcode -ge 1) {
+    #     Write-Error "Building Editor WSA Failed! See log file for more information $(Get-Location)\Logs\Build.InEditor.WSA.$($Version).log";
+    #     exit($lastexitcode)
+    # }
+    # else
+    # {
+    #     Write-Output "Build Succeeded"
+    # }
     
-    Write-Output "============ Building Player Android ============ "
-    dotnet msbuild ..\MSBuild\BuildProjects.proj -target:BuildAndroidPlayer  > "Logs\Build.Player.Android.$($Version).log"
-    if ($lastexitcode -ge 1) {
-        Write-Error "Building Player Android Failed! See log file for more information $(Get-Location)\Logs\Build.Player.Android.$($Version).log";
-        exit($lastexitcode)
-    }
-    else
-    {
-        Write-Output "Build Succeeded"
-    }
+    # Write-Output "============ Building Player Android ============ "
+    # dotnet msbuild ..\MSBuild\BuildProjects.proj -target:BuildAndroidPlayer  > "Logs\Build.Player.Android.$($Version).log"
+    # if ($lastexitcode -ge 1) {
+    #     Write-Error "Building Player Android Failed! See log file for more information $(Get-Location)\Logs\Build.Player.Android.$($Version).log";
+    #     exit($lastexitcode)
+    # }
+    # else
+    # {
+    #     Write-Output "Build Succeeded"
+    # }
 
-    Write-Output "============ Building Editor Android ============ "
-    dotnet msbuild ..\MSBuild\BuildProjects.proj -target:BuildAndroidInEditor  > "Logs\Build.InEditor.Android.$($Version).log"
-    if ($lastexitcode -ge 1) {
-        Write-Error "Building Player Android Failed! See log file for more information $(Get-Location)\Logs\Build.InEditor.Android.$($Version).log";
-        exit($lastexitcode)
-    }
-    else
-    {
-        Write-Output "Build Succeeded"
-    }
+    # Write-Output "============ Building Editor Android ============ "
+    # dotnet msbuild ..\MSBuild\BuildProjects.proj -target:BuildAndroidInEditor  > "Logs\Build.InEditor.Android.$($Version).log"
+    # if ($lastexitcode -ge 1) {
+    #     Write-Error "Building Player Android Failed! See log file for more information $(Get-Location)\Logs\Build.InEditor.Android.$($Version).log";
+    #     exit($lastexitcode)
+    # }
+    # else
+    # {
+    #     Write-Output "Build Succeeded"
+    # }
 
-    Write-Output "============ Building Player iOS ============ "
-    dotnet msbuild ..\MSBuild\BuildProjects.proj -target:BuildiOSPlayer  > "Logs\Build.Player.iOS.$($Version).log"
-    if ($lastexitcode -ge 1) {
-        Write-Error "Building Player iOS Failed! See log file for more information $(Get-Location)\Logs\Build.Player.iOS.$($Version).log";
-        exit($lastexitcode)
-    }
-    else
-    {
-        Write-Output "Build Succeeded"
-    }
+    # Write-Output "============ Building Player iOS ============ "
+    # dotnet msbuild ..\MSBuild\BuildProjects.proj -target:BuildiOSPlayer  > "Logs\Build.Player.iOS.$($Version).log"
+    # if ($lastexitcode -ge 1) {
+    #     Write-Error "Building Player iOS Failed! See log file for more information $(Get-Location)\Logs\Build.Player.iOS.$($Version).log";
+    #     exit($lastexitcode)
+    # }
+    # else
+    # {
+    #     Write-Output "Build Succeeded"
+    # }
 
-    Write-Output "============ Building Editor iOS ============ "
-    dotnet msbuild ..\MSBuild\BuildProjects.proj -target:BuildiOSInEditor  > "Logs\Build.InEditor.iOS.$($Version).log"
-    if ($lastexitcode -ge 1) {
-        Write-Error "Building Player iOS Failed! See log file for more information $(Get-Location)\Logs\Build.InEditor.iOS.$($Version).log";
-        exit($lastexitcode)
-    }
-    else
-    {
-        Write-Output "Build Succeeded"
-    }
+    # Write-Output "============ Building Editor iOS ============ "
+    # dotnet msbuild ..\MSBuild\BuildProjects.proj -target:BuildiOSInEditor  > "Logs\Build.InEditor.iOS.$($Version).log"
+    # if ($lastexitcode -ge 1) {
+    #     Write-Error "Building Player iOS Failed! See log file for more information $(Get-Location)\Logs\Build.InEditor.iOS.$($Version).log";
+    #     exit($lastexitcode)
+    # }
+    # else
+    # {
+    #     Write-Output "Build Succeeded"
+    # }
 
     ### Run Asset regargetting:
     RunUnityTask -taskName "AssetRetargeting" -methodToExecute "Microsoft.Build.Unity.ProjectGeneration.AssetScriptReferenceRetargeter.RetargetAssets"
     
-    # ### Package NuGet
-    # New-Item -ItemType Directory -Force -Path $OutputDirectory
-    # $OutputDirectory = Resolve-Path $OutputDirectory
-    # $releaseNotes = "Built on local Unity"
+    ### Package NuGet
+    New-Item -ItemType Directory -Force -Path $OutputDirectory
+    $OutputDirectory = Resolve-Path $OutputDirectory
+    $releaseNotes = "Built on local Unity"
 
-    # # Add this location to the path as NuGet.exe may be installed here
-    # $env:PATH = "$($env:Path);$((Get-Location).Path)"
+    # Add this location to the path as NuGet.exe may be installed here
+    $env:PATH = "$($env:Path);$((Get-Location).Path)"
 
-    # # Check if NuGet.exe is in the environment PATH, if not go ahead and install it to this directory
-    # where.exe nuget > $null 2> $null
-    # if ($lastexitcode -ne 0) {
-    #     Write-Host "Could not find NuGet.exe in the path. Downloading it now from: https://dist.nuget.org/win-x86-commandline/latest/nuget.exe"
-    #     Invoke-WebRequest -Uri "https://dist.nuget.org/win-x86-commandline/latest/nuget.exe" -OutFile ".\nuget.exe"
-    # }
+    # Check if NuGet.exe is in the environment PATH, if not go ahead and install it to this directory
+    where.exe nuget > $null 2> $null
+    if ($lastexitcode -ne 0) {
+        Write-Host "Could not find NuGet.exe in the path. Downloading it now from: https://dist.nuget.org/win-x86-commandline/latest/nuget.exe"
+        Invoke-WebRequest -Uri "https://dist.nuget.org/win-x86-commandline/latest/nuget.exe" -OutFile ".\nuget.exe"
+    }
     
-    # # Kick jobs for bundling up the nuget packages
-    # Get-ChildItem -Filter *.nuspec -Recurse | Foreach-Object {
-    #     Write-Verbose "Starting nuget job for $($_.FullName)"
-    #     $props = "version=$Version;releaseNotes=$releaseNotes"
+    # Kick jobs for bundling up the nuget packages
+    Get-ChildItem -Filter *.nuspec -Recurse | Foreach-Object {
+        Write-Verbose "Starting nuget job for $($_.FullName)"
+        $props = "version=$Version;releaseNotes=$releaseNotes"
 
-    #     nuget pack $_.FullName -OutputDirectory $OutputDirectory -Properties $props -Exclude *.nuspec.meta
+        nuget pack $_.FullName -OutputDirectory $OutputDirectory -Properties $props -Exclude *.nuspec.meta
         
-    #     # To make debugging the Mixed Reality Spectator View NuGet packages locally much easier automatically create new packages with version 0.0.0 and then
-    #     # restore them to the machine NuGet feed. To test changes to the packages developers can run this script and then change their
-    #     # project to consume version 0.0.0 and restore. Because the package is in the machine global feed it will resolve properly.
-    #     # $localVersion = '0.0.0'
-    #     $packageId = ([xml](Get-Content $_.FullName)).package.metadata.id
-    #     # $finalInstallPath = [System.IO.Path]::Combine($env:UserProfile, '.nuget', 'packages', $packageId, $localVersion)
-    #     $finalInstallPath = [System.IO.Path]::Combine($env:UserProfile, '.nuget', 'packages', $packageId, $Version)
+        # # To make debugging the Mixed Reality Spectator View NuGet packages locally much easier automatically create new packages with version 0.0.0 and then
+        # # restore them to the machine NuGet feed. To test changes to the packages developers can run this script and then change their
+        # # project to consume version 0.0.0 and restore. Because the package is in the machine global feed it will resolve properly.
+        # # $localVersion = '0.0.0'
+        # $packageId = ([xml](Get-Content $_.FullName)).package.metadata.id
+        # # $finalInstallPath = [System.IO.Path]::Combine($env:UserProfile, '.nuget', 'packages', $packageId, $localVersion)
+        # $finalInstallPath = [System.IO.Path]::Combine($env:UserProfile, '.nuget', 'packages', $packageId, $Version)
         
-    #     # Repack but with a hard-coded version of 0.0.0 (the -Version parameter overrides the property value for version)
-    #     # nuget pack $_.FullName -OutputDirectory $OutputDirectory -Properties $props -Exclude *.nuspec.meta -Version $localVersion
-    #     nuget pack $_.FullName -OutputDirectory $OutputDirectory -Properties $props -Exclude *.nuspec.meta -Version $Version
+        # # Repack but with a hard-coded version of 0.0.0 (the -Version parameter overrides the property value for version)
+        # # nuget pack $_.FullName -OutputDirectory $OutputDirectory -Properties $props -Exclude *.nuspec.meta -Version $localVersion
+        # nuget pack $_.FullName -OutputDirectory $OutputDirectory -Properties $props -Exclude *.nuspec.meta -Version $Version
         
-    #     # If the package is already installed to the machine global cache delete it, otherwise the next restore will no-op
-    #     if ([System.IO.Directory]::Exists($finalInstallPath)) {
-    #         Remove-Item -Recurse -Force $finalInstallPath
-    #     }
+        # # If the package is already installed to the machine global cache delete it, otherwise the next restore will no-op
+        # if ([System.IO.Directory]::Exists($finalInstallPath)) {
+        #     Remove-Item -Recurse -Force $finalInstallPath
+        # }
         
-    #     # Restore the package by providing the nupkg folder. After this restore the machine global cache will be populated with the package
-    #     $restoreProjectPath = [System.IO.Path]::Combine((Split-Path $MyInvocation.MyCommand.Path), 'NuGetRestoreProject.csproj')
-    #     # dotnet build "$restoreProjectPath" -p:RestorePackageFeed="$(convert-path $OutputDirectory)" -p:RestorePackageId=$packageId -p:RestorePackageVersion=$localVersion
-    #     dotnet build "$restoreProjectPath" -p:RestorePackageFeed="$(convert-path $OutputDirectory)" -p:RestorePackageId=$packageId -p:RestorePackageVersion=$Version
-    # }
+        # # Restore the package by providing the nupkg folder. After this restore the machine global cache will be populated with the package
+        # $restoreProjectPath = [System.IO.Path]::Combine((Split-Path $MyInvocation.MyCommand.Path), 'NuGetRestoreProject.csproj')
+        # # dotnet build "$restoreProjectPath" -p:RestorePackageFeed="$(convert-path $OutputDirectory)" -p:RestorePackageId=$packageId -p:RestorePackageVersion=$localVersion
+        # dotnet build "$restoreProjectPath" -p:RestorePackageFeed="$(convert-path $OutputDirectory)" -p:RestorePackageId=$packageId -p:RestorePackageVersion=$Version
+    }
 }
 finally {
     Set-Location $OriginalPath
