@@ -12,12 +12,13 @@
     <copyright>© Microsoft Corporation. All rights reserved.</copyright>
     <releaseNotes>$releaseNotes$</releaseNotes>
     <tags>Unity MixedReality SpectatorView</tags>
+    <dependencies>
+      <dependency id="Microsoft.MixedReality.QR" version="0.5.2082" />
+    </dependencies>
   </metadata>
   <files>
     <!-- Prefabs, Materials, Scenes, etc. -->
     <file src="PhotoCapture\**" target="MRSV\Content\PhotoCapture\"
-      exclude="**\*.csproj;**\*.csproj.meta;**\*.sln;**\*.sln.meta;**\*.md;**\*.md.meta" />
-    <file src="Plugins\**" target="MRSV\Content\Plugins\"
       exclude="**\*.csproj;**\*.csproj.meta;**\*.sln;**\*.sln.meta;**\*.md;**\*.md.meta" />
     <file src="SpatialAlignment\**" target="MRSV\Content\SpatialAlignment\"
       exclude="**\*.csproj;**\*.csproj.meta;**\*.sln;**\*.sln.meta;**\*.md;**\*.md.meta" />
@@ -30,6 +31,10 @@
     <file src="SpectatorView.Editor\**" target="MRSV\Content\SpectatorView.Editor\"
       exclude="**\*.csproj;**\*.csproj.meta;**\*.sln;**\*.sln.meta;**\*.md;**\*.md.meta" />
     <file src="SpectatorView.Tests\**" target="MRSV\Content\SpectatorView.Tests\"
+      exclude="**\*.csproj;**\*.csproj.meta;**\*.sln;**\*.sln.meta;**\*.md;**\*.md.meta" />
+
+    <!-- Android Files -->
+    <file src="Plugins\**" target="MRSV\Content\Plugins\"
       exclude="**\*.csproj;**\*.csproj.meta;**\*.sln;**\*.sln.meta;**\*.md;**\*.md.meta" />
 
     <!-- Compiled binaries -->

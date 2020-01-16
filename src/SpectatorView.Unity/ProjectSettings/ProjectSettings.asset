@@ -680,7 +680,7 @@ PlayerSettings:
   metroCertificatePassword: 
   metroCertificateSubject: DefaultCompany
   metroCertificateIssuer: DefaultCompany
-  metroCertificateNotAfter: 007a5ac41245d601
+  metroCertificateNotAfter: 80bfbbc002ebd601
   metroApplicationDescription: Mixed-reality spectator view for third person perspective
     viewing of mixed-reality applications
   wsaImages: {}
