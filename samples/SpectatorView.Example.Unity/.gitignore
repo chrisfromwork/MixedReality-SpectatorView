@@ -73,3 +73,5 @@ UWP/
 # Avoid checking in build directories
 Assets/BuildTools.Unity
 Assets/BuildTools.Unity.meta
+
+Assets/Generated.StateSynchronization.AssetCaches/
