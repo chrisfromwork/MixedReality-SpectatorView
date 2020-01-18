@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Microsoft.MixedReality.SpectatorView.Unity</id>
+    <version>$version$</version>
+    <authors>Microsoft</authors>
+    <owners>Microsoft,MixedReality</owners>
+    <licenseUrl>https://github.com/Microsoft/MixedReality-SpectatorView/LICENSE</licenseUrl>
+    <projectUrl>https://aka.ms/spectatorview</projectUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <description>Spectator View is an augmented reality product that enables viewing HoloLens experiences from secondary devices.</description>
+    <copyright>© Microsoft Corporation. All rights reserved.</copyright>
+    <releaseNotes>$releaseNotes$</releaseNotes>
+    <tags>Unity MixedReality SpectatorView</tags>
+    <dependencies>
+      <dependency id="Microsoft.MixedReality.QR" version="0.5.2082" />
+    </dependencies>
+  </metadata>
+  <files>
+    <!-- Target file that moves content into consuming Unity Project -->
+    <file src="Microsoft.MixedReality.SpectatorView.Unity.targets" target="build\net46" />
+
+    <!-- Prefabs, Materials, Scenes, etc. -->
+    <file src="..\..\NuGet\Content\PhotoCapture\**" target="MRSV\content\PhotoCapture\"
+      exclude="**\*.csproj;**\*.csproj.meta;**\*.sln;**\*.sln.meta;**\*.md;**\*.md.meta" />
+    <file src="..\..\NuGet\Content\SpatialAlignment\**" target="MRSV\content\SpatialAlignment\"
+      exclude="**\*.csproj;**\*.csproj.meta;**\*.sln;**\*.sln.meta;**\*.md;**\*.md.meta" />
+    <file src="..\..\NuGet\Content\SpatialAlignment.ASA\**" target="MRSV\content\SpatialAlignment.ASA\"
+      exclude="**\*.csproj;**\*.csproj.meta;**\*.sln;**\*.sln.meta;**\*.md;**\*.md.meta" />
+    <file src="..\..\NuGet\Content\SpatialAlignment.ASA.Editor\**" target="MRSV\content\SpatialAlignment.ASA.Editor\"
+      exclude="**\*.csproj;**\*.csproj.meta;**\*.sln;**\*.sln.meta;**\*.md;**\*.md.meta" />
+    <file src="..\..\NuGet\Content\SpectatorView\**" target="MRSV\content\SpectatorView\"
+      exclude="**\*.csproj;**\*.csproj.meta;**\*.sln;**\*.sln.meta;**\*.md;**\*.md.meta" />
+    <file src="..\..\NuGet\Content\SpectatorView.Editor\**" target="MRSV\content\SpectatorView.Editor\"
+      exclude="**\*.csproj;**\*.csproj.meta;**\*.sln;**\*.sln.meta;**\*.md;**\*.md.meta" />
+    <file src="..\..\NuGet\Content\SpectatorView.Tests\**" target="MRSV\content\SpectatorView.Tests\"
+      exclude="**\*.csproj;**\*.csproj.meta;**\*.sln;**\*.sln.meta;**\*.md;**\*.md.meta" />
+
+    <!-- Android Files -->
+    <file src="Plugins\**" target="MRSV\Plugins\"
+      exclude="**\*.csproj;**\*.csproj.meta;**\*.sln;**\*.sln.meta;**\*.md;**\*.md.meta" />
+
+    <!-- Compiled binaries -->
+    <file src="..\..\NuGet\Plugins\AndroidPlayer\**" target="MRSV\bin\Player\Android\" exclude="**\*Unity*"/>
+    <file src="..\..\NuGet\Plugins\iOSPlayer\**" target="MRSV\bin\Player\iOS\" exclude="**\*Unity*"/>
+    <file src="..\..\NuGet\Plugins\WSAPlayer\**" target="MRSV\bin\Player\WSA\" exclude="**\*Unity*"/>
+    <file src="..\..\NuGet\Plugins\WindowsStandalone32Player\**" target="MRSV\bin\Player\WindowsStandalone32\" exclude="**\*Unity*"/>
+    <file src="..\..\NuGet\Plugins\AndroidInEditor\**" target="MRSV\bin\InEditor\Android\" exclude="**\*Unity*"/>
+    <file src="..\..\NuGet\Plugins\iOSInEditor\**" target="MRSV\bin\InEditor\iOS\" exclude="**\*Unity*"/>
+    <file src="..\..\NuGet\Plugins\WSAInEditor\**" target="MRSV\bin\InEditor\WSA\" exclude="**\*Unity*"/>
+    <file src="..\..\NuGet\Plugins\WindowsStandalone32InEditor\**" target="MRSV\bin\InEditor\WindowsStandalone32\" exclude="**\*Unity*"/>
+  </files>
+</package>

@@ -1,1 +1,7 @@
 build
+Backup
+bin
+obj
+UpgradeLog.htm
+.vs
+app.config

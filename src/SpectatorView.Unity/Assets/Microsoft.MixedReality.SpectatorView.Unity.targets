@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <!--All extra resources for this package will be placed under this folder in the output directory.-->
+        <MRSV-PackageDestinationFolder>$(MSBuildThisFileName)</MRSV-PackageDestinationFolder>
+    </PropertyGroup>
+
+    <ItemGroup Condition="'$(MSBuildForUnityVersion)' != ''">
+        <Content Include="$(MSBuildThisFileDirectory)..\..\MRSV\content\**">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+            <!-- Don't show .meta files in Solution Explorer - it's not useful. -->
+            <Visible Condition="'%(Extension)' == '.meta'">false</Visible>
+            <Link>$(MRSV-PackageDestinationFolder)\content\%(RecursiveDir)%(Filename)%(Extension)</Link>
+        </Content>
+        <Content Include="$(MSBuildThisFileDirectory)..\..\MRSV\bin\Player\**">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+            <!-- Don't show .meta files in Solution Explorer - it's not useful. -->
+            <Visible Condition="'%(Extension)' == '.meta'">false</Visible>
+            <Link>$(MRSV-PackageDestinationFolder)\bin\Player\%(RecursiveDir)%(Filename)%(Extension)</Link>
+        </Content>
+        <Content Include="$(MSBuildThisFileDirectory)..\..\MRSV\bin\InEditor\WindowsStandalone32\**"
+            Condition="'$(UnityPlatform)' == 'WindowsStandalone32' OR '$(UnityPlatform)' == 'WindowsStandalone64'">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+            <!-- Don't show .meta files in Solution Explorer - it's not useful. -->
+            <Visible Condition="'%(Extension)' == '.meta'">false</Visible>
+            <Link>$(MRSV-PackageDestinationFolder)\bin\InEditor\WindowsStandalone32\%(RecursiveDir)%(Filename)%(Extension)</Link>
+        </Content>
+        <Content Include="$(MSBuildThisFileDirectory)..\..\MRSV\bin\InEditor\WSA\**"
+            Condition="'$(UnityPlatform)' == 'WSA'">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+            <!-- Don't show .meta files in Solution Explorer - it's not useful. -->
+            <Visible Condition="'%(Extension)' == '.meta'">false</Visible>
+            <Link>$(MRSV-PackageDestinationFolder)\bin\InEditor\WSA\%(RecursiveDir)%(Filename)%(Extension)</Link>
+        </Content>
+        <Content Include="$(MSBuildThisFileDirectory)..\..\MRSV\bin\InEditor\Android\**"
+            Condition="'$(UnityPlatform)' == 'Android'">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+            <!-- Don't show .meta files in Solution Explorer - it's not useful. -->
+            <Visible Condition="'%(Extension)' == '.meta'">false</Visible>
+            <Link>$(MRSV-PackageDestinationFolder)\bin\InEditor\Android\%(RecursiveDir)%(Filename)%(Extension)</Link>
+        </Content>
+        <Content Include="$(MSBuildThisFileDirectory)..\..\MRSV\bin\InEditor\iOS\**"
+            Condition="'$(UnityPlatform)' == 'iOS'">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+            <!-- Don't show .meta files in Solution Explorer - it's not useful. -->
+            <Visible Condition="'%(Extension)' == '.meta'">false</Visible>
+            <Link>$(MRSV-PackageDestinationFolder)\bin\InEditor\iOS\%(RecursiveDir)%(Filename)%(Extension)</Link>
+        </Content>
+    </ItemGroup>
+</Project>
