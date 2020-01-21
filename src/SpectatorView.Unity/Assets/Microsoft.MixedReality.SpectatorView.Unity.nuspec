@@ -13,7 +13,7 @@
     <releaseNotes>$releaseNotes$</releaseNotes>
     <tags>Unity MixedReality SpectatorView</tags>
     <dependencies>
-      <dependency id="Microsoft.MixedReality.QR" version="0.5.2082" />
+      <dependency id="Microsoft.MixedReality.QR" version="0.5.2085" />
     </dependencies>
   </metadata>
   <files>
