@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 2e7a9c7e0d7bbe046967e8d322d9fc45
+=======
+guid: f661f259b79d3d041bc838f2796dd236
+>>>>>>> buildTools2
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
