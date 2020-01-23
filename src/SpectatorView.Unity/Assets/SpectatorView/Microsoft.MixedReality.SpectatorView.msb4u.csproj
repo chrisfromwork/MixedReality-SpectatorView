@@ -28,7 +28,7 @@
   <Import Project="$(MSBuildForUnityGeneratedProjectDirectory)\$(MSBuildProjectName).g.props" />
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.MixedReality.QR" Version="0.5.2085"/>
+    <PackageReference Include="Microsoft.MixedReality.SceneUnderstanding" Version="0.5.2054" />
   </ItemGroup>
 
   <Import Project="$(MSBuildForUnityGeneratedProjectDirectory)\$(MSBuildProjectName).g.targets" />
