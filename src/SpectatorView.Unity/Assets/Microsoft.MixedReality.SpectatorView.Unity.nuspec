@@ -45,9 +45,9 @@
     <file src="..\..\NuGet\Plugins\iOSPlayer\**" target="MRSV\bin\Player\iOS\" exclude="**\*Unity*"/>
     <file src="..\..\NuGet\Plugins\WSAPlayer\**" target="MRSV\bin\Player\WSA\" exclude="**\*Unity*"/>
     <file src="..\..\NuGet\Plugins\WindowsStandalone32Player\**" target="MRSV\bin\Player\WindowsStandalone32\" exclude="**\*Unity*"/>
-    <file src="..\..\NuGet\Plugins\AndroidInEditor\**" target="MRSV\bin\InEditor\Android\" exclude="**\*Unity*"/>
-    <file src="..\..\NuGet\Plugins\iOSInEditor\**" target="MRSV\bin\InEditor\iOS\" exclude="**\*Unity*"/>
-    <file src="..\..\NuGet\Plugins\WSAInEditor\**" target="MRSV\bin\InEditor\WSA\" exclude="**\*Unity*"/>
-    <file src="..\..\NuGet\Plugins\WindowsStandalone32InEditor\**" target="MRSV\bin\InEditor\WindowsStandalone32\" exclude="**\*Unity*"/>
+    <file src="..\..\NuGet\Plugins\AndroidInEditor\**" target="MRSV\bin\InEditor\Android\" exclude="**\*Unity*;**\Microsoft.MixedReality.QR.Editor.*"/>
+    <file src="..\..\NuGet\Plugins\iOSInEditor\**" target="MRSV\bin\InEditor\iOS\" exclude="**\*Unity*;**\Microsoft.MixedReality.QR.Editor.*"/>
+    <file src="..\..\NuGet\Plugins\WSAInEditor\**" target="MRSV\bin\InEditor\WSA\" exclude="**\*Unity*;**\Microsoft.MixedReality.QR.Editor.*"/>
+    <file src="..\..\NuGet\Plugins\WindowsStandalone32InEditor\**" target="MRSV\bin\InEditor\WindowsStandalone32\" exclude="**\*Unity*;**\Microsoft.MixedReality.QR.Editor.*"/>
   </files>
 </package>
