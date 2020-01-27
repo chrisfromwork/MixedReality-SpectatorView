@@ -43,6 +43,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnityEditor.SpatialTracking
 		{BA171B3D-D2A5-1234-AB86-4770F99741A5} = {BA171B3D-D2A5-1234-AB86-4770F99741A5}
 	EndProjectSection
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Unity.XR.WindowsMR.msb4u", "..\MSBuild\Projects\Unity.XR.WindowsMR.msb4u.csproj", "{33B4BC8F-F031-CA64-CB5B-84C47A40DD88}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2BAFAC87-E7F4-B9B4-18D9-448D219B01AB} = {2BAFAC87-E7F4-B9B4-18D9-448D219B01AB}
+	EndProjectSection
+EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Unity.Analytics.DataPrivacy.msb4u", "..\MSBuild\Projects\Unity.Analytics.DataPrivacy.msb4u.csproj", "{0FDA7EBE-61AB-2164-383D-10E32EFB9C6E}"
 	ProjectSection(ProjectDependencies) = postProject
 		{2BAFAC87-E7F4-B9B4-18D9-448D219B01AB} = {2BAFAC87-E7F4-B9B4-18D9-448D219B01AB}
@@ -98,6 +103,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Unity.XR.ARCore.Editor.msb4
 		{92703082-F92B-41BA-80F0-D6912DE66115} = {92703082-F92B-41BA-80F0-D6912DE66115}
 	EndProjectSection
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Unity.XR.WindowsMR.Editor.msb4u", "..\MSBuild\Projects\Unity.XR.WindowsMR.Editor.msb4u.csproj", "{0BBD462D-7DC8-F944-1973-A4C86A22E16E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{33B4BC8F-F031-CA64-CB5B-84C47A40DD88} = {33B4BC8F-F031-CA64-CB5B-84C47A40DD88}
+	EndProjectSection
+EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Unity.XR.ARKit.msb4u", "..\MSBuild\Projects\Unity.XR.ARKit.msb4u.csproj", "{DFD0CE20-189D-48E5-B22B-B4134B558F5A}"
 	ProjectSection(ProjectDependencies) = postProject
 		{92703082-F92B-41BA-80F0-D6912DE66115} = {92703082-F92B-41BA-80F0-D6912DE66115}
@@ -148,20 +158,22 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Assembly-CSharp.msb4u", "As
 		{2C573E6B-2716-5184-6A79-655161004C5B} = {2C573E6B-2716-5184-6A79-655161004C5B}
 		{3A9781DB-4804-A994-5B98-83F3A7C46D45} = {3A9781DB-4804-A994-5B98-83F3A7C46D45}
 		{B13A1D1D-FB13-F1B4-89A0-FF5612F36F29} = {B13A1D1D-FB13-F1B4-89A0-FF5612F36F29}
+		{0BBD462D-7DC8-F944-1973-A4C86A22E16E} = {0BBD462D-7DC8-F944-1973-A4C86A22E16E}
 		{BA171B3D-D2A5-1234-AB86-4770F99741A5} = {BA171B3D-D2A5-1234-AB86-4770F99741A5}
 		{6055BE8E-BEFD-69E4-8B49-212B09B47B2F} = {6055BE8E-BEFD-69E4-8B49-212B09B47B2F}
 		{0FDA7EBE-61AB-2164-383D-10E32EFB9C6E} = {0FDA7EBE-61AB-2164-383D-10E32EFB9C6E}
 		{52C867DE-B383-2554-C84D-C4202BD47258} = {52C867DE-B383-2554-C84D-C4202BD47258}
+		{33B4BC8F-F031-CA64-CB5B-84C47A40DD88} = {33B4BC8F-F031-CA64-CB5B-84C47A40DD88}
 		{7910D4AF-31B7-41AC-B1BC-E1140634A975} = {7910D4AF-31B7-41AC-B1BC-E1140634A975}
 		{343DEAAF-83E0-CEE4-CA97-8E7DF0B80D21} = {343DEAAF-83E0-CEE4-CA97-8E7DF0B80D21}
 		{A44F47CF-3ADA-4435-DBC5-16BAD0BC86FE} = {A44F47CF-3ADA-4435-DBC5-16BAD0BC86FE}
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Dependencies.msb4u", "Dependencies.msb4u.csproj", "{86B9A0C9-B3A4-4A1B-9A2A-6C42CAAE9CE3}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Built In Packages", "Built In Packages", "{AE8031DB-34EF-45DA-B7DC-C5FFEB6AD8BB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpectatorViewExampleUnity.Dependencies.msb4u", "SpectatorViewExampleUnity.Dependencies.msb4u.csproj", "{86B9A0C9-B3A4-4A1B-9A2A-6C42CAAE9CE3}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Imported Packages", "Imported Packages", "{59F99E2F-2341-4899-8322-94A3CBAD1CAB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Built In Packages", "Built In Packages", "{AE8031DB-34EF-45DA-B7DC-C5FFEB6AD8BB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "External Packages", "External Packages", "{91D0E16C-0D52-4506-A68B-492BE89AB57C}"
 EndProject
@@ -169,11 +181,15 @@ Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		InEditor|Android = InEditor|Android
 		InEditor|iOS = InEditor|iOS
+		InEditor|LinuxStandalone64 = InEditor|LinuxStandalone64
+		InEditor|macOSStandalone = InEditor|macOSStandalone
 		InEditor|WindowsStandalone32 = InEditor|WindowsStandalone32
 		InEditor|WindowsStandalone64 = InEditor|WindowsStandalone64
 		InEditor|WSA = InEditor|WSA
 		Player|Android = Player|Android
 		Player|iOS = Player|iOS
+		Player|LinuxStandalone64 = Player|LinuxStandalone64
+		Player|macOSStandalone = Player|macOSStandalone
 		Player|WindowsStandalone32 = Player|WindowsStandalone32
 		Player|WindowsStandalone64 = Player|WindowsStandalone64
 		Player|WSA = Player|WSA
@@ -183,6 +199,10 @@ Global
 		{F06555F7-5B07-0AF4-58A0-03D92F9EFB00}.InEditor|Android.Build.0 = InEditor|Android
 		{F06555F7-5B07-0AF4-58A0-03D92F9EFB00}.InEditor|iOS.ActiveCfg = InEditor|iOS
 		{F06555F7-5B07-0AF4-58A0-03D92F9EFB00}.InEditor|iOS.Build.0 = InEditor|iOS
+		{F06555F7-5B07-0AF4-58A0-03D92F9EFB00}.InEditor|LinuxStandalone64.ActiveCfg = InEditor|LinuxStandalone64
+		{F06555F7-5B07-0AF4-58A0-03D92F9EFB00}.InEditor|LinuxStandalone64.Build.0 = InEditor|LinuxStandalone64
+		{F06555F7-5B07-0AF4-58A0-03D92F9EFB00}.InEditor|macOSStandalone.ActiveCfg = InEditor|macOSStandalone
+		{F06555F7-5B07-0AF4-58A0-03D92F9EFB00}.InEditor|macOSStandalone.Build.0 = InEditor|macOSStandalone
 		{F06555F7-5B07-0AF4-58A0-03D92F9EFB00}.InEditor|WindowsStandalone32.ActiveCfg = InEditor|WindowsStandalone32
 		{F06555F7-5B07-0AF4-58A0-03D92F9EFB00}.InEditor|WindowsStandalone32.Build.0 = InEditor|WindowsStandalone32
 		{F06555F7-5B07-0AF4-58A0-03D92F9EFB00}.InEditor|WindowsStandalone64.ActiveCfg = InEditor|WindowsStandalone64
@@ -193,6 +213,10 @@ Global
 		{F06555F7-5B07-0AF4-58A0-03D92F9EFB00}.Player|Android.Build.0 = Player|Android
 		{F06555F7-5B07-0AF4-58A0-03D92F9EFB00}.Player|iOS.ActiveCfg = Player|iOS
 		{F06555F7-5B07-0AF4-58A0-03D92F9EFB00}.Player|iOS.Build.0 = Player|iOS
+		{F06555F7-5B07-0AF4-58A0-03D92F9EFB00}.Player|LinuxStandalone64.ActiveCfg = Player|LinuxStandalone64
+		{F06555F7-5B07-0AF4-58A0-03D92F9EFB00}.Player|LinuxStandalone64.Build.0 = Player|LinuxStandalone64
+		{F06555F7-5B07-0AF4-58A0-03D92F9EFB00}.Player|macOSStandalone.ActiveCfg = Player|macOSStandalone
+		{F06555F7-5B07-0AF4-58A0-03D92F9EFB00}.Player|macOSStandalone.Build.0 = Player|macOSStandalone
 		{F06555F7-5B07-0AF4-58A0-03D92F9EFB00}.Player|WindowsStandalone32.ActiveCfg = Player|WindowsStandalone32
 		{F06555F7-5B07-0AF4-58A0-03D92F9EFB00}.Player|WindowsStandalone32.Build.0 = Player|WindowsStandalone32
 		{F06555F7-5B07-0AF4-58A0-03D92F9EFB00}.Player|WindowsStandalone64.ActiveCfg = Player|WindowsStandalone64
@@ -203,6 +227,10 @@ Global
 		{D03624F0-2FD4-AEF4-AA6B-888A1B059AD7}.InEditor|Android.Build.0 = InEditor|Android
 		{D03624F0-2FD4-AEF4-AA6B-888A1B059AD7}.InEditor|iOS.ActiveCfg = InEditor|iOS
 		{D03624F0-2FD4-AEF4-AA6B-888A1B059AD7}.InEditor|iOS.Build.0 = InEditor|iOS
+		{D03624F0-2FD4-AEF4-AA6B-888A1B059AD7}.InEditor|LinuxStandalone64.ActiveCfg = InEditor|LinuxStandalone64
+		{D03624F0-2FD4-AEF4-AA6B-888A1B059AD7}.InEditor|LinuxStandalone64.Build.0 = InEditor|LinuxStandalone64
+		{D03624F0-2FD4-AEF4-AA6B-888A1B059AD7}.InEditor|macOSStandalone.ActiveCfg = InEditor|macOSStandalone
+		{D03624F0-2FD4-AEF4-AA6B-888A1B059AD7}.InEditor|macOSStandalone.Build.0 = InEditor|macOSStandalone
 		{D03624F0-2FD4-AEF4-AA6B-888A1B059AD7}.InEditor|WindowsStandalone32.ActiveCfg = InEditor|WindowsStandalone32
 		{D03624F0-2FD4-AEF4-AA6B-888A1B059AD7}.InEditor|WindowsStandalone32.Build.0 = InEditor|WindowsStandalone32
 		{D03624F0-2FD4-AEF4-AA6B-888A1B059AD7}.InEditor|WindowsStandalone64.ActiveCfg = InEditor|WindowsStandalone64
@@ -213,6 +241,10 @@ Global
 		{D03624F0-2FD4-AEF4-AA6B-888A1B059AD7}.Player|Android.Build.0 = Player|Android
 		{D03624F0-2FD4-AEF4-AA6B-888A1B059AD7}.Player|iOS.ActiveCfg = Player|iOS
 		{D03624F0-2FD4-AEF4-AA6B-888A1B059AD7}.Player|iOS.Build.0 = Player|iOS
+		{D03624F0-2FD4-AEF4-AA6B-888A1B059AD7}.Player|LinuxStandalone64.ActiveCfg = Player|LinuxStandalone64
+		{D03624F0-2FD4-AEF4-AA6B-888A1B059AD7}.Player|LinuxStandalone64.Build.0 = Player|LinuxStandalone64
+		{D03624F0-2FD4-AEF4-AA6B-888A1B059AD7}.Player|macOSStandalone.ActiveCfg = Player|macOSStandalone
+		{D03624F0-2FD4-AEF4-AA6B-888A1B059AD7}.Player|macOSStandalone.Build.0 = Player|macOSStandalone
 		{D03624F0-2FD4-AEF4-AA6B-888A1B059AD7}.Player|WindowsStandalone32.ActiveCfg = Player|WindowsStandalone32
 		{D03624F0-2FD4-AEF4-AA6B-888A1B059AD7}.Player|WindowsStandalone32.Build.0 = Player|WindowsStandalone32
 		{D03624F0-2FD4-AEF4-AA6B-888A1B059AD7}.Player|WindowsStandalone64.ActiveCfg = Player|WindowsStandalone64
@@ -223,6 +255,10 @@ Global
 		{A44F47CF-3ADA-4435-DBC5-16BAD0BC86FE}.InEditor|Android.Build.0 = InEditor|Android
 		{A44F47CF-3ADA-4435-DBC5-16BAD0BC86FE}.InEditor|iOS.ActiveCfg = InEditor|iOS
 		{A44F47CF-3ADA-4435-DBC5-16BAD0BC86FE}.InEditor|iOS.Build.0 = InEditor|iOS
+		{A44F47CF-3ADA-4435-DBC5-16BAD0BC86FE}.InEditor|LinuxStandalone64.ActiveCfg = InEditor|LinuxStandalone64
+		{A44F47CF-3ADA-4435-DBC5-16BAD0BC86FE}.InEditor|LinuxStandalone64.Build.0 = InEditor|LinuxStandalone64
+		{A44F47CF-3ADA-4435-DBC5-16BAD0BC86FE}.InEditor|macOSStandalone.ActiveCfg = InEditor|macOSStandalone
+		{A44F47CF-3ADA-4435-DBC5-16BAD0BC86FE}.InEditor|macOSStandalone.Build.0 = InEditor|macOSStandalone
 		{A44F47CF-3ADA-4435-DBC5-16BAD0BC86FE}.InEditor|WindowsStandalone32.ActiveCfg = InEditor|WindowsStandalone32
 		{A44F47CF-3ADA-4435-DBC5-16BAD0BC86FE}.InEditor|WindowsStandalone32.Build.0 = InEditor|WindowsStandalone32
 		{A44F47CF-3ADA-4435-DBC5-16BAD0BC86FE}.InEditor|WindowsStandalone64.ActiveCfg = InEditor|WindowsStandalone64
@@ -233,6 +269,10 @@ Global
 		{A44F47CF-3ADA-4435-DBC5-16BAD0BC86FE}.Player|Android.Build.0 = Player|Android
 		{A44F47CF-3ADA-4435-DBC5-16BAD0BC86FE}.Player|iOS.ActiveCfg = Player|iOS
 		{A44F47CF-3ADA-4435-DBC5-16BAD0BC86FE}.Player|iOS.Build.0 = Player|iOS
+		{A44F47CF-3ADA-4435-DBC5-16BAD0BC86FE}.Player|LinuxStandalone64.ActiveCfg = Player|LinuxStandalone64
+		{A44F47CF-3ADA-4435-DBC5-16BAD0BC86FE}.Player|LinuxStandalone64.Build.0 = Player|LinuxStandalone64
+		{A44F47CF-3ADA-4435-DBC5-16BAD0BC86FE}.Player|macOSStandalone.ActiveCfg = Player|macOSStandalone
+		{A44F47CF-3ADA-4435-DBC5-16BAD0BC86FE}.Player|macOSStandalone.Build.0 = Player|macOSStandalone
 		{A44F47CF-3ADA-4435-DBC5-16BAD0BC86FE}.Player|WindowsStandalone32.ActiveCfg = Player|WindowsStandalone32
 		{A44F47CF-3ADA-4435-DBC5-16BAD0BC86FE}.Player|WindowsStandalone32.Build.0 = Player|WindowsStandalone32
 		{A44F47CF-3ADA-4435-DBC5-16BAD0BC86FE}.Player|WindowsStandalone64.ActiveCfg = Player|WindowsStandalone64
@@ -243,6 +283,10 @@ Global
 		{5710C1F8-59F1-945B-6BC9-B33CFF6B43FC}.InEditor|Android.Build.0 = InEditor|Android
 		{5710C1F8-59F1-945B-6BC9-B33CFF6B43FC}.InEditor|iOS.ActiveCfg = InEditor|iOS
 		{5710C1F8-59F1-945B-6BC9-B33CFF6B43FC}.InEditor|iOS.Build.0 = InEditor|iOS
+		{5710C1F8-59F1-945B-6BC9-B33CFF6B43FC}.InEditor|LinuxStandalone64.ActiveCfg = InEditor|LinuxStandalone64
+		{5710C1F8-59F1-945B-6BC9-B33CFF6B43FC}.InEditor|LinuxStandalone64.Build.0 = InEditor|LinuxStandalone64
+		{5710C1F8-59F1-945B-6BC9-B33CFF6B43FC}.InEditor|macOSStandalone.ActiveCfg = InEditor|macOSStandalone
+		{5710C1F8-59F1-945B-6BC9-B33CFF6B43FC}.InEditor|macOSStandalone.Build.0 = InEditor|macOSStandalone
 		{5710C1F8-59F1-945B-6BC9-B33CFF6B43FC}.InEditor|WindowsStandalone32.ActiveCfg = InEditor|WindowsStandalone32
 		{5710C1F8-59F1-945B-6BC9-B33CFF6B43FC}.InEditor|WindowsStandalone32.Build.0 = InEditor|WindowsStandalone32
 		{5710C1F8-59F1-945B-6BC9-B33CFF6B43FC}.InEditor|WindowsStandalone64.ActiveCfg = InEditor|WindowsStandalone64
@@ -251,6 +295,8 @@ Global
 		{5710C1F8-59F1-945B-6BC9-B33CFF6B43FC}.InEditor|WSA.Build.0 = InEditor|WSA
 		{5710C1F8-59F1-945B-6BC9-B33CFF6B43FC}.Player|Android.ActiveCfg = Player|Android
 		{5710C1F8-59F1-945B-6BC9-B33CFF6B43FC}.Player|iOS.ActiveCfg = Player|iOS
+		{5710C1F8-59F1-945B-6BC9-B33CFF6B43FC}.Player|LinuxStandalone64.ActiveCfg = Player|LinuxStandalone64
+		{5710C1F8-59F1-945B-6BC9-B33CFF6B43FC}.Player|macOSStandalone.ActiveCfg = Player|macOSStandalone
 		{5710C1F8-59F1-945B-6BC9-B33CFF6B43FC}.Player|WindowsStandalone32.ActiveCfg = Player|WindowsStandalone32
 		{5710C1F8-59F1-945B-6BC9-B33CFF6B43FC}.Player|WindowsStandalone64.ActiveCfg = Player|WindowsStandalone64
 		{5710C1F8-59F1-945B-6BC9-B33CFF6B43FC}.Player|WSA.ActiveCfg = Player|WSA
@@ -258,6 +304,10 @@ Global
 		{8B845B12-3AB4-1844-8A8B-E2935FA804E0}.InEditor|Android.Build.0 = InEditor|Android
 		{8B845B12-3AB4-1844-8A8B-E2935FA804E0}.InEditor|iOS.ActiveCfg = InEditor|iOS
 		{8B845B12-3AB4-1844-8A8B-E2935FA804E0}.InEditor|iOS.Build.0 = InEditor|iOS
+		{8B845B12-3AB4-1844-8A8B-E2935FA804E0}.InEditor|LinuxStandalone64.ActiveCfg = InEditor|LinuxStandalone64
+		{8B845B12-3AB4-1844-8A8B-E2935FA804E0}.InEditor|LinuxStandalone64.Build.0 = InEditor|LinuxStandalone64
+		{8B845B12-3AB4-1844-8A8B-E2935FA804E0}.InEditor|macOSStandalone.ActiveCfg = InEditor|macOSStandalone
+		{8B845B12-3AB4-1844-8A8B-E2935FA804E0}.InEditor|macOSStandalone.Build.0 = InEditor|macOSStandalone
 		{8B845B12-3AB4-1844-8A8B-E2935FA804E0}.InEditor|WindowsStandalone32.ActiveCfg = InEditor|WindowsStandalone32
 		{8B845B12-3AB4-1844-8A8B-E2935FA804E0}.InEditor|WindowsStandalone32.Build.0 = InEditor|WindowsStandalone32
 		{8B845B12-3AB4-1844-8A8B-E2935FA804E0}.InEditor|WindowsStandalone64.ActiveCfg = InEditor|WindowsStandalone64
@@ -266,6 +316,8 @@ Global
 		{8B845B12-3AB4-1844-8A8B-E2935FA804E0}.InEditor|WSA.Build.0 = InEditor|WSA
 		{8B845B12-3AB4-1844-8A8B-E2935FA804E0}.Player|Android.ActiveCfg = Player|Android
 		{8B845B12-3AB4-1844-8A8B-E2935FA804E0}.Player|iOS.ActiveCfg = Player|iOS
+		{8B845B12-3AB4-1844-8A8B-E2935FA804E0}.Player|LinuxStandalone64.ActiveCfg = Player|LinuxStandalone64
+		{8B845B12-3AB4-1844-8A8B-E2935FA804E0}.Player|macOSStandalone.ActiveCfg = Player|macOSStandalone
 		{8B845B12-3AB4-1844-8A8B-E2935FA804E0}.Player|WindowsStandalone32.ActiveCfg = Player|WindowsStandalone32
 		{8B845B12-3AB4-1844-8A8B-E2935FA804E0}.Player|WindowsStandalone64.ActiveCfg = Player|WindowsStandalone64
 		{8B845B12-3AB4-1844-8A8B-E2935FA804E0}.Player|WSA.ActiveCfg = Player|WSA
@@ -273,6 +325,10 @@ Global
 		{DD3313CA-0C5C-44BC-F9D0-4FB62792CA4F}.InEditor|Android.Build.0 = InEditor|Android
 		{DD3313CA-0C5C-44BC-F9D0-4FB62792CA4F}.InEditor|iOS.ActiveCfg = InEditor|iOS
 		{DD3313CA-0C5C-44BC-F9D0-4FB62792CA4F}.InEditor|iOS.Build.0 = InEditor|iOS
+		{DD3313CA-0C5C-44BC-F9D0-4FB62792CA4F}.InEditor|LinuxStandalone64.ActiveCfg = InEditor|LinuxStandalone64
+		{DD3313CA-0C5C-44BC-F9D0-4FB62792CA4F}.InEditor|LinuxStandalone64.Build.0 = InEditor|LinuxStandalone64
+		{DD3313CA-0C5C-44BC-F9D0-4FB62792CA4F}.InEditor|macOSStandalone.ActiveCfg = InEditor|macOSStandalone
+		{DD3313CA-0C5C-44BC-F9D0-4FB62792CA4F}.InEditor|macOSStandalone.Build.0 = InEditor|macOSStandalone
 		{DD3313CA-0C5C-44BC-F9D0-4FB62792CA4F}.InEditor|WindowsStandalone32.ActiveCfg = InEditor|WindowsStandalone32
 		{DD3313CA-0C5C-44BC-F9D0-4FB62792CA4F}.InEditor|WindowsStandalone32.Build.0 = InEditor|WindowsStandalone32
 		{DD3313CA-0C5C-44BC-F9D0-4FB62792CA4F}.InEditor|WindowsStandalone64.ActiveCfg = InEditor|WindowsStandalone64
@@ -281,6 +337,8 @@ Global
 		{DD3313CA-0C5C-44BC-F9D0-4FB62792CA4F}.InEditor|WSA.Build.0 = InEditor|WSA
 		{DD3313CA-0C5C-44BC-F9D0-4FB62792CA4F}.Player|Android.ActiveCfg = Player|Android
 		{DD3313CA-0C5C-44BC-F9D0-4FB62792CA4F}.Player|iOS.ActiveCfg = Player|iOS
+		{DD3313CA-0C5C-44BC-F9D0-4FB62792CA4F}.Player|LinuxStandalone64.ActiveCfg = Player|LinuxStandalone64
+		{DD3313CA-0C5C-44BC-F9D0-4FB62792CA4F}.Player|macOSStandalone.ActiveCfg = Player|macOSStandalone
 		{DD3313CA-0C5C-44BC-F9D0-4FB62792CA4F}.Player|WindowsStandalone32.ActiveCfg = Player|WindowsStandalone32
 		{DD3313CA-0C5C-44BC-F9D0-4FB62792CA4F}.Player|WindowsStandalone64.ActiveCfg = Player|WindowsStandalone64
 		{DD3313CA-0C5C-44BC-F9D0-4FB62792CA4F}.Player|WSA.ActiveCfg = Player|WSA
@@ -288,6 +346,10 @@ Global
 		{BA171B3D-D2A5-1234-AB86-4770F99741A5}.InEditor|Android.Build.0 = InEditor|Android
 		{BA171B3D-D2A5-1234-AB86-4770F99741A5}.InEditor|iOS.ActiveCfg = InEditor|iOS
 		{BA171B3D-D2A5-1234-AB86-4770F99741A5}.InEditor|iOS.Build.0 = InEditor|iOS
+		{BA171B3D-D2A5-1234-AB86-4770F99741A5}.InEditor|LinuxStandalone64.ActiveCfg = InEditor|LinuxStandalone64
+		{BA171B3D-D2A5-1234-AB86-4770F99741A5}.InEditor|LinuxStandalone64.Build.0 = InEditor|LinuxStandalone64
+		{BA171B3D-D2A5-1234-AB86-4770F99741A5}.InEditor|macOSStandalone.ActiveCfg = InEditor|macOSStandalone
+		{BA171B3D-D2A5-1234-AB86-4770F99741A5}.InEditor|macOSStandalone.Build.0 = InEditor|macOSStandalone
 		{BA171B3D-D2A5-1234-AB86-4770F99741A5}.InEditor|WindowsStandalone32.ActiveCfg = InEditor|WindowsStandalone32
 		{BA171B3D-D2A5-1234-AB86-4770F99741A5}.InEditor|WindowsStandalone32.Build.0 = InEditor|WindowsStandalone32
 		{BA171B3D-D2A5-1234-AB86-4770F99741A5}.InEditor|WindowsStandalone64.ActiveCfg = InEditor|WindowsStandalone64
@@ -298,6 +360,10 @@ Global
 		{BA171B3D-D2A5-1234-AB86-4770F99741A5}.Player|Android.Build.0 = Player|Android
 		{BA171B3D-D2A5-1234-AB86-4770F99741A5}.Player|iOS.ActiveCfg = Player|iOS
 		{BA171B3D-D2A5-1234-AB86-4770F99741A5}.Player|iOS.Build.0 = Player|iOS
+		{BA171B3D-D2A5-1234-AB86-4770F99741A5}.Player|LinuxStandalone64.ActiveCfg = Player|LinuxStandalone64
+		{BA171B3D-D2A5-1234-AB86-4770F99741A5}.Player|LinuxStandalone64.Build.0 = Player|LinuxStandalone64
+		{BA171B3D-D2A5-1234-AB86-4770F99741A5}.Player|macOSStandalone.ActiveCfg = Player|macOSStandalone
+		{BA171B3D-D2A5-1234-AB86-4770F99741A5}.Player|macOSStandalone.Build.0 = Player|macOSStandalone
 		{BA171B3D-D2A5-1234-AB86-4770F99741A5}.Player|WindowsStandalone32.ActiveCfg = Player|WindowsStandalone32
 		{BA171B3D-D2A5-1234-AB86-4770F99741A5}.Player|WindowsStandalone32.Build.0 = Player|WindowsStandalone32
 		{BA171B3D-D2A5-1234-AB86-4770F99741A5}.Player|WindowsStandalone64.ActiveCfg = Player|WindowsStandalone64
@@ -308,6 +374,10 @@ Global
 		{2BAFAC87-E7F4-B9B4-18D9-448D219B01AB}.InEditor|Android.Build.0 = InEditor|Android
 		{2BAFAC87-E7F4-B9B4-18D9-448D219B01AB}.InEditor|iOS.ActiveCfg = InEditor|iOS
 		{2BAFAC87-E7F4-B9B4-18D9-448D219B01AB}.InEditor|iOS.Build.0 = InEditor|iOS
+		{2BAFAC87-E7F4-B9B4-18D9-448D219B01AB}.InEditor|LinuxStandalone64.ActiveCfg = InEditor|LinuxStandalone64
+		{2BAFAC87-E7F4-B9B4-18D9-448D219B01AB}.InEditor|LinuxStandalone64.Build.0 = InEditor|LinuxStandalone64
+		{2BAFAC87-E7F4-B9B4-18D9-448D219B01AB}.InEditor|macOSStandalone.ActiveCfg = InEditor|macOSStandalone
+		{2BAFAC87-E7F4-B9B4-18D9-448D219B01AB}.InEditor|macOSStandalone.Build.0 = InEditor|macOSStandalone
 		{2BAFAC87-E7F4-B9B4-18D9-448D219B01AB}.InEditor|WindowsStandalone32.ActiveCfg = InEditor|WindowsStandalone32
 		{2BAFAC87-E7F4-B9B4-18D9-448D219B01AB}.InEditor|WindowsStandalone32.Build.0 = InEditor|WindowsStandalone32
 		{2BAFAC87-E7F4-B9B4-18D9-448D219B01AB}.InEditor|WindowsStandalone64.ActiveCfg = InEditor|WindowsStandalone64
@@ -318,6 +388,10 @@ Global
 		{2BAFAC87-E7F4-B9B4-18D9-448D219B01AB}.Player|Android.Build.0 = Player|Android
 		{2BAFAC87-E7F4-B9B4-18D9-448D219B01AB}.Player|iOS.ActiveCfg = Player|iOS
 		{2BAFAC87-E7F4-B9B4-18D9-448D219B01AB}.Player|iOS.Build.0 = Player|iOS
+		{2BAFAC87-E7F4-B9B4-18D9-448D219B01AB}.Player|LinuxStandalone64.ActiveCfg = Player|LinuxStandalone64
+		{2BAFAC87-E7F4-B9B4-18D9-448D219B01AB}.Player|LinuxStandalone64.Build.0 = Player|LinuxStandalone64
+		{2BAFAC87-E7F4-B9B4-18D9-448D219B01AB}.Player|macOSStandalone.ActiveCfg = Player|macOSStandalone
+		{2BAFAC87-E7F4-B9B4-18D9-448D219B01AB}.Player|macOSStandalone.Build.0 = Player|macOSStandalone
 		{2BAFAC87-E7F4-B9B4-18D9-448D219B01AB}.Player|WindowsStandalone32.ActiveCfg = Player|WindowsStandalone32
 		{2BAFAC87-E7F4-B9B4-18D9-448D219B01AB}.Player|WindowsStandalone32.Build.0 = Player|WindowsStandalone32
 		{2BAFAC87-E7F4-B9B4-18D9-448D219B01AB}.Player|WindowsStandalone64.ActiveCfg = Player|WindowsStandalone64
@@ -328,6 +402,10 @@ Global
 		{343DEAAF-83E0-CEE4-CA97-8E7DF0B80D21}.InEditor|Android.Build.0 = InEditor|Android
 		{343DEAAF-83E0-CEE4-CA97-8E7DF0B80D21}.InEditor|iOS.ActiveCfg = InEditor|iOS
 		{343DEAAF-83E0-CEE4-CA97-8E7DF0B80D21}.InEditor|iOS.Build.0 = InEditor|iOS
+		{343DEAAF-83E0-CEE4-CA97-8E7DF0B80D21}.InEditor|LinuxStandalone64.ActiveCfg = InEditor|LinuxStandalone64
+		{343DEAAF-83E0-CEE4-CA97-8E7DF0B80D21}.InEditor|LinuxStandalone64.Build.0 = InEditor|LinuxStandalone64
+		{343DEAAF-83E0-CEE4-CA97-8E7DF0B80D21}.InEditor|macOSStandalone.ActiveCfg = InEditor|macOSStandalone
+		{343DEAAF-83E0-CEE4-CA97-8E7DF0B80D21}.InEditor|macOSStandalone.Build.0 = InEditor|macOSStandalone
 		{343DEAAF-83E0-CEE4-CA97-8E7DF0B80D21}.InEditor|WindowsStandalone32.ActiveCfg = InEditor|WindowsStandalone32
 		{343DEAAF-83E0-CEE4-CA97-8E7DF0B80D21}.InEditor|WindowsStandalone32.Build.0 = InEditor|WindowsStandalone32
 		{343DEAAF-83E0-CEE4-CA97-8E7DF0B80D21}.InEditor|WindowsStandalone64.ActiveCfg = InEditor|WindowsStandalone64
@@ -336,6 +414,8 @@ Global
 		{343DEAAF-83E0-CEE4-CA97-8E7DF0B80D21}.InEditor|WSA.Build.0 = InEditor|WSA
 		{343DEAAF-83E0-CEE4-CA97-8E7DF0B80D21}.Player|Android.ActiveCfg = Player|Android
 		{343DEAAF-83E0-CEE4-CA97-8E7DF0B80D21}.Player|iOS.ActiveCfg = Player|iOS
+		{343DEAAF-83E0-CEE4-CA97-8E7DF0B80D21}.Player|LinuxStandalone64.ActiveCfg = Player|LinuxStandalone64
+		{343DEAAF-83E0-CEE4-CA97-8E7DF0B80D21}.Player|macOSStandalone.ActiveCfg = Player|macOSStandalone
 		{343DEAAF-83E0-CEE4-CA97-8E7DF0B80D21}.Player|WindowsStandalone32.ActiveCfg = Player|WindowsStandalone32
 		{343DEAAF-83E0-CEE4-CA97-8E7DF0B80D21}.Player|WindowsStandalone64.ActiveCfg = Player|WindowsStandalone64
 		{343DEAAF-83E0-CEE4-CA97-8E7DF0B80D21}.Player|WSA.ActiveCfg = Player|WSA
@@ -343,6 +423,10 @@ Global
 		{645165C8-1694-74BF-BBEB-8FB0BCFD26F5}.InEditor|Android.Build.0 = InEditor|Android
 		{645165C8-1694-74BF-BBEB-8FB0BCFD26F5}.InEditor|iOS.ActiveCfg = InEditor|iOS
 		{645165C8-1694-74BF-BBEB-8FB0BCFD26F5}.InEditor|iOS.Build.0 = InEditor|iOS
+		{645165C8-1694-74BF-BBEB-8FB0BCFD26F5}.InEditor|LinuxStandalone64.ActiveCfg = InEditor|LinuxStandalone64
+		{645165C8-1694-74BF-BBEB-8FB0BCFD26F5}.InEditor|LinuxStandalone64.Build.0 = InEditor|LinuxStandalone64
+		{645165C8-1694-74BF-BBEB-8FB0BCFD26F5}.InEditor|macOSStandalone.ActiveCfg = InEditor|macOSStandalone
+		{645165C8-1694-74BF-BBEB-8FB0BCFD26F5}.InEditor|macOSStandalone.Build.0 = InEditor|macOSStandalone
 		{645165C8-1694-74BF-BBEB-8FB0BCFD26F5}.InEditor|WindowsStandalone32.ActiveCfg = InEditor|WindowsStandalone32
 		{645165C8-1694-74BF-BBEB-8FB0BCFD26F5}.InEditor|WindowsStandalone32.Build.0 = InEditor|WindowsStandalone32
 		{645165C8-1694-74BF-BBEB-8FB0BCFD26F5}.InEditor|WindowsStandalone64.ActiveCfg = InEditor|WindowsStandalone64
@@ -351,6 +435,8 @@ Global
 		{645165C8-1694-74BF-BBEB-8FB0BCFD26F5}.InEditor|WSA.Build.0 = InEditor|WSA
 		{645165C8-1694-74BF-BBEB-8FB0BCFD26F5}.Player|Android.ActiveCfg = Player|Android
 		{645165C8-1694-74BF-BBEB-8FB0BCFD26F5}.Player|iOS.ActiveCfg = Player|iOS
+		{645165C8-1694-74BF-BBEB-8FB0BCFD26F5}.Player|LinuxStandalone64.ActiveCfg = Player|LinuxStandalone64
+		{645165C8-1694-74BF-BBEB-8FB0BCFD26F5}.Player|macOSStandalone.ActiveCfg = Player|macOSStandalone
 		{645165C8-1694-74BF-BBEB-8FB0BCFD26F5}.Player|WindowsStandalone32.ActiveCfg = Player|WindowsStandalone32
 		{645165C8-1694-74BF-BBEB-8FB0BCFD26F5}.Player|WindowsStandalone64.ActiveCfg = Player|WindowsStandalone64
 		{645165C8-1694-74BF-BBEB-8FB0BCFD26F5}.Player|WSA.ActiveCfg = Player|WSA
@@ -358,6 +444,10 @@ Global
 		{28C5E819-ECE8-A074-6ABB-16DC5AA91F44}.InEditor|Android.Build.0 = InEditor|Android
 		{28C5E819-ECE8-A074-6ABB-16DC5AA91F44}.InEditor|iOS.ActiveCfg = InEditor|iOS
 		{28C5E819-ECE8-A074-6ABB-16DC5AA91F44}.InEditor|iOS.Build.0 = InEditor|iOS
+		{28C5E819-ECE8-A074-6ABB-16DC5AA91F44}.InEditor|LinuxStandalone64.ActiveCfg = InEditor|LinuxStandalone64
+		{28C5E819-ECE8-A074-6ABB-16DC5AA91F44}.InEditor|LinuxStandalone64.Build.0 = InEditor|LinuxStandalone64
+		{28C5E819-ECE8-A074-6ABB-16DC5AA91F44}.InEditor|macOSStandalone.ActiveCfg = InEditor|macOSStandalone
+		{28C5E819-ECE8-A074-6ABB-16DC5AA91F44}.InEditor|macOSStandalone.Build.0 = InEditor|macOSStandalone
 		{28C5E819-ECE8-A074-6ABB-16DC5AA91F44}.InEditor|WindowsStandalone32.ActiveCfg = InEditor|WindowsStandalone32
 		{28C5E819-ECE8-A074-6ABB-16DC5AA91F44}.InEditor|WindowsStandalone32.Build.0 = InEditor|WindowsStandalone32
 		{28C5E819-ECE8-A074-6ABB-16DC5AA91F44}.InEditor|WindowsStandalone64.ActiveCfg = InEditor|WindowsStandalone64
@@ -368,6 +458,10 @@ Global
 		{28C5E819-ECE8-A074-6ABB-16DC5AA91F44}.Player|Android.Build.0 = Player|Android
 		{28C5E819-ECE8-A074-6ABB-16DC5AA91F44}.Player|iOS.ActiveCfg = Player|iOS
 		{28C5E819-ECE8-A074-6ABB-16DC5AA91F44}.Player|iOS.Build.0 = Player|iOS
+		{28C5E819-ECE8-A074-6ABB-16DC5AA91F44}.Player|LinuxStandalone64.ActiveCfg = Player|LinuxStandalone64
+		{28C5E819-ECE8-A074-6ABB-16DC5AA91F44}.Player|LinuxStandalone64.Build.0 = Player|LinuxStandalone64
+		{28C5E819-ECE8-A074-6ABB-16DC5AA91F44}.Player|macOSStandalone.ActiveCfg = Player|macOSStandalone
+		{28C5E819-ECE8-A074-6ABB-16DC5AA91F44}.Player|macOSStandalone.Build.0 = Player|macOSStandalone
 		{28C5E819-ECE8-A074-6ABB-16DC5AA91F44}.Player|WindowsStandalone32.ActiveCfg = Player|WindowsStandalone32
 		{28C5E819-ECE8-A074-6ABB-16DC5AA91F44}.Player|WindowsStandalone32.Build.0 = Player|WindowsStandalone32
 		{28C5E819-ECE8-A074-6ABB-16DC5AA91F44}.Player|WindowsStandalone64.ActiveCfg = Player|WindowsStandalone64
@@ -378,6 +472,10 @@ Global
 		{D528C8C9-8D26-9CA4-4A06-CD9624A03945}.InEditor|Android.Build.0 = InEditor|Android
 		{D528C8C9-8D26-9CA4-4A06-CD9624A03945}.InEditor|iOS.ActiveCfg = InEditor|iOS
 		{D528C8C9-8D26-9CA4-4A06-CD9624A03945}.InEditor|iOS.Build.0 = InEditor|iOS
+		{D528C8C9-8D26-9CA4-4A06-CD9624A03945}.InEditor|LinuxStandalone64.ActiveCfg = InEditor|LinuxStandalone64
+		{D528C8C9-8D26-9CA4-4A06-CD9624A03945}.InEditor|LinuxStandalone64.Build.0 = InEditor|LinuxStandalone64
+		{D528C8C9-8D26-9CA4-4A06-CD9624A03945}.InEditor|macOSStandalone.ActiveCfg = InEditor|macOSStandalone
+		{D528C8C9-8D26-9CA4-4A06-CD9624A03945}.InEditor|macOSStandalone.Build.0 = InEditor|macOSStandalone
 		{D528C8C9-8D26-9CA4-4A06-CD9624A03945}.InEditor|WindowsStandalone32.ActiveCfg = InEditor|WindowsStandalone32
 		{D528C8C9-8D26-9CA4-4A06-CD9624A03945}.InEditor|WindowsStandalone32.Build.0 = InEditor|WindowsStandalone32
 		{D528C8C9-8D26-9CA4-4A06-CD9624A03945}.InEditor|WindowsStandalone64.ActiveCfg = InEditor|WindowsStandalone64
@@ -386,6 +484,8 @@ Global
 		{D528C8C9-8D26-9CA4-4A06-CD9624A03945}.InEditor|WSA.Build.0 = InEditor|WSA
 		{D528C8C9-8D26-9CA4-4A06-CD9624A03945}.Player|Android.ActiveCfg = Player|Android
 		{D528C8C9-8D26-9CA4-4A06-CD9624A03945}.Player|iOS.ActiveCfg = Player|iOS
+		{D528C8C9-8D26-9CA4-4A06-CD9624A03945}.Player|LinuxStandalone64.ActiveCfg = Player|LinuxStandalone64
+		{D528C8C9-8D26-9CA4-4A06-CD9624A03945}.Player|macOSStandalone.ActiveCfg = Player|macOSStandalone
 		{D528C8C9-8D26-9CA4-4A06-CD9624A03945}.Player|WindowsStandalone32.ActiveCfg = Player|WindowsStandalone32
 		{D528C8C9-8D26-9CA4-4A06-CD9624A03945}.Player|WindowsStandalone64.ActiveCfg = Player|WindowsStandalone64
 		{D528C8C9-8D26-9CA4-4A06-CD9624A03945}.Player|WSA.ActiveCfg = Player|WSA
@@ -393,6 +493,10 @@ Global
 		{0DF1F49A-50F1-5354-5BF9-9E3DBB6674AD}.InEditor|Android.Build.0 = InEditor|Android
 		{0DF1F49A-50F1-5354-5BF9-9E3DBB6674AD}.InEditor|iOS.ActiveCfg = InEditor|iOS
 		{0DF1F49A-50F1-5354-5BF9-9E3DBB6674AD}.InEditor|iOS.Build.0 = InEditor|iOS
+		{0DF1F49A-50F1-5354-5BF9-9E3DBB6674AD}.InEditor|LinuxStandalone64.ActiveCfg = InEditor|LinuxStandalone64
+		{0DF1F49A-50F1-5354-5BF9-9E3DBB6674AD}.InEditor|LinuxStandalone64.Build.0 = InEditor|LinuxStandalone64
+		{0DF1F49A-50F1-5354-5BF9-9E3DBB6674AD}.InEditor|macOSStandalone.ActiveCfg = InEditor|macOSStandalone
+		{0DF1F49A-50F1-5354-5BF9-9E3DBB6674AD}.InEditor|macOSStandalone.Build.0 = InEditor|macOSStandalone
 		{0DF1F49A-50F1-5354-5BF9-9E3DBB6674AD}.InEditor|WindowsStandalone32.ActiveCfg = InEditor|WindowsStandalone32
 		{0DF1F49A-50F1-5354-5BF9-9E3DBB6674AD}.InEditor|WindowsStandalone32.Build.0 = InEditor|WindowsStandalone32
 		{0DF1F49A-50F1-5354-5BF9-9E3DBB6674AD}.InEditor|WindowsStandalone64.ActiveCfg = InEditor|WindowsStandalone64
@@ -401,6 +505,8 @@ Global
 		{0DF1F49A-50F1-5354-5BF9-9E3DBB6674AD}.InEditor|WSA.Build.0 = InEditor|WSA
 		{0DF1F49A-50F1-5354-5BF9-9E3DBB6674AD}.Player|Android.ActiveCfg = Player|Android
 		{0DF1F49A-50F1-5354-5BF9-9E3DBB6674AD}.Player|iOS.ActiveCfg = Player|iOS
+		{0DF1F49A-50F1-5354-5BF9-9E3DBB6674AD}.Player|LinuxStandalone64.ActiveCfg = Player|LinuxStandalone64
+		{0DF1F49A-50F1-5354-5BF9-9E3DBB6674AD}.Player|macOSStandalone.ActiveCfg = Player|macOSStandalone
 		{0DF1F49A-50F1-5354-5BF9-9E3DBB6674AD}.Player|WindowsStandalone32.ActiveCfg = Player|WindowsStandalone32
 		{0DF1F49A-50F1-5354-5BF9-9E3DBB6674AD}.Player|WindowsStandalone64.ActiveCfg = Player|WindowsStandalone64
 		{0DF1F49A-50F1-5354-5BF9-9E3DBB6674AD}.Player|WSA.ActiveCfg = Player|WSA
@@ -408,6 +514,10 @@ Global
 		{2C573E6B-2716-5184-6A79-655161004C5B}.InEditor|Android.Build.0 = InEditor|Android
 		{2C573E6B-2716-5184-6A79-655161004C5B}.InEditor|iOS.ActiveCfg = InEditor|iOS
 		{2C573E6B-2716-5184-6A79-655161004C5B}.InEditor|iOS.Build.0 = InEditor|iOS
+		{2C573E6B-2716-5184-6A79-655161004C5B}.InEditor|LinuxStandalone64.ActiveCfg = InEditor|LinuxStandalone64
+		{2C573E6B-2716-5184-6A79-655161004C5B}.InEditor|LinuxStandalone64.Build.0 = InEditor|LinuxStandalone64
+		{2C573E6B-2716-5184-6A79-655161004C5B}.InEditor|macOSStandalone.ActiveCfg = InEditor|macOSStandalone
+		{2C573E6B-2716-5184-6A79-655161004C5B}.InEditor|macOSStandalone.Build.0 = InEditor|macOSStandalone
 		{2C573E6B-2716-5184-6A79-655161004C5B}.InEditor|WindowsStandalone32.ActiveCfg = InEditor|WindowsStandalone32
 		{2C573E6B-2716-5184-6A79-655161004C5B}.InEditor|WindowsStandalone32.Build.0 = InEditor|WindowsStandalone32
 		{2C573E6B-2716-5184-6A79-655161004C5B}.InEditor|WindowsStandalone64.ActiveCfg = InEditor|WindowsStandalone64
@@ -416,6 +526,8 @@ Global
 		{2C573E6B-2716-5184-6A79-655161004C5B}.InEditor|WSA.Build.0 = InEditor|WSA
 		{2C573E6B-2716-5184-6A79-655161004C5B}.Player|Android.ActiveCfg = Player|Android
 		{2C573E6B-2716-5184-6A79-655161004C5B}.Player|iOS.ActiveCfg = Player|iOS
+		{2C573E6B-2716-5184-6A79-655161004C5B}.Player|LinuxStandalone64.ActiveCfg = Player|LinuxStandalone64
+		{2C573E6B-2716-5184-6A79-655161004C5B}.Player|macOSStandalone.ActiveCfg = Player|macOSStandalone
 		{2C573E6B-2716-5184-6A79-655161004C5B}.Player|WindowsStandalone32.ActiveCfg = Player|WindowsStandalone32
 		{2C573E6B-2716-5184-6A79-655161004C5B}.Player|WindowsStandalone64.ActiveCfg = Player|WindowsStandalone64
 		{2C573E6B-2716-5184-6A79-655161004C5B}.Player|WSA.ActiveCfg = Player|WSA
@@ -423,6 +535,10 @@ Global
 		{3A9781DB-4804-A994-5B98-83F3A7C46D45}.InEditor|Android.Build.0 = InEditor|Android
 		{3A9781DB-4804-A994-5B98-83F3A7C46D45}.InEditor|iOS.ActiveCfg = InEditor|iOS
 		{3A9781DB-4804-A994-5B98-83F3A7C46D45}.InEditor|iOS.Build.0 = InEditor|iOS
+		{3A9781DB-4804-A994-5B98-83F3A7C46D45}.InEditor|LinuxStandalone64.ActiveCfg = InEditor|LinuxStandalone64
+		{3A9781DB-4804-A994-5B98-83F3A7C46D45}.InEditor|LinuxStandalone64.Build.0 = InEditor|LinuxStandalone64
+		{3A9781DB-4804-A994-5B98-83F3A7C46D45}.InEditor|macOSStandalone.ActiveCfg = InEditor|macOSStandalone
+		{3A9781DB-4804-A994-5B98-83F3A7C46D45}.InEditor|macOSStandalone.Build.0 = InEditor|macOSStandalone
 		{3A9781DB-4804-A994-5B98-83F3A7C46D45}.InEditor|WindowsStandalone32.ActiveCfg = InEditor|WindowsStandalone32
 		{3A9781DB-4804-A994-5B98-83F3A7C46D45}.InEditor|WindowsStandalone32.Build.0 = InEditor|WindowsStandalone32
 		{3A9781DB-4804-A994-5B98-83F3A7C46D45}.InEditor|WindowsStandalone64.ActiveCfg = InEditor|WindowsStandalone64
@@ -431,6 +547,8 @@ Global
 		{3A9781DB-4804-A994-5B98-83F3A7C46D45}.InEditor|WSA.Build.0 = InEditor|WSA
 		{3A9781DB-4804-A994-5B98-83F3A7C46D45}.Player|Android.ActiveCfg = Player|Android
 		{3A9781DB-4804-A994-5B98-83F3A7C46D45}.Player|iOS.ActiveCfg = Player|iOS
+		{3A9781DB-4804-A994-5B98-83F3A7C46D45}.Player|LinuxStandalone64.ActiveCfg = Player|LinuxStandalone64
+		{3A9781DB-4804-A994-5B98-83F3A7C46D45}.Player|macOSStandalone.ActiveCfg = Player|macOSStandalone
 		{3A9781DB-4804-A994-5B98-83F3A7C46D45}.Player|WindowsStandalone32.ActiveCfg = Player|WindowsStandalone32
 		{3A9781DB-4804-A994-5B98-83F3A7C46D45}.Player|WindowsStandalone64.ActiveCfg = Player|WindowsStandalone64
 		{3A9781DB-4804-A994-5B98-83F3A7C46D45}.Player|WSA.ActiveCfg = Player|WSA
@@ -438,6 +556,10 @@ Global
 		{B13A1D1D-FB13-F1B4-89A0-FF5612F36F29}.InEditor|Android.Build.0 = InEditor|Android
 		{B13A1D1D-FB13-F1B4-89A0-FF5612F36F29}.InEditor|iOS.ActiveCfg = InEditor|iOS
 		{B13A1D1D-FB13-F1B4-89A0-FF5612F36F29}.InEditor|iOS.Build.0 = InEditor|iOS
+		{B13A1D1D-FB13-F1B4-89A0-FF5612F36F29}.InEditor|LinuxStandalone64.ActiveCfg = InEditor|LinuxStandalone64
+		{B13A1D1D-FB13-F1B4-89A0-FF5612F36F29}.InEditor|LinuxStandalone64.Build.0 = InEditor|LinuxStandalone64
+		{B13A1D1D-FB13-F1B4-89A0-FF5612F36F29}.InEditor|macOSStandalone.ActiveCfg = InEditor|macOSStandalone
+		{B13A1D1D-FB13-F1B4-89A0-FF5612F36F29}.InEditor|macOSStandalone.Build.0 = InEditor|macOSStandalone
 		{B13A1D1D-FB13-F1B4-89A0-FF5612F36F29}.InEditor|WindowsStandalone32.ActiveCfg = InEditor|WindowsStandalone32
 		{B13A1D1D-FB13-F1B4-89A0-FF5612F36F29}.InEditor|WindowsStandalone32.Build.0 = InEditor|WindowsStandalone32
 		{B13A1D1D-FB13-F1B4-89A0-FF5612F36F29}.InEditor|WindowsStandalone64.ActiveCfg = InEditor|WindowsStandalone64
@@ -446,13 +568,41 @@ Global
 		{B13A1D1D-FB13-F1B4-89A0-FF5612F36F29}.InEditor|WSA.Build.0 = InEditor|WSA
 		{B13A1D1D-FB13-F1B4-89A0-FF5612F36F29}.Player|Android.ActiveCfg = Player|Android
 		{B13A1D1D-FB13-F1B4-89A0-FF5612F36F29}.Player|iOS.ActiveCfg = Player|iOS
+		{B13A1D1D-FB13-F1B4-89A0-FF5612F36F29}.Player|LinuxStandalone64.ActiveCfg = Player|LinuxStandalone64
+		{B13A1D1D-FB13-F1B4-89A0-FF5612F36F29}.Player|macOSStandalone.ActiveCfg = Player|macOSStandalone
 		{B13A1D1D-FB13-F1B4-89A0-FF5612F36F29}.Player|WindowsStandalone32.ActiveCfg = Player|WindowsStandalone32
 		{B13A1D1D-FB13-F1B4-89A0-FF5612F36F29}.Player|WindowsStandalone64.ActiveCfg = Player|WindowsStandalone64
 		{B13A1D1D-FB13-F1B4-89A0-FF5612F36F29}.Player|WSA.ActiveCfg = Player|WSA
+		{33B4BC8F-F031-CA64-CB5B-84C47A40DD88}.InEditor|Android.ActiveCfg = InEditor|Android
+		{33B4BC8F-F031-CA64-CB5B-84C47A40DD88}.InEditor|Android.Build.0 = InEditor|Android
+		{33B4BC8F-F031-CA64-CB5B-84C47A40DD88}.InEditor|iOS.ActiveCfg = InEditor|iOS
+		{33B4BC8F-F031-CA64-CB5B-84C47A40DD88}.InEditor|iOS.Build.0 = InEditor|iOS
+		{33B4BC8F-F031-CA64-CB5B-84C47A40DD88}.InEditor|LinuxStandalone64.ActiveCfg = InEditor|LinuxStandalone64
+		{33B4BC8F-F031-CA64-CB5B-84C47A40DD88}.InEditor|LinuxStandalone64.Build.0 = InEditor|LinuxStandalone64
+		{33B4BC8F-F031-CA64-CB5B-84C47A40DD88}.InEditor|macOSStandalone.ActiveCfg = InEditor|macOSStandalone
+		{33B4BC8F-F031-CA64-CB5B-84C47A40DD88}.InEditor|macOSStandalone.Build.0 = InEditor|macOSStandalone
+		{33B4BC8F-F031-CA64-CB5B-84C47A40DD88}.InEditor|WindowsStandalone32.ActiveCfg = InEditor|WindowsStandalone32
+		{33B4BC8F-F031-CA64-CB5B-84C47A40DD88}.InEditor|WindowsStandalone32.Build.0 = InEditor|WindowsStandalone32
+		{33B4BC8F-F031-CA64-CB5B-84C47A40DD88}.InEditor|WindowsStandalone64.ActiveCfg = InEditor|WindowsStandalone64
+		{33B4BC8F-F031-CA64-CB5B-84C47A40DD88}.InEditor|WindowsStandalone64.Build.0 = InEditor|WindowsStandalone64
+		{33B4BC8F-F031-CA64-CB5B-84C47A40DD88}.InEditor|WSA.ActiveCfg = InEditor|WSA
+		{33B4BC8F-F031-CA64-CB5B-84C47A40DD88}.InEditor|WSA.Build.0 = InEditor|WSA
+		{33B4BC8F-F031-CA64-CB5B-84C47A40DD88}.Player|Android.ActiveCfg = Player|Android
+		{33B4BC8F-F031-CA64-CB5B-84C47A40DD88}.Player|iOS.ActiveCfg = Player|iOS
+		{33B4BC8F-F031-CA64-CB5B-84C47A40DD88}.Player|LinuxStandalone64.ActiveCfg = Player|LinuxStandalone64
+		{33B4BC8F-F031-CA64-CB5B-84C47A40DD88}.Player|macOSStandalone.ActiveCfg = Player|macOSStandalone
+		{33B4BC8F-F031-CA64-CB5B-84C47A40DD88}.Player|WindowsStandalone32.ActiveCfg = Player|WindowsStandalone32
+		{33B4BC8F-F031-CA64-CB5B-84C47A40DD88}.Player|WindowsStandalone64.ActiveCfg = Player|WindowsStandalone64
+		{33B4BC8F-F031-CA64-CB5B-84C47A40DD88}.Player|WSA.ActiveCfg = Player|WSA
+		{33B4BC8F-F031-CA64-CB5B-84C47A40DD88}.Player|WSA.Build.0 = Player|WSA
 		{0FDA7EBE-61AB-2164-383D-10E32EFB9C6E}.InEditor|Android.ActiveCfg = InEditor|Android
 		{0FDA7EBE-61AB-2164-383D-10E32EFB9C6E}.InEditor|Android.Build.0 = InEditor|Android
 		{0FDA7EBE-61AB-2164-383D-10E32EFB9C6E}.InEditor|iOS.ActiveCfg = InEditor|iOS
 		{0FDA7EBE-61AB-2164-383D-10E32EFB9C6E}.InEditor|iOS.Build.0 = InEditor|iOS
+		{0FDA7EBE-61AB-2164-383D-10E32EFB9C6E}.InEditor|LinuxStandalone64.ActiveCfg = InEditor|LinuxStandalone64
+		{0FDA7EBE-61AB-2164-383D-10E32EFB9C6E}.InEditor|LinuxStandalone64.Build.0 = InEditor|LinuxStandalone64
+		{0FDA7EBE-61AB-2164-383D-10E32EFB9C6E}.InEditor|macOSStandalone.ActiveCfg = InEditor|macOSStandalone
+		{0FDA7EBE-61AB-2164-383D-10E32EFB9C6E}.InEditor|macOSStandalone.Build.0 = InEditor|macOSStandalone
 		{0FDA7EBE-61AB-2164-383D-10E32EFB9C6E}.InEditor|WindowsStandalone32.ActiveCfg = InEditor|WindowsStandalone32
 		{0FDA7EBE-61AB-2164-383D-10E32EFB9C6E}.InEditor|WindowsStandalone32.Build.0 = InEditor|WindowsStandalone32
 		{0FDA7EBE-61AB-2164-383D-10E32EFB9C6E}.InEditor|WindowsStandalone64.ActiveCfg = InEditor|WindowsStandalone64
@@ -463,6 +613,10 @@ Global
 		{0FDA7EBE-61AB-2164-383D-10E32EFB9C6E}.Player|Android.Build.0 = Player|Android
 		{0FDA7EBE-61AB-2164-383D-10E32EFB9C6E}.Player|iOS.ActiveCfg = Player|iOS
 		{0FDA7EBE-61AB-2164-383D-10E32EFB9C6E}.Player|iOS.Build.0 = Player|iOS
+		{0FDA7EBE-61AB-2164-383D-10E32EFB9C6E}.Player|LinuxStandalone64.ActiveCfg = Player|LinuxStandalone64
+		{0FDA7EBE-61AB-2164-383D-10E32EFB9C6E}.Player|LinuxStandalone64.Build.0 = Player|LinuxStandalone64
+		{0FDA7EBE-61AB-2164-383D-10E32EFB9C6E}.Player|macOSStandalone.ActiveCfg = Player|macOSStandalone
+		{0FDA7EBE-61AB-2164-383D-10E32EFB9C6E}.Player|macOSStandalone.Build.0 = Player|macOSStandalone
 		{0FDA7EBE-61AB-2164-383D-10E32EFB9C6E}.Player|WindowsStandalone32.ActiveCfg = Player|WindowsStandalone32
 		{0FDA7EBE-61AB-2164-383D-10E32EFB9C6E}.Player|WindowsStandalone32.Build.0 = Player|WindowsStandalone32
 		{0FDA7EBE-61AB-2164-383D-10E32EFB9C6E}.Player|WindowsStandalone64.ActiveCfg = Player|WindowsStandalone64
@@ -473,6 +627,10 @@ Global
 		{52C867DE-B383-2554-C84D-C4202BD47258}.InEditor|Android.Build.0 = InEditor|Android
 		{52C867DE-B383-2554-C84D-C4202BD47258}.InEditor|iOS.ActiveCfg = InEditor|iOS
 		{52C867DE-B383-2554-C84D-C4202BD47258}.InEditor|iOS.Build.0 = InEditor|iOS
+		{52C867DE-B383-2554-C84D-C4202BD47258}.InEditor|LinuxStandalone64.ActiveCfg = InEditor|LinuxStandalone64
+		{52C867DE-B383-2554-C84D-C4202BD47258}.InEditor|LinuxStandalone64.Build.0 = InEditor|LinuxStandalone64
+		{52C867DE-B383-2554-C84D-C4202BD47258}.InEditor|macOSStandalone.ActiveCfg = InEditor|macOSStandalone
+		{52C867DE-B383-2554-C84D-C4202BD47258}.InEditor|macOSStandalone.Build.0 = InEditor|macOSStandalone
 		{52C867DE-B383-2554-C84D-C4202BD47258}.InEditor|WindowsStandalone32.ActiveCfg = InEditor|WindowsStandalone32
 		{52C867DE-B383-2554-C84D-C4202BD47258}.InEditor|WindowsStandalone32.Build.0 = InEditor|WindowsStandalone32
 		{52C867DE-B383-2554-C84D-C4202BD47258}.InEditor|WindowsStandalone64.ActiveCfg = InEditor|WindowsStandalone64
@@ -481,6 +639,8 @@ Global
 		{52C867DE-B383-2554-C84D-C4202BD47258}.InEditor|WSA.Build.0 = InEditor|WSA
 		{52C867DE-B383-2554-C84D-C4202BD47258}.Player|Android.ActiveCfg = Player|Android
 		{52C867DE-B383-2554-C84D-C4202BD47258}.Player|iOS.ActiveCfg = Player|iOS
+		{52C867DE-B383-2554-C84D-C4202BD47258}.Player|LinuxStandalone64.ActiveCfg = Player|LinuxStandalone64
+		{52C867DE-B383-2554-C84D-C4202BD47258}.Player|macOSStandalone.ActiveCfg = Player|macOSStandalone
 		{52C867DE-B383-2554-C84D-C4202BD47258}.Player|WindowsStandalone32.ActiveCfg = Player|WindowsStandalone32
 		{52C867DE-B383-2554-C84D-C4202BD47258}.Player|WindowsStandalone64.ActiveCfg = Player|WindowsStandalone64
 		{52C867DE-B383-2554-C84D-C4202BD47258}.Player|WSA.ActiveCfg = Player|WSA
@@ -488,6 +648,10 @@ Global
 		{02F77120-4943-F4A4-0949-438E873E3EFF}.InEditor|Android.Build.0 = InEditor|Android
 		{02F77120-4943-F4A4-0949-438E873E3EFF}.InEditor|iOS.ActiveCfg = InEditor|iOS
 		{02F77120-4943-F4A4-0949-438E873E3EFF}.InEditor|iOS.Build.0 = InEditor|iOS
+		{02F77120-4943-F4A4-0949-438E873E3EFF}.InEditor|LinuxStandalone64.ActiveCfg = InEditor|LinuxStandalone64
+		{02F77120-4943-F4A4-0949-438E873E3EFF}.InEditor|LinuxStandalone64.Build.0 = InEditor|LinuxStandalone64
+		{02F77120-4943-F4A4-0949-438E873E3EFF}.InEditor|macOSStandalone.ActiveCfg = InEditor|macOSStandalone
+		{02F77120-4943-F4A4-0949-438E873E3EFF}.InEditor|macOSStandalone.Build.0 = InEditor|macOSStandalone
 		{02F77120-4943-F4A4-0949-438E873E3EFF}.InEditor|WindowsStandalone32.ActiveCfg = InEditor|WindowsStandalone32
 		{02F77120-4943-F4A4-0949-438E873E3EFF}.InEditor|WindowsStandalone32.Build.0 = InEditor|WindowsStandalone32
 		{02F77120-4943-F4A4-0949-438E873E3EFF}.InEditor|WindowsStandalone64.ActiveCfg = InEditor|WindowsStandalone64
@@ -496,6 +660,8 @@ Global
 		{02F77120-4943-F4A4-0949-438E873E3EFF}.InEditor|WSA.Build.0 = InEditor|WSA
 		{02F77120-4943-F4A4-0949-438E873E3EFF}.Player|Android.ActiveCfg = Player|Android
 		{02F77120-4943-F4A4-0949-438E873E3EFF}.Player|iOS.ActiveCfg = Player|iOS
+		{02F77120-4943-F4A4-0949-438E873E3EFF}.Player|LinuxStandalone64.ActiveCfg = Player|LinuxStandalone64
+		{02F77120-4943-F4A4-0949-438E873E3EFF}.Player|macOSStandalone.ActiveCfg = Player|macOSStandalone
 		{02F77120-4943-F4A4-0949-438E873E3EFF}.Player|WindowsStandalone32.ActiveCfg = Player|WindowsStandalone32
 		{02F77120-4943-F4A4-0949-438E873E3EFF}.Player|WindowsStandalone64.ActiveCfg = Player|WindowsStandalone64
 		{02F77120-4943-F4A4-0949-438E873E3EFF}.Player|WSA.ActiveCfg = Player|WSA
@@ -503,6 +669,10 @@ Global
 		{92703082-F92B-41BA-80F0-D6912DE66115}.InEditor|Android.Build.0 = InEditor|Android
 		{92703082-F92B-41BA-80F0-D6912DE66115}.InEditor|iOS.ActiveCfg = InEditor|iOS
 		{92703082-F92B-41BA-80F0-D6912DE66115}.InEditor|iOS.Build.0 = InEditor|iOS
+		{92703082-F92B-41BA-80F0-D6912DE66115}.InEditor|LinuxStandalone64.ActiveCfg = InEditor|LinuxStandalone64
+		{92703082-F92B-41BA-80F0-D6912DE66115}.InEditor|LinuxStandalone64.Build.0 = InEditor|LinuxStandalone64
+		{92703082-F92B-41BA-80F0-D6912DE66115}.InEditor|macOSStandalone.ActiveCfg = InEditor|macOSStandalone
+		{92703082-F92B-41BA-80F0-D6912DE66115}.InEditor|macOSStandalone.Build.0 = InEditor|macOSStandalone
 		{92703082-F92B-41BA-80F0-D6912DE66115}.InEditor|WindowsStandalone32.ActiveCfg = InEditor|WindowsStandalone32
 		{92703082-F92B-41BA-80F0-D6912DE66115}.InEditor|WindowsStandalone32.Build.0 = InEditor|WindowsStandalone32
 		{92703082-F92B-41BA-80F0-D6912DE66115}.InEditor|WindowsStandalone64.ActiveCfg = InEditor|WindowsStandalone64
@@ -513,6 +683,10 @@ Global
 		{92703082-F92B-41BA-80F0-D6912DE66115}.Player|Android.Build.0 = Player|Android
 		{92703082-F92B-41BA-80F0-D6912DE66115}.Player|iOS.ActiveCfg = Player|iOS
 		{92703082-F92B-41BA-80F0-D6912DE66115}.Player|iOS.Build.0 = Player|iOS
+		{92703082-F92B-41BA-80F0-D6912DE66115}.Player|LinuxStandalone64.ActiveCfg = Player|LinuxStandalone64
+		{92703082-F92B-41BA-80F0-D6912DE66115}.Player|LinuxStandalone64.Build.0 = Player|LinuxStandalone64
+		{92703082-F92B-41BA-80F0-D6912DE66115}.Player|macOSStandalone.ActiveCfg = Player|macOSStandalone
+		{92703082-F92B-41BA-80F0-D6912DE66115}.Player|macOSStandalone.Build.0 = Player|macOSStandalone
 		{92703082-F92B-41BA-80F0-D6912DE66115}.Player|WindowsStandalone32.ActiveCfg = Player|WindowsStandalone32
 		{92703082-F92B-41BA-80F0-D6912DE66115}.Player|WindowsStandalone32.Build.0 = Player|WindowsStandalone32
 		{92703082-F92B-41BA-80F0-D6912DE66115}.Player|WindowsStandalone64.ActiveCfg = Player|WindowsStandalone64
@@ -523,6 +697,10 @@ Global
 		{1C73E6E1-E2B7-8495-3A92-12924DC002D1}.InEditor|Android.Build.0 = InEditor|Android
 		{1C73E6E1-E2B7-8495-3A92-12924DC002D1}.InEditor|iOS.ActiveCfg = InEditor|iOS
 		{1C73E6E1-E2B7-8495-3A92-12924DC002D1}.InEditor|iOS.Build.0 = InEditor|iOS
+		{1C73E6E1-E2B7-8495-3A92-12924DC002D1}.InEditor|LinuxStandalone64.ActiveCfg = InEditor|LinuxStandalone64
+		{1C73E6E1-E2B7-8495-3A92-12924DC002D1}.InEditor|LinuxStandalone64.Build.0 = InEditor|LinuxStandalone64
+		{1C73E6E1-E2B7-8495-3A92-12924DC002D1}.InEditor|macOSStandalone.ActiveCfg = InEditor|macOSStandalone
+		{1C73E6E1-E2B7-8495-3A92-12924DC002D1}.InEditor|macOSStandalone.Build.0 = InEditor|macOSStandalone
 		{1C73E6E1-E2B7-8495-3A92-12924DC002D1}.InEditor|WindowsStandalone32.ActiveCfg = InEditor|WindowsStandalone32
 		{1C73E6E1-E2B7-8495-3A92-12924DC002D1}.InEditor|WindowsStandalone32.Build.0 = InEditor|WindowsStandalone32
 		{1C73E6E1-E2B7-8495-3A92-12924DC002D1}.InEditor|WindowsStandalone64.ActiveCfg = InEditor|WindowsStandalone64
@@ -531,6 +709,8 @@ Global
 		{1C73E6E1-E2B7-8495-3A92-12924DC002D1}.InEditor|WSA.Build.0 = InEditor|WSA
 		{1C73E6E1-E2B7-8495-3A92-12924DC002D1}.Player|Android.ActiveCfg = Player|Android
 		{1C73E6E1-E2B7-8495-3A92-12924DC002D1}.Player|iOS.ActiveCfg = Player|iOS
+		{1C73E6E1-E2B7-8495-3A92-12924DC002D1}.Player|LinuxStandalone64.ActiveCfg = Player|LinuxStandalone64
+		{1C73E6E1-E2B7-8495-3A92-12924DC002D1}.Player|macOSStandalone.ActiveCfg = Player|macOSStandalone
 		{1C73E6E1-E2B7-8495-3A92-12924DC002D1}.Player|WindowsStandalone32.ActiveCfg = Player|WindowsStandalone32
 		{1C73E6E1-E2B7-8495-3A92-12924DC002D1}.Player|WindowsStandalone64.ActiveCfg = Player|WindowsStandalone64
 		{1C73E6E1-E2B7-8495-3A92-12924DC002D1}.Player|WSA.ActiveCfg = Player|WSA
@@ -538,6 +718,10 @@ Global
 		{8B0C2853-A940-D4FD-9979-BAC438EB5BF3}.InEditor|Android.Build.0 = InEditor|Android
 		{8B0C2853-A940-D4FD-9979-BAC438EB5BF3}.InEditor|iOS.ActiveCfg = InEditor|iOS
 		{8B0C2853-A940-D4FD-9979-BAC438EB5BF3}.InEditor|iOS.Build.0 = InEditor|iOS
+		{8B0C2853-A940-D4FD-9979-BAC438EB5BF3}.InEditor|LinuxStandalone64.ActiveCfg = InEditor|LinuxStandalone64
+		{8B0C2853-A940-D4FD-9979-BAC438EB5BF3}.InEditor|LinuxStandalone64.Build.0 = InEditor|LinuxStandalone64
+		{8B0C2853-A940-D4FD-9979-BAC438EB5BF3}.InEditor|macOSStandalone.ActiveCfg = InEditor|macOSStandalone
+		{8B0C2853-A940-D4FD-9979-BAC438EB5BF3}.InEditor|macOSStandalone.Build.0 = InEditor|macOSStandalone
 		{8B0C2853-A940-D4FD-9979-BAC438EB5BF3}.InEditor|WindowsStandalone32.ActiveCfg = InEditor|WindowsStandalone32
 		{8B0C2853-A940-D4FD-9979-BAC438EB5BF3}.InEditor|WindowsStandalone32.Build.0 = InEditor|WindowsStandalone32
 		{8B0C2853-A940-D4FD-9979-BAC438EB5BF3}.InEditor|WindowsStandalone64.ActiveCfg = InEditor|WindowsStandalone64
@@ -546,6 +730,8 @@ Global
 		{8B0C2853-A940-D4FD-9979-BAC438EB5BF3}.InEditor|WSA.Build.0 = InEditor|WSA
 		{8B0C2853-A940-D4FD-9979-BAC438EB5BF3}.Player|Android.ActiveCfg = Player|Android
 		{8B0C2853-A940-D4FD-9979-BAC438EB5BF3}.Player|iOS.ActiveCfg = Player|iOS
+		{8B0C2853-A940-D4FD-9979-BAC438EB5BF3}.Player|LinuxStandalone64.ActiveCfg = Player|LinuxStandalone64
+		{8B0C2853-A940-D4FD-9979-BAC438EB5BF3}.Player|macOSStandalone.ActiveCfg = Player|macOSStandalone
 		{8B0C2853-A940-D4FD-9979-BAC438EB5BF3}.Player|WindowsStandalone32.ActiveCfg = Player|WindowsStandalone32
 		{8B0C2853-A940-D4FD-9979-BAC438EB5BF3}.Player|WindowsStandalone64.ActiveCfg = Player|WindowsStandalone64
 		{8B0C2853-A940-D4FD-9979-BAC438EB5BF3}.Player|WSA.ActiveCfg = Player|WSA
@@ -553,6 +739,10 @@ Global
 		{9E6BDF94-FCB2-45C5-85C2-6819FA23A202}.InEditor|Android.Build.0 = InEditor|Android
 		{9E6BDF94-FCB2-45C5-85C2-6819FA23A202}.InEditor|iOS.ActiveCfg = InEditor|iOS
 		{9E6BDF94-FCB2-45C5-85C2-6819FA23A202}.InEditor|iOS.Build.0 = InEditor|iOS
+		{9E6BDF94-FCB2-45C5-85C2-6819FA23A202}.InEditor|LinuxStandalone64.ActiveCfg = InEditor|LinuxStandalone64
+		{9E6BDF94-FCB2-45C5-85C2-6819FA23A202}.InEditor|LinuxStandalone64.Build.0 = InEditor|LinuxStandalone64
+		{9E6BDF94-FCB2-45C5-85C2-6819FA23A202}.InEditor|macOSStandalone.ActiveCfg = InEditor|macOSStandalone
+		{9E6BDF94-FCB2-45C5-85C2-6819FA23A202}.InEditor|macOSStandalone.Build.0 = InEditor|macOSStandalone
 		{9E6BDF94-FCB2-45C5-85C2-6819FA23A202}.InEditor|WindowsStandalone32.ActiveCfg = InEditor|WindowsStandalone32
 		{9E6BDF94-FCB2-45C5-85C2-6819FA23A202}.InEditor|WindowsStandalone32.Build.0 = InEditor|WindowsStandalone32
 		{9E6BDF94-FCB2-45C5-85C2-6819FA23A202}.InEditor|WindowsStandalone64.ActiveCfg = InEditor|WindowsStandalone64
@@ -562,6 +752,8 @@ Global
 		{9E6BDF94-FCB2-45C5-85C2-6819FA23A202}.Player|Android.ActiveCfg = Player|Android
 		{9E6BDF94-FCB2-45C5-85C2-6819FA23A202}.Player|Android.Build.0 = Player|Android
 		{9E6BDF94-FCB2-45C5-85C2-6819FA23A202}.Player|iOS.ActiveCfg = Player|iOS
+		{9E6BDF94-FCB2-45C5-85C2-6819FA23A202}.Player|LinuxStandalone64.ActiveCfg = Player|LinuxStandalone64
+		{9E6BDF94-FCB2-45C5-85C2-6819FA23A202}.Player|macOSStandalone.ActiveCfg = Player|macOSStandalone
 		{9E6BDF94-FCB2-45C5-85C2-6819FA23A202}.Player|WindowsStandalone32.ActiveCfg = Player|WindowsStandalone32
 		{9E6BDF94-FCB2-45C5-85C2-6819FA23A202}.Player|WindowsStandalone64.ActiveCfg = Player|WindowsStandalone64
 		{9E6BDF94-FCB2-45C5-85C2-6819FA23A202}.Player|WSA.ActiveCfg = Player|WSA
@@ -569,6 +761,10 @@ Global
 		{A9420E37-D799-0B54-ABDE-F6688EDBE313}.InEditor|Android.Build.0 = InEditor|Android
 		{A9420E37-D799-0B54-ABDE-F6688EDBE313}.InEditor|iOS.ActiveCfg = InEditor|iOS
 		{A9420E37-D799-0B54-ABDE-F6688EDBE313}.InEditor|iOS.Build.0 = InEditor|iOS
+		{A9420E37-D799-0B54-ABDE-F6688EDBE313}.InEditor|LinuxStandalone64.ActiveCfg = InEditor|LinuxStandalone64
+		{A9420E37-D799-0B54-ABDE-F6688EDBE313}.InEditor|LinuxStandalone64.Build.0 = InEditor|LinuxStandalone64
+		{A9420E37-D799-0B54-ABDE-F6688EDBE313}.InEditor|macOSStandalone.ActiveCfg = InEditor|macOSStandalone
+		{A9420E37-D799-0B54-ABDE-F6688EDBE313}.InEditor|macOSStandalone.Build.0 = InEditor|macOSStandalone
 		{A9420E37-D799-0B54-ABDE-F6688EDBE313}.InEditor|WindowsStandalone32.ActiveCfg = InEditor|WindowsStandalone32
 		{A9420E37-D799-0B54-ABDE-F6688EDBE313}.InEditor|WindowsStandalone32.Build.0 = InEditor|WindowsStandalone32
 		{A9420E37-D799-0B54-ABDE-F6688EDBE313}.InEditor|WindowsStandalone64.ActiveCfg = InEditor|WindowsStandalone64
@@ -579,6 +775,10 @@ Global
 		{A9420E37-D799-0B54-ABDE-F6688EDBE313}.Player|Android.Build.0 = Player|Android
 		{A9420E37-D799-0B54-ABDE-F6688EDBE313}.Player|iOS.ActiveCfg = Player|iOS
 		{A9420E37-D799-0B54-ABDE-F6688EDBE313}.Player|iOS.Build.0 = Player|iOS
+		{A9420E37-D799-0B54-ABDE-F6688EDBE313}.Player|LinuxStandalone64.ActiveCfg = Player|LinuxStandalone64
+		{A9420E37-D799-0B54-ABDE-F6688EDBE313}.Player|LinuxStandalone64.Build.0 = Player|LinuxStandalone64
+		{A9420E37-D799-0B54-ABDE-F6688EDBE313}.Player|macOSStandalone.ActiveCfg = Player|macOSStandalone
+		{A9420E37-D799-0B54-ABDE-F6688EDBE313}.Player|macOSStandalone.Build.0 = Player|macOSStandalone
 		{A9420E37-D799-0B54-ABDE-F6688EDBE313}.Player|WindowsStandalone32.ActiveCfg = Player|WindowsStandalone32
 		{A9420E37-D799-0B54-ABDE-F6688EDBE313}.Player|WindowsStandalone32.Build.0 = Player|WindowsStandalone32
 		{A9420E37-D799-0B54-ABDE-F6688EDBE313}.Player|WindowsStandalone64.ActiveCfg = Player|WindowsStandalone64
@@ -589,6 +789,10 @@ Global
 		{6055BE8E-BEFD-69E4-8B49-212B09B47B2F}.InEditor|Android.Build.0 = InEditor|Android
 		{6055BE8E-BEFD-69E4-8B49-212B09B47B2F}.InEditor|iOS.ActiveCfg = InEditor|iOS
 		{6055BE8E-BEFD-69E4-8B49-212B09B47B2F}.InEditor|iOS.Build.0 = InEditor|iOS
+		{6055BE8E-BEFD-69E4-8B49-212B09B47B2F}.InEditor|LinuxStandalone64.ActiveCfg = InEditor|LinuxStandalone64
+		{6055BE8E-BEFD-69E4-8B49-212B09B47B2F}.InEditor|LinuxStandalone64.Build.0 = InEditor|LinuxStandalone64
+		{6055BE8E-BEFD-69E4-8B49-212B09B47B2F}.InEditor|macOSStandalone.ActiveCfg = InEditor|macOSStandalone
+		{6055BE8E-BEFD-69E4-8B49-212B09B47B2F}.InEditor|macOSStandalone.Build.0 = InEditor|macOSStandalone
 		{6055BE8E-BEFD-69E4-8B49-212B09B47B2F}.InEditor|WindowsStandalone32.ActiveCfg = InEditor|WindowsStandalone32
 		{6055BE8E-BEFD-69E4-8B49-212B09B47B2F}.InEditor|WindowsStandalone32.Build.0 = InEditor|WindowsStandalone32
 		{6055BE8E-BEFD-69E4-8B49-212B09B47B2F}.InEditor|WindowsStandalone64.ActiveCfg = InEditor|WindowsStandalone64
@@ -599,6 +803,10 @@ Global
 		{6055BE8E-BEFD-69E4-8B49-212B09B47B2F}.Player|Android.Build.0 = Player|Android
 		{6055BE8E-BEFD-69E4-8B49-212B09B47B2F}.Player|iOS.ActiveCfg = Player|iOS
 		{6055BE8E-BEFD-69E4-8B49-212B09B47B2F}.Player|iOS.Build.0 = Player|iOS
+		{6055BE8E-BEFD-69E4-8B49-212B09B47B2F}.Player|LinuxStandalone64.ActiveCfg = Player|LinuxStandalone64
+		{6055BE8E-BEFD-69E4-8B49-212B09B47B2F}.Player|LinuxStandalone64.Build.0 = Player|LinuxStandalone64
+		{6055BE8E-BEFD-69E4-8B49-212B09B47B2F}.Player|macOSStandalone.ActiveCfg = Player|macOSStandalone
+		{6055BE8E-BEFD-69E4-8B49-212B09B47B2F}.Player|macOSStandalone.Build.0 = Player|macOSStandalone
 		{6055BE8E-BEFD-69E4-8B49-212B09B47B2F}.Player|WindowsStandalone32.ActiveCfg = Player|WindowsStandalone32
 		{6055BE8E-BEFD-69E4-8B49-212B09B47B2F}.Player|WindowsStandalone32.Build.0 = Player|WindowsStandalone32
 		{6055BE8E-BEFD-69E4-8B49-212B09B47B2F}.Player|WindowsStandalone64.ActiveCfg = Player|WindowsStandalone64
@@ -609,6 +817,10 @@ Global
 		{D76576B7-68DA-4171-B007-F21C44FABE13}.InEditor|Android.Build.0 = InEditor|Android
 		{D76576B7-68DA-4171-B007-F21C44FABE13}.InEditor|iOS.ActiveCfg = InEditor|iOS
 		{D76576B7-68DA-4171-B007-F21C44FABE13}.InEditor|iOS.Build.0 = InEditor|iOS
+		{D76576B7-68DA-4171-B007-F21C44FABE13}.InEditor|LinuxStandalone64.ActiveCfg = InEditor|LinuxStandalone64
+		{D76576B7-68DA-4171-B007-F21C44FABE13}.InEditor|LinuxStandalone64.Build.0 = InEditor|LinuxStandalone64
+		{D76576B7-68DA-4171-B007-F21C44FABE13}.InEditor|macOSStandalone.ActiveCfg = InEditor|macOSStandalone
+		{D76576B7-68DA-4171-B007-F21C44FABE13}.InEditor|macOSStandalone.Build.0 = InEditor|macOSStandalone
 		{D76576B7-68DA-4171-B007-F21C44FABE13}.InEditor|WindowsStandalone32.ActiveCfg = InEditor|WindowsStandalone32
 		{D76576B7-68DA-4171-B007-F21C44FABE13}.InEditor|WindowsStandalone32.Build.0 = InEditor|WindowsStandalone32
 		{D76576B7-68DA-4171-B007-F21C44FABE13}.InEditor|WindowsStandalone64.ActiveCfg = InEditor|WindowsStandalone64
@@ -617,13 +829,40 @@ Global
 		{D76576B7-68DA-4171-B007-F21C44FABE13}.InEditor|WSA.Build.0 = InEditor|WSA
 		{D76576B7-68DA-4171-B007-F21C44FABE13}.Player|Android.ActiveCfg = Player|Android
 		{D76576B7-68DA-4171-B007-F21C44FABE13}.Player|iOS.ActiveCfg = Player|iOS
+		{D76576B7-68DA-4171-B007-F21C44FABE13}.Player|LinuxStandalone64.ActiveCfg = Player|LinuxStandalone64
+		{D76576B7-68DA-4171-B007-F21C44FABE13}.Player|macOSStandalone.ActiveCfg = Player|macOSStandalone
 		{D76576B7-68DA-4171-B007-F21C44FABE13}.Player|WindowsStandalone32.ActiveCfg = Player|WindowsStandalone32
 		{D76576B7-68DA-4171-B007-F21C44FABE13}.Player|WindowsStandalone64.ActiveCfg = Player|WindowsStandalone64
 		{D76576B7-68DA-4171-B007-F21C44FABE13}.Player|WSA.ActiveCfg = Player|WSA
+		{0BBD462D-7DC8-F944-1973-A4C86A22E16E}.InEditor|Android.ActiveCfg = InEditor|Android
+		{0BBD462D-7DC8-F944-1973-A4C86A22E16E}.InEditor|Android.Build.0 = InEditor|Android
+		{0BBD462D-7DC8-F944-1973-A4C86A22E16E}.InEditor|iOS.ActiveCfg = InEditor|iOS
+		{0BBD462D-7DC8-F944-1973-A4C86A22E16E}.InEditor|iOS.Build.0 = InEditor|iOS
+		{0BBD462D-7DC8-F944-1973-A4C86A22E16E}.InEditor|LinuxStandalone64.ActiveCfg = InEditor|LinuxStandalone64
+		{0BBD462D-7DC8-F944-1973-A4C86A22E16E}.InEditor|LinuxStandalone64.Build.0 = InEditor|LinuxStandalone64
+		{0BBD462D-7DC8-F944-1973-A4C86A22E16E}.InEditor|macOSStandalone.ActiveCfg = InEditor|macOSStandalone
+		{0BBD462D-7DC8-F944-1973-A4C86A22E16E}.InEditor|macOSStandalone.Build.0 = InEditor|macOSStandalone
+		{0BBD462D-7DC8-F944-1973-A4C86A22E16E}.InEditor|WindowsStandalone32.ActiveCfg = InEditor|WindowsStandalone32
+		{0BBD462D-7DC8-F944-1973-A4C86A22E16E}.InEditor|WindowsStandalone32.Build.0 = InEditor|WindowsStandalone32
+		{0BBD462D-7DC8-F944-1973-A4C86A22E16E}.InEditor|WindowsStandalone64.ActiveCfg = InEditor|WindowsStandalone64
+		{0BBD462D-7DC8-F944-1973-A4C86A22E16E}.InEditor|WindowsStandalone64.Build.0 = InEditor|WindowsStandalone64
+		{0BBD462D-7DC8-F944-1973-A4C86A22E16E}.InEditor|WSA.ActiveCfg = InEditor|WSA
+		{0BBD462D-7DC8-F944-1973-A4C86A22E16E}.InEditor|WSA.Build.0 = InEditor|WSA
+		{0BBD462D-7DC8-F944-1973-A4C86A22E16E}.Player|Android.ActiveCfg = Player|Android
+		{0BBD462D-7DC8-F944-1973-A4C86A22E16E}.Player|iOS.ActiveCfg = Player|iOS
+		{0BBD462D-7DC8-F944-1973-A4C86A22E16E}.Player|LinuxStandalone64.ActiveCfg = Player|LinuxStandalone64
+		{0BBD462D-7DC8-F944-1973-A4C86A22E16E}.Player|macOSStandalone.ActiveCfg = Player|macOSStandalone
+		{0BBD462D-7DC8-F944-1973-A4C86A22E16E}.Player|WindowsStandalone32.ActiveCfg = Player|WindowsStandalone32
+		{0BBD462D-7DC8-F944-1973-A4C86A22E16E}.Player|WindowsStandalone64.ActiveCfg = Player|WindowsStandalone64
+		{0BBD462D-7DC8-F944-1973-A4C86A22E16E}.Player|WSA.ActiveCfg = Player|WSA
 		{DFD0CE20-189D-48E5-B22B-B4134B558F5A}.InEditor|Android.ActiveCfg = InEditor|Android
 		{DFD0CE20-189D-48E5-B22B-B4134B558F5A}.InEditor|Android.Build.0 = InEditor|Android
 		{DFD0CE20-189D-48E5-B22B-B4134B558F5A}.InEditor|iOS.ActiveCfg = InEditor|iOS
 		{DFD0CE20-189D-48E5-B22B-B4134B558F5A}.InEditor|iOS.Build.0 = InEditor|iOS
+		{DFD0CE20-189D-48E5-B22B-B4134B558F5A}.InEditor|LinuxStandalone64.ActiveCfg = InEditor|LinuxStandalone64
+		{DFD0CE20-189D-48E5-B22B-B4134B558F5A}.InEditor|LinuxStandalone64.Build.0 = InEditor|LinuxStandalone64
+		{DFD0CE20-189D-48E5-B22B-B4134B558F5A}.InEditor|macOSStandalone.ActiveCfg = InEditor|macOSStandalone
+		{DFD0CE20-189D-48E5-B22B-B4134B558F5A}.InEditor|macOSStandalone.Build.0 = InEditor|macOSStandalone
 		{DFD0CE20-189D-48E5-B22B-B4134B558F5A}.InEditor|WindowsStandalone32.ActiveCfg = InEditor|WindowsStandalone32
 		{DFD0CE20-189D-48E5-B22B-B4134B558F5A}.InEditor|WindowsStandalone32.Build.0 = InEditor|WindowsStandalone32
 		{DFD0CE20-189D-48E5-B22B-B4134B558F5A}.InEditor|WindowsStandalone64.ActiveCfg = InEditor|WindowsStandalone64
@@ -633,6 +872,8 @@ Global
 		{DFD0CE20-189D-48E5-B22B-B4134B558F5A}.Player|Android.ActiveCfg = Player|Android
 		{DFD0CE20-189D-48E5-B22B-B4134B558F5A}.Player|iOS.ActiveCfg = Player|iOS
 		{DFD0CE20-189D-48E5-B22B-B4134B558F5A}.Player|iOS.Build.0 = Player|iOS
+		{DFD0CE20-189D-48E5-B22B-B4134B558F5A}.Player|LinuxStandalone64.ActiveCfg = Player|LinuxStandalone64
+		{DFD0CE20-189D-48E5-B22B-B4134B558F5A}.Player|macOSStandalone.ActiveCfg = Player|macOSStandalone
 		{DFD0CE20-189D-48E5-B22B-B4134B558F5A}.Player|WindowsStandalone32.ActiveCfg = Player|WindowsStandalone32
 		{DFD0CE20-189D-48E5-B22B-B4134B558F5A}.Player|WindowsStandalone64.ActiveCfg = Player|WindowsStandalone64
 		{DFD0CE20-189D-48E5-B22B-B4134B558F5A}.Player|WSA.ActiveCfg = Player|WSA
@@ -640,6 +881,10 @@ Global
 		{7F759C46-4CB5-EA84-48D4-41F13B57AEC0}.InEditor|Android.Build.0 = InEditor|Android
 		{7F759C46-4CB5-EA84-48D4-41F13B57AEC0}.InEditor|iOS.ActiveCfg = InEditor|iOS
 		{7F759C46-4CB5-EA84-48D4-41F13B57AEC0}.InEditor|iOS.Build.0 = InEditor|iOS
+		{7F759C46-4CB5-EA84-48D4-41F13B57AEC0}.InEditor|LinuxStandalone64.ActiveCfg = InEditor|LinuxStandalone64
+		{7F759C46-4CB5-EA84-48D4-41F13B57AEC0}.InEditor|LinuxStandalone64.Build.0 = InEditor|LinuxStandalone64
+		{7F759C46-4CB5-EA84-48D4-41F13B57AEC0}.InEditor|macOSStandalone.ActiveCfg = InEditor|macOSStandalone
+		{7F759C46-4CB5-EA84-48D4-41F13B57AEC0}.InEditor|macOSStandalone.Build.0 = InEditor|macOSStandalone
 		{7F759C46-4CB5-EA84-48D4-41F13B57AEC0}.InEditor|WindowsStandalone32.ActiveCfg = InEditor|WindowsStandalone32
 		{7F759C46-4CB5-EA84-48D4-41F13B57AEC0}.InEditor|WindowsStandalone32.Build.0 = InEditor|WindowsStandalone32
 		{7F759C46-4CB5-EA84-48D4-41F13B57AEC0}.InEditor|WindowsStandalone64.ActiveCfg = InEditor|WindowsStandalone64
@@ -648,6 +893,8 @@ Global
 		{7F759C46-4CB5-EA84-48D4-41F13B57AEC0}.InEditor|WSA.Build.0 = InEditor|WSA
 		{7F759C46-4CB5-EA84-48D4-41F13B57AEC0}.Player|Android.ActiveCfg = Player|Android
 		{7F759C46-4CB5-EA84-48D4-41F13B57AEC0}.Player|iOS.ActiveCfg = Player|iOS
+		{7F759C46-4CB5-EA84-48D4-41F13B57AEC0}.Player|LinuxStandalone64.ActiveCfg = Player|LinuxStandalone64
+		{7F759C46-4CB5-EA84-48D4-41F13B57AEC0}.Player|macOSStandalone.ActiveCfg = Player|macOSStandalone
 		{7F759C46-4CB5-EA84-48D4-41F13B57AEC0}.Player|WindowsStandalone32.ActiveCfg = Player|WindowsStandalone32
 		{7F759C46-4CB5-EA84-48D4-41F13B57AEC0}.Player|WindowsStandalone64.ActiveCfg = Player|WindowsStandalone64
 		{7F759C46-4CB5-EA84-48D4-41F13B57AEC0}.Player|WSA.ActiveCfg = Player|WSA
@@ -655,6 +902,10 @@ Global
 		{6546D776-5B41-65B4-0850-B3667F981C26}.InEditor|Android.Build.0 = InEditor|Android
 		{6546D776-5B41-65B4-0850-B3667F981C26}.InEditor|iOS.ActiveCfg = InEditor|iOS
 		{6546D776-5B41-65B4-0850-B3667F981C26}.InEditor|iOS.Build.0 = InEditor|iOS
+		{6546D776-5B41-65B4-0850-B3667F981C26}.InEditor|LinuxStandalone64.ActiveCfg = InEditor|LinuxStandalone64
+		{6546D776-5B41-65B4-0850-B3667F981C26}.InEditor|LinuxStandalone64.Build.0 = InEditor|LinuxStandalone64
+		{6546D776-5B41-65B4-0850-B3667F981C26}.InEditor|macOSStandalone.ActiveCfg = InEditor|macOSStandalone
+		{6546D776-5B41-65B4-0850-B3667F981C26}.InEditor|macOSStandalone.Build.0 = InEditor|macOSStandalone
 		{6546D776-5B41-65B4-0850-B3667F981C26}.InEditor|WindowsStandalone32.ActiveCfg = InEditor|WindowsStandalone32
 		{6546D776-5B41-65B4-0850-B3667F981C26}.InEditor|WindowsStandalone32.Build.0 = InEditor|WindowsStandalone32
 		{6546D776-5B41-65B4-0850-B3667F981C26}.InEditor|WindowsStandalone64.ActiveCfg = InEditor|WindowsStandalone64
@@ -663,6 +914,8 @@ Global
 		{6546D776-5B41-65B4-0850-B3667F981C26}.InEditor|WSA.Build.0 = InEditor|WSA
 		{6546D776-5B41-65B4-0850-B3667F981C26}.Player|Android.ActiveCfg = Player|Android
 		{6546D776-5B41-65B4-0850-B3667F981C26}.Player|iOS.ActiveCfg = Player|iOS
+		{6546D776-5B41-65B4-0850-B3667F981C26}.Player|LinuxStandalone64.ActiveCfg = Player|LinuxStandalone64
+		{6546D776-5B41-65B4-0850-B3667F981C26}.Player|macOSStandalone.ActiveCfg = Player|macOSStandalone
 		{6546D776-5B41-65B4-0850-B3667F981C26}.Player|WindowsStandalone32.ActiveCfg = Player|WindowsStandalone32
 		{6546D776-5B41-65B4-0850-B3667F981C26}.Player|WindowsStandalone64.ActiveCfg = Player|WindowsStandalone64
 		{6546D776-5B41-65B4-0850-B3667F981C26}.Player|WSA.ActiveCfg = Player|WSA
@@ -670,6 +923,10 @@ Global
 		{7910D4AF-31B7-41AC-B1BC-E1140634A975}.InEditor|Android.Build.0 = InEditor|Android
 		{7910D4AF-31B7-41AC-B1BC-E1140634A975}.InEditor|iOS.ActiveCfg = InEditor|iOS
 		{7910D4AF-31B7-41AC-B1BC-E1140634A975}.InEditor|iOS.Build.0 = InEditor|iOS
+		{7910D4AF-31B7-41AC-B1BC-E1140634A975}.InEditor|LinuxStandalone64.ActiveCfg = InEditor|LinuxStandalone64
+		{7910D4AF-31B7-41AC-B1BC-E1140634A975}.InEditor|LinuxStandalone64.Build.0 = InEditor|LinuxStandalone64
+		{7910D4AF-31B7-41AC-B1BC-E1140634A975}.InEditor|macOSStandalone.ActiveCfg = InEditor|macOSStandalone
+		{7910D4AF-31B7-41AC-B1BC-E1140634A975}.InEditor|macOSStandalone.Build.0 = InEditor|macOSStandalone
 		{7910D4AF-31B7-41AC-B1BC-E1140634A975}.InEditor|WindowsStandalone32.ActiveCfg = InEditor|WindowsStandalone32
 		{7910D4AF-31B7-41AC-B1BC-E1140634A975}.InEditor|WindowsStandalone32.Build.0 = InEditor|WindowsStandalone32
 		{7910D4AF-31B7-41AC-B1BC-E1140634A975}.InEditor|WindowsStandalone64.ActiveCfg = InEditor|WindowsStandalone64
@@ -678,6 +935,8 @@ Global
 		{7910D4AF-31B7-41AC-B1BC-E1140634A975}.InEditor|WSA.Build.0 = InEditor|WSA
 		{7910D4AF-31B7-41AC-B1BC-E1140634A975}.Player|Android.ActiveCfg = Player|Android
 		{7910D4AF-31B7-41AC-B1BC-E1140634A975}.Player|iOS.ActiveCfg = Player|iOS
+		{7910D4AF-31B7-41AC-B1BC-E1140634A975}.Player|LinuxStandalone64.ActiveCfg = Player|LinuxStandalone64
+		{7910D4AF-31B7-41AC-B1BC-E1140634A975}.Player|macOSStandalone.ActiveCfg = Player|macOSStandalone
 		{7910D4AF-31B7-41AC-B1BC-E1140634A975}.Player|WindowsStandalone32.ActiveCfg = Player|WindowsStandalone32
 		{7910D4AF-31B7-41AC-B1BC-E1140634A975}.Player|WindowsStandalone64.ActiveCfg = Player|WindowsStandalone64
 		{7910D4AF-31B7-41AC-B1BC-E1140634A975}.Player|WSA.ActiveCfg = Player|WSA
@@ -685,6 +944,10 @@ Global
 		{97386677-BCE5-44C1-A6D1-B348C273B000}.InEditor|Android.Build.0 = InEditor|Android
 		{97386677-BCE5-44C1-A6D1-B348C273B000}.InEditor|iOS.ActiveCfg = InEditor|iOS
 		{97386677-BCE5-44C1-A6D1-B348C273B000}.InEditor|iOS.Build.0 = InEditor|iOS
+		{97386677-BCE5-44C1-A6D1-B348C273B000}.InEditor|LinuxStandalone64.ActiveCfg = InEditor|LinuxStandalone64
+		{97386677-BCE5-44C1-A6D1-B348C273B000}.InEditor|LinuxStandalone64.Build.0 = InEditor|LinuxStandalone64
+		{97386677-BCE5-44C1-A6D1-B348C273B000}.InEditor|macOSStandalone.ActiveCfg = InEditor|macOSStandalone
+		{97386677-BCE5-44C1-A6D1-B348C273B000}.InEditor|macOSStandalone.Build.0 = InEditor|macOSStandalone
 		{97386677-BCE5-44C1-A6D1-B348C273B000}.InEditor|WindowsStandalone32.ActiveCfg = InEditor|WindowsStandalone32
 		{97386677-BCE5-44C1-A6D1-B348C273B000}.InEditor|WindowsStandalone32.Build.0 = InEditor|WindowsStandalone32
 		{97386677-BCE5-44C1-A6D1-B348C273B000}.InEditor|WindowsStandalone64.ActiveCfg = InEditor|WindowsStandalone64
@@ -695,6 +958,10 @@ Global
 		{97386677-BCE5-44C1-A6D1-B348C273B000}.Player|Android.Build.0 = Player|Android
 		{97386677-BCE5-44C1-A6D1-B348C273B000}.Player|iOS.ActiveCfg = Player|iOS
 		{97386677-BCE5-44C1-A6D1-B348C273B000}.Player|iOS.Build.0 = Player|iOS
+		{97386677-BCE5-44C1-A6D1-B348C273B000}.Player|LinuxStandalone64.ActiveCfg = Player|LinuxStandalone64
+		{97386677-BCE5-44C1-A6D1-B348C273B000}.Player|LinuxStandalone64.Build.0 = Player|LinuxStandalone64
+		{97386677-BCE5-44C1-A6D1-B348C273B000}.Player|macOSStandalone.ActiveCfg = Player|macOSStandalone
+		{97386677-BCE5-44C1-A6D1-B348C273B000}.Player|macOSStandalone.Build.0 = Player|macOSStandalone
 		{97386677-BCE5-44C1-A6D1-B348C273B000}.Player|WindowsStandalone32.ActiveCfg = Player|WindowsStandalone32
 		{97386677-BCE5-44C1-A6D1-B348C273B000}.Player|WindowsStandalone32.Build.0 = Player|WindowsStandalone32
 		{97386677-BCE5-44C1-A6D1-B348C273B000}.Player|WindowsStandalone64.ActiveCfg = Player|WindowsStandalone64
@@ -705,11 +972,15 @@ Global
 		{86B9A0C9-B3A4-4A1B-9A2A-6C42CAAE9CE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{86B9A0C9-B3A4-4A1B-9A2A-6C42CAAE9CE3}.InEditor|Android.ActiveCfg = Debug|Any CPU
 		{86B9A0C9-B3A4-4A1B-9A2A-6C42CAAE9CE3}.InEditor|iOS.ActiveCfg = Debug|Any CPU
+		{86B9A0C9-B3A4-4A1B-9A2A-6C42CAAE9CE3}.InEditor|LinuxStandalone64.ActiveCfg = Debug|Any CPU
+		{86B9A0C9-B3A4-4A1B-9A2A-6C42CAAE9CE3}.InEditor|macOSStandalone.ActiveCfg = Debug|Any CPU
 		{86B9A0C9-B3A4-4A1B-9A2A-6C42CAAE9CE3}.InEditor|WindowsStandalone32.ActiveCfg = Debug|Any CPU
 		{86B9A0C9-B3A4-4A1B-9A2A-6C42CAAE9CE3}.InEditor|WindowsStandalone64.ActiveCfg = Debug|Any CPU
 		{86B9A0C9-B3A4-4A1B-9A2A-6C42CAAE9CE3}.InEditor|WSA.ActiveCfg = Debug|Any CPU
 		{86B9A0C9-B3A4-4A1B-9A2A-6C42CAAE9CE3}.Player|Android.ActiveCfg = Debug|Any CPU
 		{86B9A0C9-B3A4-4A1B-9A2A-6C42CAAE9CE3}.Player|iOS.ActiveCfg = Debug|Any CPU
+		{86B9A0C9-B3A4-4A1B-9A2A-6C42CAAE9CE3}.Player|LinuxStandalone64.ActiveCfg = Debug|Any CPU
+		{86B9A0C9-B3A4-4A1B-9A2A-6C42CAAE9CE3}.Player|macOSStandalone.ActiveCfg = Debug|Any CPU
 		{86B9A0C9-B3A4-4A1B-9A2A-6C42CAAE9CE3}.Player|WindowsStandalone32.ActiveCfg = Debug|Any CPU
 		{86B9A0C9-B3A4-4A1B-9A2A-6C42CAAE9CE3}.Player|WindowsStandalone64.ActiveCfg = Debug|Any CPU
 		{86B9A0C9-B3A4-4A1B-9A2A-6C42CAAE9CE3}.Player|WSA.ActiveCfg = Debug|Any CPU
@@ -720,7 +991,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{F06555F7-5B07-0AF4-58A0-03D92F9EFB00} = {AE8031DB-34EF-45DA-B7DC-C5FFEB6AD8BB}
+		{F06555F7-5B07-0AF4-58A0-03D92F9EFB00} = {59F99E2F-2341-4899-8322-94A3CBAD1CAB}
 		{D03624F0-2FD4-AEF4-AA6B-888A1B059AD7} = {59F99E2F-2341-4899-8322-94A3CBAD1CAB}
 		{A44F47CF-3ADA-4435-DBC5-16BAD0BC86FE} = {59F99E2F-2341-4899-8322-94A3CBAD1CAB}
 		{5710C1F8-59F1-945B-6BC9-B33CFF6B43FC} = {59F99E2F-2341-4899-8322-94A3CBAD1CAB}
@@ -736,9 +1007,10 @@ Global
 		{2C573E6B-2716-5184-6A79-655161004C5B} = {AE8031DB-34EF-45DA-B7DC-C5FFEB6AD8BB}
 		{3A9781DB-4804-A994-5B98-83F3A7C46D45} = {AE8031DB-34EF-45DA-B7DC-C5FFEB6AD8BB}
 		{B13A1D1D-FB13-F1B4-89A0-FF5612F36F29} = {59F99E2F-2341-4899-8322-94A3CBAD1CAB}
+		{33B4BC8F-F031-CA64-CB5B-84C47A40DD88} = {59F99E2F-2341-4899-8322-94A3CBAD1CAB}
 		{0FDA7EBE-61AB-2164-383D-10E32EFB9C6E} = {59F99E2F-2341-4899-8322-94A3CBAD1CAB}
 		{52C867DE-B383-2554-C84D-C4202BD47258} = {59F99E2F-2341-4899-8322-94A3CBAD1CAB}
-		{02F77120-4943-F4A4-0949-438E873E3EFF} = {AE8031DB-34EF-45DA-B7DC-C5FFEB6AD8BB}
+		{02F77120-4943-F4A4-0949-438E873E3EFF} = {59F99E2F-2341-4899-8322-94A3CBAD1CAB}
 		{92703082-F92B-41BA-80F0-D6912DE66115} = {59F99E2F-2341-4899-8322-94A3CBAD1CAB}
 		{1C73E6E1-E2B7-8495-3A92-12924DC002D1} = {59F99E2F-2341-4899-8322-94A3CBAD1CAB}
 		{8B0C2853-A940-D4FD-9979-BAC438EB5BF3} = {59F99E2F-2341-4899-8322-94A3CBAD1CAB}
@@ -746,6 +1018,7 @@ Global
 		{A9420E37-D799-0B54-ABDE-F6688EDBE313} = {59F99E2F-2341-4899-8322-94A3CBAD1CAB}
 		{6055BE8E-BEFD-69E4-8B49-212B09B47B2F} = {59F99E2F-2341-4899-8322-94A3CBAD1CAB}
 		{D76576B7-68DA-4171-B007-F21C44FABE13} = {59F99E2F-2341-4899-8322-94A3CBAD1CAB}
+		{0BBD462D-7DC8-F944-1973-A4C86A22E16E} = {59F99E2F-2341-4899-8322-94A3CBAD1CAB}
 		{DFD0CE20-189D-48E5-B22B-B4134B558F5A} = {59F99E2F-2341-4899-8322-94A3CBAD1CAB}
 		{7F759C46-4CB5-EA84-48D4-41F13B57AEC0} = {59F99E2F-2341-4899-8322-94A3CBAD1CAB}
 		{6546D776-5B41-65B4-0850-B3667F981C26} = {59F99E2F-2341-4899-8322-94A3CBAD1CAB}
@@ -755,8 +1028,8 @@ Global
 		SolutionGuid = {76242699-C2C2-49F2-8ED5-A97045C2C8EC}
 	EndGlobalSection
 	GlobalSection(SolutionNotes) = postSolution
-		{AE8031DB-34EF-45DA-B7DC-C5FFEB6AD8BB} = msb4u.generated
 		{59F99E2F-2341-4899-8322-94A3CBAD1CAB} = msb4u.generated
+		{AE8031DB-34EF-45DA-B7DC-C5FFEB6AD8BB} = msb4u.generated
 		{91D0E16C-0D52-4506-A68B-492BE89AB57C} = msb4u.generated
 		{F06555F7-5B07-0AF4-58A0-03D92F9EFB00} = msb4u.generated
 		{D03624F0-2FD4-AEF4-AA6B-888A1B059AD7} = msb4u.generated
@@ -774,6 +1047,7 @@ Global
 		{2C573E6B-2716-5184-6A79-655161004C5B} = msb4u.generated
 		{3A9781DB-4804-A994-5B98-83F3A7C46D45} = msb4u.generated
 		{B13A1D1D-FB13-F1B4-89A0-FF5612F36F29} = msb4u.generated
+		{33B4BC8F-F031-CA64-CB5B-84C47A40DD88} = msb4u.generated
 		{0FDA7EBE-61AB-2164-383D-10E32EFB9C6E} = msb4u.generated
 		{52C867DE-B383-2554-C84D-C4202BD47258} = msb4u.generated
 		{02F77120-4943-F4A4-0949-438E873E3EFF} = msb4u.generated
@@ -784,6 +1058,7 @@ Global
 		{A9420E37-D799-0B54-ABDE-F6688EDBE313} = msb4u.generated
 		{6055BE8E-BEFD-69E4-8B49-212B09B47B2F} = msb4u.generated
 		{D76576B7-68DA-4171-B007-F21C44FABE13} = msb4u.generated
+		{0BBD462D-7DC8-F944-1973-A4C86A22E16E} = msb4u.generated
 		{DFD0CE20-189D-48E5-B22B-B4134B558F5A} = msb4u.generated
 		{7F759C46-4CB5-EA84-48D4-41F13B57AEC0} = msb4u.generated
 		{6546D776-5B41-65B4-0850-B3667F981C26} = msb4u.generated
