@@ -1,6 +1,8 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using Boo.Lang;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -117,7 +119,7 @@ namespace Microsoft.MixedReality.SpectatorView
         }
 
         /// <inheritdoc />
-        public void ShowMarker(int id)
+        public void ShowMarker(string id)
         {
             if (_rawImage == null)
             {
@@ -135,7 +137,8 @@ namespace Microsoft.MixedReality.SpectatorView
 
             if (_rawImage != null)
             {
-                _rawImage.texture = MakeMarkerTex(cCodes[id]);
+                int index = int.Parse(id);
+                _rawImage.texture = MakeMarkerTex(cCodes[index]);
                 var size = GetMarkerSizeInPixels();
                 _rawImage.rectTransform.sizeDelta = new Vector2(size, size);
             }
@@ -176,9 +179,13 @@ namespace Microsoft.MixedReality.SpectatorView
         }
 
         /// <inheritdoc />
-        public bool TryGetMaxSupportedMarkerId(out int markerId)
+        public bool GetSupportedMarkers(out HashSet<string> markerIds)
         {
-            markerId = cCodes.Length - 1;
+            markerIds = new HashSet<string>();
+            for(int i = 0; i < cCodes.Length; i++)
+            {
+                markerIds.Add(i.ToString());
+            }
             return true;
         }
 

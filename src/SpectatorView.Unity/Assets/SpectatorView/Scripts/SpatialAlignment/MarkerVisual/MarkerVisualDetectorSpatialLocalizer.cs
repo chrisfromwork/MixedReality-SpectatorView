@@ -130,8 +130,9 @@ namespace Microsoft.MixedReality.SpectatorView
                 switch (command)
                 {
                     case MarkerVisualLocalizationSettings.DiscoveryHeader:
-                        int maxSupportedMarkerId = reader.Read();
-                        coordinateId = DetermineCoordinateId(maxSupportedMarkerId);
+                        string supportedMarkersStr = reader.ReadString();
+                        string[] supportedMarkers = supportedMarkersStr.Split(MarkerVisualSpatialLocalizer.MarkerSetConcatChar);
+                        coordinateId = DetermineCoordinateId(supportedMarkers);
                         SendCoordinateAssigned(coordinateId);
                         coordinateAssigned.TrySetResult(coordinateId);
                         break;
@@ -169,15 +170,15 @@ namespace Microsoft.MixedReality.SpectatorView
                 });
             }
 
-            private string DetermineCoordinateId(int maxSupportedMarkerId)
+            private string DetermineCoordinateId(string[] supportedMarkers)
             {
-                DebugLog("GetMarkerId currently returns 1 when possible to avoid conficts with the MarkerDetectorSpatialLocalizer that uses 0. Additional work is still required to enable assigning unique marker ids to different application participants.");
-                if (maxSupportedMarkerId > 0)
+                DebugLog("GetMarkerId currently returns the second maker when possible to avoid conficts with the MarkerDetectorSpatialLocalizer that uses first supported marker. Additional work is still required to enable assigning unique marker ids to different application participants.");
+                if (supportedMarkers.Length > 0)
                 {
-                    return 1.ToString();
+                    return supportedMarkers[0];
                 }
 
-                return 0.ToString();
+                return supportedMarkers[1];
             }
         }
     }

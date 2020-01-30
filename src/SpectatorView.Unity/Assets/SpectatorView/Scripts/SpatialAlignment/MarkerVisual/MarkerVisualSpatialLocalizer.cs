@@ -4,6 +4,7 @@
 using Microsoft.MixedReality.SpatialAlignment;
 using System;
 using System.IO;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -28,6 +29,8 @@ namespace Microsoft.MixedReality.SpectatorView
     /// </summary>
     public abstract class MarkerVisualSpatialLocalizer : SpatialLocalizer<MarkerVisualLocalizationSettings>
     {
+        public const char MarkerSetConcatChar = ';';
+
         [Tooltip("The reference to a prefab containing an IMarkerVisual.")]
         [SerializeField]
         protected GameObject MarkerVisualPrefab = null;
@@ -207,13 +210,26 @@ namespace Microsoft.MixedReality.SpectatorView
 
             private bool TrySendMarkerVisualDiscoveryMessage()
             {
-                if (localizer.markerVisual.TryGetMaxSupportedMarkerId(out var maxId))
+                if (localizer.markerVisual.GetSupportedMarkers(out var markerIds))
                 {
-                    DebugLog($"Sending maximum id for discovery: {maxId}");
                     peerConnection?.SendData(writer =>
                     {
                         writer.Write(MarkerVisualLocalizationSettings.DiscoveryHeader);
-                        writer.Write(maxId);
+                        StringBuilder builder = new StringBuilder();
+                        int count = 0;
+                        int numMarkers = markerIds.Count;
+                        foreach (var id in markerIds)
+                        {
+                            count++;
+                            builder.Append(id);
+                            if (count != numMarkers)
+                            {
+                                builder.Append(MarkerSetConcatChar);
+                            }
+                        }
+                        string markers = builder.ToString();
+                        DebugLog($"Sending supported markers for discovery: {markers}");
+                        writer.Write(markers);
                     });
 
                     return true;

@@ -16,7 +16,7 @@ namespace Microsoft.MixedReality.SpectatorView
         /// <summary>
         /// Id of the detected marker
         /// </summary>
-        public int Id;
+        public string Id;
 
         /// <summary>
         /// Position of the detected marker relative to the application origin
@@ -42,7 +42,7 @@ namespace Microsoft.MixedReality.SpectatorView
         /// <param name="id">Detected marker id</param>
         /// <param name="position">Position of the detected marker relative to the application origin</param>
         /// <param name="rotation">Rotation of the detected marker relative to the application origin</param>
-        public Marker(int id, Vector3 position, Quaternion rotation)
+        public Marker(string id, Vector3 position, Quaternion rotation)
         {
             Id = id;
             Position = position;

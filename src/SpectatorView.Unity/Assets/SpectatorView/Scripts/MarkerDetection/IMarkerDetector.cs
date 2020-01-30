@@ -9,7 +9,7 @@ namespace Microsoft.MixedReality.SpectatorView
     /// Delegate called when markers have been detected by an <see cref="IMarkerDetector"/>
     /// </summary>
     /// <param name="markers">Dictionary of <see cref="Marker"/>s that have been detected</param>
-    public delegate void MarkersUpdatedHandler(Dictionary<int, Marker> markers);
+    public delegate void MarkersUpdatedHandler(Dictionary<string, Marker> markers);
 
     /// <summary>
     /// Interface that should be implemented by any class that detects markers
@@ -50,6 +50,6 @@ namespace Microsoft.MixedReality.SpectatorView
         /// <param name="markerId">id of detected marker</param>
         /// <param name="size">The physical size (in meters) of the detected marker</param>
         /// <returns>True if the size was located</returns>
-        bool TryGetMarkerSize(int markerId, out float size);
+        bool TryGetMarkerSize(string markerId, out float size);
     }
 }

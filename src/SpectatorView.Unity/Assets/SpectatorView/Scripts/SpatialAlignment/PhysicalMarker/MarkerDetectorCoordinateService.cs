@@ -3,6 +3,7 @@
 
 using Microsoft.MixedReality.SpatialAlignment;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -13,9 +14,9 @@ namespace Microsoft.MixedReality.SpectatorView
     /// <summary>
     /// A marker detection based implementation of <see cref="Microsoft.MixedReality.SpatialAlignment.ISpatialCoordinateService"/>.
     /// </summary>
-    public class MarkerDetectorCoordinateService : SpatialCoordinateServiceBase<int>
+    public class MarkerDetectorCoordinateService : SpatialCoordinateServiceBase<string>
     {
-        private class SpatialCoordinate : SpatialCoordinateUnityBase<int>
+        private class SpatialCoordinate : SpatialCoordinateUnityBase<string>
         {
             private Marker marker;
 
@@ -77,7 +78,7 @@ namespace Microsoft.MixedReality.SpectatorView
             markerDetector.MarkersUpdated -= OnMarkersUpdated;
         }
 
-        private void OnMarkersUpdated(Dictionary<int, Marker> markers)
+        private void OnMarkersUpdated(Dictionary<string, Marker> markers)
         {
             DebugLog("Markers Updated");
             if (IsDisposed)
@@ -87,9 +88,9 @@ namespace Microsoft.MixedReality.SpectatorView
             }
 
             HashSet<SpatialCoordinate> newCoordinates = new HashSet<SpatialCoordinate>();
-            HashSet<int> seenIds = new HashSet<int>();
+            HashSet<string> seenIds = new HashSet<string>();
 
-            foreach (KeyValuePair<int, Marker> pair in markers)
+            foreach (KeyValuePair<string, Marker> pair in markers)
             {
                 DebugLog($"Got Marker Id: {pair.Key}");
                 seenIds.Add(pair.Key);
@@ -122,9 +123,13 @@ namespace Microsoft.MixedReality.SpectatorView
             }
         }
 
-        protected override bool TryParse(string id, out int result) => int.TryParse(id, out result);
+        protected override bool TryParse(string id, out string result)
+        {
+            result = id;
+            return true;
+        }
 
-        protected override async Task OnDiscoverCoordinatesAsync(CancellationToken cancellationToken, int[] idsToLocate = null)
+        protected override async Task OnDiscoverCoordinatesAsync(CancellationToken cancellationToken, string[] idsToLocate = null)
         {
 #if UNITY_EDITOR
             await OnDiscoverCoordinatesEditorAsync(cancellationToken, idsToLocate);
@@ -133,7 +138,7 @@ namespace Microsoft.MixedReality.SpectatorView
 #endif
         }
 
-        private async Task OnDiscoverCoordinatesImplAsync(CancellationToken cancellationToken, int[] idsToLocate = null)
+        private async Task OnDiscoverCoordinatesImplAsync(CancellationToken cancellationToken, string[] idsToLocate = null)
         {
             DebugLog("Starting detection");
             markerDetector.StartDetecting();
@@ -144,7 +149,7 @@ namespace Microsoft.MixedReality.SpectatorView
                     while (!cancellationToken.IsCancellationRequested)
                     {
                         bool allFound = true;
-                        foreach (int id in idsToLocate)
+                        foreach (string id in idsToLocate)
                         {
                             if (!knownCoordinates.TryGetValue(id, out ISpatialCoordinate coordinate) || coordinate.State == LocatedState.Unresolved)
                             {
@@ -183,7 +188,7 @@ namespace Microsoft.MixedReality.SpectatorView
             }
         }
 
-        private async Task OnDiscoverCoordinatesEditorAsync(CancellationToken cancellationToken, int[] idsToLocate = null)
+        private async Task OnDiscoverCoordinatesEditorAsync(CancellationToken cancellationToken, string[] idsToLocate = null)
         {
             if (idsToLocate == null ||
                 idsToLocate.Length != 1)
@@ -192,7 +197,7 @@ namespace Microsoft.MixedReality.SpectatorView
                 return;
             }
 
-            var coordinate = new SimulatedSpatialCoordinate<int>(idsToLocate[0], Vector3.zero, Quaternion.Euler(0, 180, 0));
+            var coordinate = new SimulatedSpatialCoordinate<string>(idsToLocate[0], Vector3.zero, Quaternion.Euler(0, 180, 0));
             DebugLog("Created artificial coordinate for debugging in the editor, waiting five seconds to fire detection event.");
             await Task.Delay(simulatedMarkerDetectionDelay, cancellationToken).IgnoreCancellation();
             OnNewCoordinate(coordinate.Id, coordinate);

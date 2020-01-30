@@ -12,7 +12,7 @@ namespace Microsoft.MixedReality.SpectatorView
 {
     public class MarkerDetectorLocalizationSettings : ISpatialLocalizationSettings, IEditableSpatialLocalizationSettings
     {
-        public int MarkerID { get; set; }
+        public string MarkerID { get; set; }
         public float MarkerSize { get; set; } = 0.1f;
 
         public void Serialize(BinaryWriter writer)
@@ -27,7 +27,7 @@ namespace Microsoft.MixedReality.SpectatorView
             {
                 settings = new MarkerDetectorLocalizationSettings
                 {
-                    MarkerID = reader.ReadInt32(),
+                    MarkerID = reader.ReadString(),
                     MarkerSize = reader.ReadSingle(),
                 };
                 return true;
@@ -56,7 +56,7 @@ namespace Microsoft.MixedReality.SpectatorView
 
             public override void OnGUI(Rect rect)
             {
-                settings.MarkerID = EditorGUILayout.IntField("Marker ID", settings.MarkerID);
+                settings.MarkerID = EditorGUILayout.TextField("Marker ID", settings.MarkerID);
                 settings.MarkerSize = EditorGUILayout.FloatField("Marker Size (m)", settings.MarkerSize);
             }
         }

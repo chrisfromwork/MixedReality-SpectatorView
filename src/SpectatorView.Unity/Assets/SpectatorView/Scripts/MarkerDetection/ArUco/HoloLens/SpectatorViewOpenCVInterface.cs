@@ -171,7 +171,7 @@ namespace Microsoft.MixedReality.SpectatorView
                                 var positionInUnityWorld = transformInUnityWorld.GetColumn(3);
                                 var rotationInUnityWorld = Quaternion.LookRotation(transformInUnityWorld.GetColumn(2), transformInUnityWorld.GetColumn(1));
 
-                                var marker = new Marker(id, positionInUnityWorld, rotationInUnityWorld);
+                                var marker = new Marker(id.ToString(), positionInUnityWorld, rotationInUnityWorld);
                                 Debug.Log("Marker detected: " + marker.ToString());
 
                                 dictionary[id] = marker;

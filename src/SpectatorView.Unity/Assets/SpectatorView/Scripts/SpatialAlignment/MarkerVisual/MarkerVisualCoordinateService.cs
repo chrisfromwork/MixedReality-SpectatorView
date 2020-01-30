@@ -13,9 +13,9 @@ namespace Microsoft.MixedReality.SpectatorView
     /// A variant of marker based <see cref="Microsoft.MixedReality.SpatialAlignment.ISpatialCoordinateService"/> implementation. This one tracks coordinates displayed on the screen of current mobile device.
     /// The logic is that every time you start tracking a new coordinate is created and shown on the screen, after you stop tracking that coordinates location is no longer updated with the device.
     /// </summary>
-    public class MarkerVisualCoordinateService : SpatialCoordinateServiceBase<int>
+    public class MarkerVisualCoordinateService : SpatialCoordinateServiceBase<string>
     {
-        private class SpatialCoordinate : SpatialCoordinateUnityBase<int>
+        private class SpatialCoordinate : SpatialCoordinateUnityBase<string>
         {
             private readonly IMarkerVisual markerVisual;
 
@@ -37,7 +37,7 @@ namespace Microsoft.MixedReality.SpectatorView
             /// <inheritdoc/>
             public override LocatedState State => locatedState;
 
-            public SpatialCoordinate(int id, IMarkerVisual markerVisual)
+            public SpatialCoordinate(string id, IMarkerVisual markerVisual)
                 : base(id) { this.markerVisual = markerVisual; }
 
             public void ShowMarker()
@@ -68,11 +68,10 @@ namespace Microsoft.MixedReality.SpectatorView
             DebugLog("Service Created");
         }
 
-        protected override bool TryParse(string id, out int result)
+        protected override bool TryParse(string id, out string result)
         {
-            DebugLog($"Parsing coordinate id: {id}");
-            result = -1;
-            return int.TryParse(id, out result);
+            result = id;
+            return true;
         }
 
         protected override void OnManagedDispose()
@@ -81,7 +80,7 @@ namespace Microsoft.MixedReality.SpectatorView
             DebugLog("Service Disposed");
         }
 
-        protected override async Task OnDiscoverCoordinatesAsync(CancellationToken cancellationToken, int[] idsToLocate)
+        protected override async Task OnDiscoverCoordinatesAsync(CancellationToken cancellationToken, string[] idsToLocate)
         {
             DebugLog($"OnDiscoverCoordinateAsync, CanBeCanceled:{cancellationToken.CanBeCanceled}, IsCancellationRequested:{cancellationToken.IsCancellationRequested}");
             if (idsToLocate == null || idsToLocate.Length < 1)

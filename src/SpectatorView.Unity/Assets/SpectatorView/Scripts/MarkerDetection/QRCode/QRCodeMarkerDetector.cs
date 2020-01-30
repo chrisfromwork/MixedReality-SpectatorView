@@ -37,12 +37,11 @@ namespace Microsoft.MixedReality.SpectatorView
         private QRCodesManager _qrCodesManager;
         private Dictionary<QRCode, SpatialCoordinateSystem> _markerCoordinateSystems = new Dictionary<QRCode, SpatialCoordinateSystem>();
         private bool _processMarkers = false;
-        private Dictionary<QRCode, int> _markerIds = new Dictionary<QRCode, int>();
+        private Dictionary<QRCode, string> _markerIds = new Dictionary<QRCode, string>();
 #endif
 
         private object _contentLock = new object();
-        private Dictionary<int, float> _markerSizes = new Dictionary<int, float>();
-        private readonly string _qrCodeNamePrefix = "sv";
+        private Dictionary<string, float> _markerSizes = new Dictionary<string, float>();
 
 #if ENABLE_QRCODES
         private bool _tracking = false;
@@ -87,7 +86,7 @@ namespace Microsoft.MixedReality.SpectatorView
         }
 
         /// <inheritdoc />
-        public bool TryGetMarkerSize(int markerId, out float size)
+        public bool TryGetMarkerSize(string markerId, out float size)
         {
             lock(_contentLock)
             {
@@ -197,7 +196,7 @@ namespace Microsoft.MixedReality.SpectatorView
         private void ProcessMarkerUpdates()
         {
             bool locatedAllMarkers = true;
-            var markerDictionary = new Dictionary<int, Marker>();
+            var markerDictionary = new Dictionary<string, Marker>();
             lock (_contentLock)
             {
                 foreach (var markerPair in _markerIds)
@@ -269,7 +268,7 @@ namespace Microsoft.MixedReality.SpectatorView
                 foreach (var key in keysToRemove)
                 {
                     DebugLog($"Removing QRCode based on old detection timestamp: {key.Data}");
-                    if (_markerIds.TryGetValue(key, out int id))
+                    if (_markerIds.TryGetValue(key, out string id))
                     {
                         _markerSizes.Remove(id);
                     }
@@ -281,21 +280,16 @@ namespace Microsoft.MixedReality.SpectatorView
 #endif
         }
 
-        private bool TryGetMarkerId(string qrCode, out int markerId)
+        private bool TryGetMarkerId(string qrCode, out string markerId)
         {
-            markerId = -1;
-            if (qrCode != null &&
-                qrCode.Trim().StartsWith(_qrCodeNamePrefix))
+            markerId = string.Empty;
+            if (!string.IsNullOrEmpty(qrCode))
             {
-                var qrCodeId = qrCode.Trim().Replace(_qrCodeNamePrefix, "");
-                if (Int32.TryParse(qrCodeId, out markerId))
-                {
-                    return true;
-                }
+                markerId = qrCode;
+                return true;
             }
 
             DebugLog($"Unable to obtain markerId for QR code: {qrCode}");
-            markerId = -1;
             return false;
         }
 

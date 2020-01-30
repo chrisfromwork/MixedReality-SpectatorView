@@ -14,7 +14,7 @@ namespace Microsoft.MixedReality.SpectatorView
         /// Shows the specified marker
         /// </summary>
         /// <param name="id">Id of the marker to show</param>
-        void ShowMarker(int id);
+        void ShowMarker(string id);
 
         /// <summary>
         /// Hides any shown markers
@@ -33,7 +33,7 @@ namespace Microsoft.MixedReality.SpectatorView
         /// </summary>
         /// <param name="supportedIds">Output maximum marker id</param>
         /// <returns>Returns true if the maximum marker id can be found, otherwise false.</returns>
-        bool TryGetMaxSupportedMarkerId(out int markerId);
+        bool GetSupportedMarkers(out HashSet<string> markerIds);
 
         /// <summary>
         /// Tries to set an additional scale factors for the marker visual.

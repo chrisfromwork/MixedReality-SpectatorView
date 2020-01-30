@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -39,7 +40,7 @@ namespace Microsoft.MixedReality.SpectatorView
 
         private float _additionalScaleFactor = 1.0f;
         private float _paddingScaling = 200.0f / (200.0f - (2.0f * 24.0f)); // sv*.png images have 24 pixels of padding
-        private const string _textureFileName = "sv*";
+        private const string _textureFileNamePrefix = "sv";
         private const int _maxMarkerId = 19;
         private TrackingState _cachedTrackingState = TrackingState.Unknown;
 
@@ -63,7 +64,7 @@ namespace Microsoft.MixedReality.SpectatorView
         }
 
         /// <inheritdoc />
-        public void ShowMarker(int id)
+        public void ShowMarker(string id)
         {
             if (_rawImage == null)
             {
@@ -79,11 +80,9 @@ namespace Microsoft.MixedReality.SpectatorView
 
             _content.SetActive(true);
 
-            var textureFileName = _textureFileName.Replace("*", id.ToString());
-
             Texture2D texture;
             if (_rawImage != null &&
-                TryLoadTexture(textureFileName, out texture))
+                TryLoadTexture(id, out texture))
             {
                 _rawImage.texture = texture;
                 var size = GetMarkerSizeInPixels();
@@ -91,7 +90,7 @@ namespace Microsoft.MixedReality.SpectatorView
             }
             else
             {
-                Debug.LogError("Failed to load texture: " + textureFileName);
+                Debug.LogError("Failed to load texture: " + id);
             }
         }
 
@@ -130,9 +129,13 @@ namespace Microsoft.MixedReality.SpectatorView
         }
 
         /// <inheritdoc />
-        public bool TryGetMaxSupportedMarkerId(out int markerId)
+        public bool GetSupportedMarkers(out HashSet<string> markerIds)
         {
-            markerId = _maxMarkerId;
+            markerIds = new HashSet<string>();
+            for (int i = 0; i <= _maxMarkerId; i++)
+            {
+                markerIds.Add($"{_textureFileNamePrefix}{i}");
+            }
             return true;
         }
 

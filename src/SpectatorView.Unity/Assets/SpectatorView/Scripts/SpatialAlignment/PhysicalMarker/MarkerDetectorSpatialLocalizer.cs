@@ -55,7 +55,7 @@ namespace Microsoft.MixedReality.SpectatorView
                 ISpatialCoordinate spatialCoordinate = null;
                 using (var cancellableCTS = CancellationTokenSource.CreateLinkedTokenSource(defaultCancellationToken, cancellationToken))
                 {
-                    await coordinateService.TryDiscoverCoordinatesAsync(cancellationToken, new int[] { settings.MarkerID });
+                    await coordinateService.TryDiscoverCoordinatesAsync(cancellationToken, new string[] { settings.MarkerID });
 
                     if (!coordinateService.TryGetKnownCoordinate(settings.MarkerID, out spatialCoordinate))
                     {

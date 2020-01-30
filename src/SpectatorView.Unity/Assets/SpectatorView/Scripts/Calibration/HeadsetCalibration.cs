@@ -4,6 +4,7 @@
 using System.Collections.Generic;
 using System.Collections.Concurrent;
 using UnityEngine;
+using System;
 
 namespace Microsoft.MixedReality.SpectatorView
 {
@@ -48,10 +49,11 @@ namespace Microsoft.MixedReality.SpectatorView
         public static readonly string UploadCalibrationCommandHeader= "UPLOADCALIBDATA";
         public static readonly string UploadCalibrationResultCommandHeader = "UPLOADCALIBRESULT";
 
+        private const string QRCodeMarkerPrefix = "sv";
         private bool markersUpdated = false;
-        private Dictionary<int, Marker> qrCodeMarkers = new Dictionary<int, Marker>();
-        private Dictionary<int, GameObject> qrCodeDebugVisuals = new Dictionary<int, GameObject>();
-        private Dictionary<int, GameObject> arucoDebugVisuals = new Dictionary<int, GameObject>();
+        private Dictionary<string, Marker> qrCodeMarkers = new Dictionary<string, Marker>();
+        private Dictionary<string, GameObject> qrCodeDebugVisuals = new Dictionary<string, GameObject>();
+        private Dictionary<string, GameObject> arucoDebugVisuals = new Dictionary<string, GameObject>();
         private readonly float markerPaddingRatio = 34f / (300f - (2f * 34f)); // padding pixels / marker width in pixels - This is based off of the output from CalibrationBoardGenerator.exe
         private Dictionary<int, MarkerPair> markerPairs = new Dictionary<int, MarkerPair>();
         private ConcurrentQueue<HeadsetCalibrationData> sendQueue = new ConcurrentQueue<HeadsetCalibrationData>();
@@ -72,9 +74,15 @@ namespace Microsoft.MixedReality.SpectatorView
             data.markers = new List<MarkerPair>();
             foreach (var qrCodePair in qrCodeMarkers)
             {
-                if (markerPairs.ContainsKey(qrCodePair.Key))
+                if (!TryConvertQRCodeMarkerId(qrCodePair.Key, out int id))
                 {
-                    var markerPair = markerPairs[qrCodePair.Key];
+                    Debug.LogWarning($"QRCode had unexpected id: {qrCodePair.Key}");
+                    continue;
+                }
+
+                if (markerPairs.ContainsKey(id))
+                {
+                    var markerPair = markerPairs[id];
                     data.markers.Add(markerPair);
                 }
             }
@@ -111,7 +119,7 @@ namespace Microsoft.MixedReality.SpectatorView
             }
         }
 
-        private void OnQRCodesMarkersUpdated(Dictionary<int, Marker> markers)
+        private void OnQRCodesMarkersUpdated(Dictionary<string, Marker> markers)
         {
             MergeDictionaries(qrCodeMarkers, markers);
             markersUpdated = true;
@@ -119,7 +127,7 @@ namespace Microsoft.MixedReality.SpectatorView
 
         private void ProcessQRCodeUpdate()
         {
-            HashSet<int> updatedMarkerIds = new HashSet<int>();
+            HashSet<string> updatedMarkerIds = new HashSet<string>();
 
             foreach (var marker in qrCodeMarkers)
             {
@@ -151,14 +159,21 @@ namespace Microsoft.MixedReality.SpectatorView
                         arucoDebugVisuals[marker.Key] = arucoDebugVisual;
                     }
 
-                    var markerPair = new MarkerPair();
-                    markerPair.id = marker.Key;
-                    markerPair.qrCodeMarkerCorners = CalculateMarkerCorners(qrCodeTopLeftPosition, qrCodeRotation, size);
-                    markerPair.arucoMarkerCorners = CalculateMarkerCorners(arucoTopLeftPosition, arucoRotation, size);
-
-                    lock (markerPairs)
+                    if (TryConvertQRCodeMarkerId(marker.Key, out int id))
                     {
-                        markerPairs[marker.Key] = markerPair;
+                        var markerPair = new MarkerPair();
+                        markerPair.id = id;
+                        markerPair.qrCodeMarkerCorners = CalculateMarkerCorners(qrCodeTopLeftPosition, qrCodeRotation, size);
+                        markerPair.arucoMarkerCorners = CalculateMarkerCorners(arucoTopLeftPosition, arucoRotation, size);
+
+                        lock (markerPairs)
+                        {
+                            markerPairs[id] = markerPair;
+                        }
+                    }
+                    else
+                    {
+                        Debug.LogWarning($"Observed unexpected marker id: {marker.Key}");
                     }
                 }
             }
@@ -167,9 +182,9 @@ namespace Microsoft.MixedReality.SpectatorView
             RemoveUnobservedItemsAndDestroy(arucoDebugVisuals, updatedMarkerIds);
         }
 
-        private static void MergeDictionaries(Dictionary<int, Marker> dictionary, Dictionary<int, Marker> update)
+        private static void MergeDictionaries(Dictionary<string, Marker> dictionary, Dictionary<string, Marker> update)
         {
-            HashSet<int> observedMarkers = new HashSet<int>();
+            HashSet<string> observedMarkers = new HashSet<string>();
             foreach (var markerUpdate in update)
             {
                 dictionary[markerUpdate.Key] = markerUpdate.Value;
@@ -242,6 +257,26 @@ namespace Microsoft.MixedReality.SpectatorView
             corners.bottomRight = originToTopLeftCorner.MultiplyPoint(new Vector3(-size, -size, 0));
             corners.orientation = topLeftOrientation;
             return corners;
+        }
+
+        private bool TryConvertQRCodeMarkerId(string markerId, out int id)
+        {
+            id = -1;
+            if (!markerId.StartsWith(QRCodeMarkerPrefix))
+            {
+                return false;
+            }
+
+            try
+            {
+                id = int.Parse(markerId.Remove(0, QRCodeMarkerPrefix.Length));
+                return true;
+            }
+            catch (Exception e)
+            {
+                Debug.LogError($"Exception thrown converting QR code marker id: {markerId}: {e.Message}");
+                return false;
+            }
         }
     }
 }

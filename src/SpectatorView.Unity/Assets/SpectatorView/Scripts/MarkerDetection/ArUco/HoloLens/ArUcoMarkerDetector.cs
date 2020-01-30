@@ -47,7 +47,7 @@ namespace Microsoft.MixedReality.SpectatorView
         private HoloLensCamera _holoLensCamera;
         private SpectatorViewOpenCVInterface _api = null;
         private bool _detecting = false;
-        private Dictionary<int, Marker> _nextMarkerUpdate;
+        private Dictionary<string, Marker> _nextMarkerUpdate;
         private MarkerDetectionCompletionStrategy _detectionCompletionStrategy;
         private object lockObj = new object();
         private Task setupCameraTask = null;
@@ -181,7 +181,7 @@ namespace Microsoft.MixedReality.SpectatorView
         }
 
         /// <inheritdoc />
-        public bool TryGetMarkerSize(int markerId, out float size)
+        public bool TryGetMarkerSize(string markerId, out float size)
         {
             size = 0.0f;
             return false;
@@ -287,7 +287,7 @@ namespace Microsoft.MixedReality.SpectatorView
                         }
                     }
 
-                    var validMarkers = new Dictionary<int, Marker>();
+                    var validMarkers = new Dictionary<string, Marker>();
                     foreach (var observationPair in _markerObservations)
                     {
                         Marker completedMarker;
@@ -318,7 +318,7 @@ namespace Microsoft.MixedReality.SpectatorView
 
         private void LogMessagesAboutMarker(string markerState, IReadOnlyList<Marker> allMarkers, IReadOnlyList<Marker> inlierMarkers, Marker averageMarker, Marker averageInlierMarker)
         {
-            int markerId = allMarkers.Count > 0 ? allMarkers[0].Id : -1;
+            string markerId = allMarkers.Count > 0 ? allMarkers[0].Id : string.Empty;
             double positionStandardDeviation = StandardDeviation(allMarkers, averageMarker, marker => (marker.Position - averageMarker.Position).magnitude);
             double rotationStandardDeviation = StandardDeviation(allMarkers, averageMarker, marker => Quaternion.Angle(marker.Rotation, averageMarker.Rotation));
 
@@ -332,7 +332,7 @@ namespace Microsoft.MixedReality.SpectatorView
         {
             var count = (float)markers.Count;
             var averagePos = Vector3.zero;
-            int id = -1;
+            string id = string.Empty;
             List<Quaternion> rotations = new List<Quaternion>();
             foreach (var marker in markers)
             {
