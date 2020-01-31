@@ -105,6 +105,7 @@ namespace Microsoft.MixedReality.SpectatorView.Editor
                     showCalibrationStatus: true,
                     showSpatialLocalization: true,
                     ref holographicCameraIPAddress);
+                CustomCameraIntrinsicsGUI(holographicCameraDevice);
             }
             EditorGUILayout.EndHorizontal();
         }

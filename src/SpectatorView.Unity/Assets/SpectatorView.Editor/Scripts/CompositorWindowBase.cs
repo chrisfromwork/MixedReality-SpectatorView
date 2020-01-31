@@ -56,6 +56,7 @@ namespace Microsoft.MixedReality.SpectatorView.Editor
         protected const int connectAndDisconnectButtonWidth = 90;
         private const int settingsButtonWidth = 24;
         private Dictionary<string, Rect> buttonRects = new Dictionary<string, Rect>();
+        private string cameraIntrinsicsPath = "";
 
         protected Guid selectedLocalizerId = Guid.Empty;
 
@@ -178,6 +179,25 @@ namespace Microsoft.MixedReality.SpectatorView.Editor
                 GUI.enabled = true;
             }
             EditorGUILayout.EndVertical();
+        }
+
+        protected void CustomCameraIntrinsicsGUI(DeviceInfoObserver deviceInfo)
+        {
+            GUI.enabled = (deviceInfo == null || deviceInfo.NetworkManager == null || !deviceInfo.NetworkManager.IsConnected);
+            EditorGUILayout.BeginVertical("Box");
+            {
+                RenderTitle("Custom Camera Intrinsics", Color.clear);
+                GUILayout.Label("Custom CameraIntrinsics.json path:");
+                cameraIntrinsicsPath = GUILayout.TextField(cameraIntrinsicsPath);
+                if (GUILayout.Button(new GUIContent("Apply"), GUILayout.Width(connectAndDisconnectButtonWidth)))
+                {
+                    CalculatedCameraIntrinsics intrinsics = CalibrationDataHelper.LoadCameraIntrinsics(cameraIntrinsicsPath);
+                    CompositionManager compositionManager = GetCompositionManager();
+                    compositionManager.ApplyCustomIntrinsics(intrinsics);
+                }
+            }
+            EditorGUILayout.EndVertical();
+            GUI.enabled = true;
         }
 
         private void SpatialLocalizationGUI(string deviceTypeLabel, SpatialCoordinateSystemParticipant spatialCoordinateSystemParticipant)

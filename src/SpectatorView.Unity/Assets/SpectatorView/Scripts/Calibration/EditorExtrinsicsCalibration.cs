@@ -264,7 +264,7 @@ namespace Microsoft.MixedReality.SpectatorView
             }
             else
             {
-                Debug.LogWarning("No usable marker datasets have been processed, unable to calculate camera extrinsics.");
+                Debug.LogWarning("No usable marker datasets have been processed, identity matrix will be used for extrinsics!");
             }
         }
 

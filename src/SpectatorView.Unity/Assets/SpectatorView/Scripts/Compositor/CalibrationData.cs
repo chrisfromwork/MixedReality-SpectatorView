@@ -55,6 +55,11 @@ namespace Microsoft.MixedReality.SpectatorView
         /// <inheritdoc />
         public void SetUnityCameraIntrinsics(Camera camera)
         {
+            ApplyCameraIntrinsics(camera, cameraIntrinsics);
+        }
+
+        public static void ApplyCameraIntrinsics(Camera camera, CalculatedCameraIntrinsics cameraIntrinsics)
+        {
             // D3D projection matrix (ProjectionMatrixToUnity accounts for it)
             Matrix4x4 projection = Matrix4x4.zero;
             projection[0, 0] = 2;

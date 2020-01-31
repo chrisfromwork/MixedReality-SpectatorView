@@ -539,6 +539,13 @@ namespace Microsoft.MixedReality.SpectatorView
 #endif
         }
 
+        public void ApplyCustomIntrinsics(CalculatedCameraIntrinsics cameraIntrinsics)
+        {
+#if UNITY_EDITOR
+            Microsoft.MixedReality.SpectatorView.CalibrationData.ApplyCameraIntrinsics(GetComponent<Camera>(), cameraIntrinsics);
+#endif
+        }
+
         /// <summary>
         /// Clears cached information about synchronized poses and time offsets.
         /// </summary>
