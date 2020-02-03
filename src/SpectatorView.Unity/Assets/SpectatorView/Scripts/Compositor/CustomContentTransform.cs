@@ -90,7 +90,7 @@ namespace Microsoft.MixedReality.SpectatorView
                 var appliedRotation = HolographicCamera.SharedSpatialCoordinateProxy.transform.rotation;
 
                 var sharedWorldPosition = appliedPosition;
-                var sharedWorldRotation = Quaternion.Euler(CustomRotation) * Quaternion.Euler(90, 0, 0) * appliedRotation;
+                var sharedWorldRotation = Quaternion.Euler(CustomRotation) * appliedRotation;
 
                 // This seems to be right but more testing is needed.
                 SharedWorldRootTransform.SetPositionAndRotation(sharedWorldPosition, sharedWorldRotation);
