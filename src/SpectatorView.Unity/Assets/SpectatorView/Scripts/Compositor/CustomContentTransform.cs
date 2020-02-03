@@ -11,6 +11,12 @@ namespace Microsoft.MixedReality.SpectatorView
         [SerializeField]
         private Vector3 CustomRotation;
 
+        [SerializeField]
+        private bool ApplyOffsetOnMarkerPlane;
+
+        [SerializeField]
+        private Vector2 MarkerPlaneOffset;
+
         HolographicCameraObserver HolographicCamera
         {
             get
@@ -72,7 +78,7 @@ namespace Microsoft.MixedReality.SpectatorView
             }
         }
 
-        void Update()
+        private void Update()
         {
             var participant = GetSpatialCoordinateSystemParticipant(HolographicCameraDevice);
             if (HolographicCamera != null &&
@@ -80,21 +86,32 @@ namespace Microsoft.MixedReality.SpectatorView
                 cachedCompositionManager != null &&
                 cachedCompositionManager.VideoCameraPose != null)
             {
-                var coordinatePosition = participant.PeerSpatialCoordinateWorldPosition;
-                var coordinateRotation = participant.PeerSpatialCoordinateWorldRotation;
+                // Unneeded for now
+                //var coordinatePosition = participant.PeerSpatialCoordinateWorldPosition;
+                //var coordinateRotation = participant.PeerSpatialCoordinateWorldRotation;
 
-                var cameraPosition = cachedCompositionManager.VideoCameraPose.transform.position;
-                var cameraRotation = cachedCompositionManager.VideoCameraPose.transform.rotation;
+                //var cameraPosition = cachedCompositionManager.VideoCameraPose.transform.position;
+                //var cameraRotation = cachedCompositionManager.VideoCameraPose.transform.rotation;
 
                 var appliedPosition = HolographicCamera.SharedSpatialCoordinateProxy.transform.position;
                 var appliedRotation = HolographicCamera.SharedSpatialCoordinateProxy.transform.rotation;
 
                 var sharedWorldPosition = appliedPosition;
+                if (ApplyOffsetOnMarkerPlane)
+                {
+                    sharedWorldPosition += CalcTopLeftFromCenter(sharedWorldPosition, appliedRotation, MarkerPlaneOffset);
+                }
                 var sharedWorldRotation = Quaternion.Euler(CustomRotation) * appliedRotation;
 
                 // This seems to be right but more testing is needed.
                 SharedWorldRootTransform.SetPositionAndRotation(sharedWorldPosition, sharedWorldRotation);
             }
+        }
+
+        private static Vector3 CalcTopLeftFromCenter(Vector3 middlePosition, Quaternion orientation, Vector2 offset)
+        {
+            var originToMiddle = Matrix4x4.TRS(middlePosition, orientation, Vector3.one);
+            return originToMiddle.MultiplyPoint(new Vector3(offset.x, offset.y, 0));
         }
     }
 }
