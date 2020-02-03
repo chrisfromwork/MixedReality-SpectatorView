@@ -30,7 +30,7 @@ namespace Microsoft.MixedReality.SpectatorView
 
         protected override int RemotePort => remotePort;
 
-        private GameObject sharedSpatialCoordinateProxy;
+        public GameObject SharedSpatialCoordinateProxy { get; private set; }
 
         protected override void Awake()
         {
@@ -51,12 +51,12 @@ namespace Microsoft.MixedReality.SpectatorView
         {
             if (appDeviceObserver != null &&
                 appDeviceObserver.ConnectedEndpoint != null &&
-                sharedSpatialCoordinateProxy != null &&
+                SharedSpatialCoordinateProxy != null &&
                 SpatialCoordinateSystemManager.IsInitialized &&
                 SpatialCoordinateSystemManager.Instance.TryGetSpatialCoordinateSystemParticipant(appDeviceObserver.ConnectedEndpoint, out SpatialCoordinateSystemParticipant participant))
             {
-                sharedSpatialCoordinateProxy.transform.position = participant.PeerSpatialCoordinateWorldPosition;
-                sharedSpatialCoordinateProxy.transform.rotation = participant.PeerSpatialCoordinateWorldRotation;
+                SharedSpatialCoordinateProxy.transform.position = participant.PeerSpatialCoordinateWorldPosition;
+                SharedSpatialCoordinateProxy.transform.rotation = participant.PeerSpatialCoordinateWorldRotation;
             }
         }
 
@@ -77,20 +77,20 @@ namespace Microsoft.MixedReality.SpectatorView
             CalculatedCameraCalibration calibration;
             if (CalculatedCameraCalibration.TryDeserialize(calibrationDataPayload, out calibration))
             {
-                if (sharedSpatialCoordinateProxy == null)
+                if (SharedSpatialCoordinateProxy == null)
                 {
-                    sharedSpatialCoordinateProxy = new GameObject("App HMD Shared Spatial Coordinate");
-                    sharedSpatialCoordinateProxy.transform.SetParent(transform, worldPositionStays: true);
+                    SharedSpatialCoordinateProxy = new GameObject("App HMD Shared Spatial Coordinate");
+                    SharedSpatialCoordinateProxy.transform.SetParent(transform, worldPositionStays: true);
                     if (appDeviceObserver != null &&
                         appDeviceObserver.ConnectedEndpoint != null &&
                         SpatialCoordinateSystemManager.IsInitialized &&
                         SpatialCoordinateSystemManager.Instance.TryGetSpatialCoordinateSystemParticipant(appDeviceObserver.ConnectedEndpoint, out SpatialCoordinateSystemParticipant participant))
                     {
-                        sharedSpatialCoordinateProxy.transform.position = participant.PeerSpatialCoordinateWorldPosition;
-                        sharedSpatialCoordinateProxy.transform.rotation = participant.PeerSpatialCoordinateWorldRotation;
+                        SharedSpatialCoordinateProxy.transform.position = participant.PeerSpatialCoordinateWorldPosition;
+                        SharedSpatialCoordinateProxy.transform.rotation = participant.PeerSpatialCoordinateWorldRotation;
                     }
                 }
-                compositionManager.EnableHolographicCamera(sharedSpatialCoordinateProxy.transform, new CalibrationData(calibration.Intrinsics, calibration.Extrinsics));
+                compositionManager.EnableHolographicCamera(SharedSpatialCoordinateProxy.transform, new CalibrationData(calibration.Intrinsics, calibration.Extrinsics));
             }
             else
             {
