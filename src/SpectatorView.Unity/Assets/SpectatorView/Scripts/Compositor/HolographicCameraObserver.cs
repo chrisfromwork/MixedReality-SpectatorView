@@ -30,7 +30,22 @@ namespace Microsoft.MixedReality.SpectatorView
 
         protected override int RemotePort => remotePort;
 
-        public GameObject SharedSpatialCoordinateProxy { get; private set; }
+        public GameObject SharedSpatialCoordinateProxy
+        {
+            get
+            {
+                if (sharedSpatialCoordinateProxy == null)
+                {
+                    sharedSpatialCoordinateProxy = new GameObject("App HMD Shared Spatial Coordinate");
+                    sharedSpatialCoordinateProxy.transform.SetParent(transform, worldPositionStays: true);
+                }
+
+                return sharedSpatialCoordinateProxy;
+            }
+        }
+        private GameObject sharedSpatialCoordinateProxy;
+        private bool receivedCalibration = false;
+
 
         protected override void Awake()
         {
@@ -51,7 +66,7 @@ namespace Microsoft.MixedReality.SpectatorView
         {
             if (appDeviceObserver != null &&
                 appDeviceObserver.ConnectedEndpoint != null &&
-                SharedSpatialCoordinateProxy != null &&
+                receivedCalibration &&
                 SpatialCoordinateSystemManager.IsInitialized &&
                 SpatialCoordinateSystemManager.Instance.TryGetSpatialCoordinateSystemParticipant(appDeviceObserver.ConnectedEndpoint, out SpatialCoordinateSystemParticipant participant))
             {
@@ -77,20 +92,8 @@ namespace Microsoft.MixedReality.SpectatorView
             CalculatedCameraCalibration calibration;
             if (CalculatedCameraCalibration.TryDeserialize(calibrationDataPayload, out calibration))
             {
-                if (SharedSpatialCoordinateProxy == null)
-                {
-                    SharedSpatialCoordinateProxy = new GameObject("App HMD Shared Spatial Coordinate");
-                    SharedSpatialCoordinateProxy.transform.SetParent(transform, worldPositionStays: true);
-                    if (appDeviceObserver != null &&
-                        appDeviceObserver.ConnectedEndpoint != null &&
-                        SpatialCoordinateSystemManager.IsInitialized &&
-                        SpatialCoordinateSystemManager.Instance.TryGetSpatialCoordinateSystemParticipant(appDeviceObserver.ConnectedEndpoint, out SpatialCoordinateSystemParticipant participant))
-                    {
-                        SharedSpatialCoordinateProxy.transform.position = participant.PeerSpatialCoordinateWorldPosition;
-                        SharedSpatialCoordinateProxy.transform.rotation = participant.PeerSpatialCoordinateWorldRotation;
-                    }
-                }
                 compositionManager.EnableHolographicCamera(SharedSpatialCoordinateProxy.transform, new CalibrationData(calibration.Intrinsics, calibration.Extrinsics));
+                receivedCalibration = true;
             }
             else
             {

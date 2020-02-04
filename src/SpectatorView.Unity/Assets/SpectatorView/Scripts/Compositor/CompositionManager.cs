@@ -547,6 +547,23 @@ namespace Microsoft.MixedReality.SpectatorView
 #endif
         }
 
+        public void ApplyCustomCameraPosition(Transform parent, Matrix4x4 cameraTransformMatrix, Matrix4x4 cameraExtrinsicsTransforMatrix)
+        {
+            if (VideoCameraPose == null)
+            {
+                VideoCameraPose = new GameObject("Camera HMD Pose");
+            }
+
+            VideoCameraPose.transform.SetParent(parent);
+            gameObject.transform.parent = VideoCameraPose.transform;
+
+            VideoCameraPose.transform.localPosition = cameraTransformMatrix.GetColumn(3);
+            VideoCameraPose.transform.localRotation = Quaternion.LookRotation(cameraTransformMatrix.GetColumn(2), cameraTransformMatrix.GetColumn(1));
+
+            this.transform.localPosition = cameraExtrinsicsTransforMatrix.GetColumn(3);
+            this.transform.localRotation = Quaternion.LookRotation(cameraExtrinsicsTransforMatrix.GetColumn(2), cameraExtrinsicsTransforMatrix.GetColumn(1));
+        }
+
         /// <summary>
         /// Clears cached information about synchronized poses and time offsets.
         /// </summary>

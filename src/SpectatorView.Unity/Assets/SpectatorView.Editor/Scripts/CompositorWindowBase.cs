@@ -54,9 +54,11 @@ namespace Microsoft.MixedReality.SpectatorView.Editor
         protected const int textureRenderModeSplit = 1;
         private const float quadPadding = 4;
         protected const int connectAndDisconnectButtonWidth = 90;
+        protected const int largeButtonWidth = 150;
         private const int settingsButtonWidth = 24;
         private Dictionary<string, Rect> buttonRects = new Dictionary<string, Rect>();
         private string cameraIntrinsicsPath = "";
+        private string cameraTransformPath = "";
 
         protected Guid selectedLocalizerId = Guid.Empty;
 
@@ -199,6 +201,40 @@ namespace Microsoft.MixedReality.SpectatorView.Editor
             EditorGUILayout.EndVertical();
             GUI.enabled = true;
         }
+
+        protected void CustomCameraPositionGUI(DeviceInfoObserver deviceInfo)
+        {
+            bool holographicDeviceConnected = (deviceInfo == null || deviceInfo.NetworkManager == null || !deviceInfo.NetworkManager.IsConnected);
+            EditorGUILayout.BeginVertical("Box");
+            {
+                RenderTitle("Custom Camera Transform", Color.clear);
+                GUI.enabled = !holographicDeviceConnected;
+                if (GUILayout.Button(new GUIContent("Save Current Transform"), GUILayout.ExpandWidth(true)))
+                {
+                    CompositionManager compositionManager = GetCompositionManager();
+                    HolographicCameraObserver observer = GetHolographicCameraObserver();
+                    var parentMatrix = Matrix4x4.TRS(observer.SharedSpatialCoordinateProxy.transform.localPosition, observer.SharedSpatialCoordinateProxy.transform.localRotation, Vector3.one);
+                    var cameraMatrix = Matrix4x4.TRS(compositionManager.VideoCameraPose.transform.localPosition, compositionManager.VideoCameraPose.transform.localRotation, Vector3.one);
+                    var extrinsicsMatrix = Matrix4x4.TRS(compositionManager.transform.localPosition, compositionManager.transform.localRotation, Vector3.one);
+                    var cameraTransform = new CustomCameraTransform(cameraMatrix, extrinsicsMatrix);
+                    CustomCameraTransform.SaveCameraTransform(cameraTransform);
+                }
+
+                GUI.enabled = holographicDeviceConnected;
+                GUILayout.Label("Custom CameraTransform.json path:");
+                cameraTransformPath = GUILayout.TextField(cameraTransformPath);
+                if (GUILayout.Button(new GUIContent("Apply"), GUILayout.Width(connectAndDisconnectButtonWidth)))
+                {
+                    CompositionManager compositionManager = GetCompositionManager();
+                    HolographicCameraObserver observer = GetHolographicCameraObserver();
+                    var cameraTransform = CustomCameraTransform.LoadCameraTransform(cameraTransformPath);
+                    compositionManager.ApplyCustomCameraPosition(observer.SharedSpatialCoordinateProxy.transform, cameraTransform.Transform, cameraTransform.ExtrinsicsTransform);
+                }
+            }
+            EditorGUILayout.EndVertical();
+            GUI.enabled = true;
+        }
+
 
         private void SpatialLocalizationGUI(string deviceTypeLabel, SpatialCoordinateSystemParticipant spatialCoordinateSystemParticipant)
         {
