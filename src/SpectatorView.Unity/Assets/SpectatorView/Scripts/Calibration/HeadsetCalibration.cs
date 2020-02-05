@@ -54,7 +54,7 @@ namespace Microsoft.MixedReality.SpectatorView
         private Dictionary<string, Marker> qrCodeMarkers = new Dictionary<string, Marker>();
         private Dictionary<string, GameObject> qrCodeDebugVisuals = new Dictionary<string, GameObject>();
         private Dictionary<string, GameObject> arucoDebugVisuals = new Dictionary<string, GameObject>();
-        private readonly float markerPaddingRatio = 34f / (300f - (2f * 34f)); // padding pixels / marker width in pixels - This is based off of the output from CalibrationBoardGenerator.exe
+        public static readonly float MarkerPaddingRatio = 34f / (300f - (2f * 34f)); // padding pixels / marker width in pixels - This is based off of the output from CalibrationBoardGenerator.exe
         private Dictionary<int, MarkerPair> markerPairs = new Dictionary<int, MarkerPair>();
         private ConcurrentQueue<HeadsetCalibrationData> sendQueue = new ConcurrentQueue<HeadsetCalibrationData>();
 
@@ -147,7 +147,7 @@ namespace Microsoft.MixedReality.SpectatorView
                     }
 
                     var originToQRCode = Matrix4x4.TRS(qrCodeTopLeftPosition, qrCodeRotation, Vector3.one);
-                    var arucoTopLeftPosition = originToQRCode.MultiplyPoint(new Vector3(-1.0f * ((2.0f * (size * markerPaddingRatio)) + (size)), 0, 0));
+                    var arucoTopLeftPosition = originToQRCode.MultiplyPoint(new Vector3(-1.0f * ((2.0f * (size * MarkerPaddingRatio)) + (size)), 0, 0));
                     // We assume that the aruco marker has the same orientation as the qr code marker because they are on the same plane/2d calibration board.
                     var arucoRotation = marker.Value.Rotation;
 
