@@ -5,7 +5,8 @@ function SetupRepository
 {
     param(
         [switch] $iOS,
-        [switch] $NoDownloads
+        [switch] $NoDownloads,
+        [switch] $NoSymbolicLinks
     )
     
     $origLoc = Get-Location
@@ -27,7 +28,10 @@ function SetupRepository
     # Ensure that submodules are initialized and cloned.
     Write-Output "Updating spectator view related submodules."
     git submodule update --init
-    
-    FixSymbolicLinks
+
+    If (!$NoSymbolicLinks)
+    {
+        FixSymbolicLinks
+    }
     Set-Location $origLoc
 }
