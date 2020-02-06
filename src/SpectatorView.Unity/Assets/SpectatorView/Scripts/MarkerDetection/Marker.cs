@@ -16,11 +16,13 @@ namespace Microsoft.MixedReality.SpectatorView
         /// <summary>
         /// Id of the detected marker
         /// </summary>
+        [SerializeField]
         public string Id;
 
         /// <summary>
         /// Position of the detected marker relative to the application origin
         /// </summary>
+        [SerializeField]
         public Vector3 Position;
 
         /// <summary>
@@ -29,6 +31,7 @@ namespace Microsoft.MixedReality.SpectatorView
         /// Y-Axis positive direction is upward along the marker.
         /// Z-Axis positive direction is outward from the marker compared to into the marker.
         /// </summary>
+        [SerializeField]
         public Quaternion Rotation;
 
         /// <summary>
