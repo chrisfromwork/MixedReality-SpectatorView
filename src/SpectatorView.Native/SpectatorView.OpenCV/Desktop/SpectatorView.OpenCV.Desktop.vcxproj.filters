@@ -11,6 +11,9 @@
       <Filter>Shared Files</Filter>
     </ClInclude>
     <ClInclude Include="..\SharedFiles\SpectatorViewPlugin.h" />
+    <ClInclude Include="..\SharedFiles\ChessboardStereoCalibration.h">
+      <Filter>Shared Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\SharedFiles\ArUcoMarkerDetector.cpp">
@@ -21,6 +24,9 @@
     </ClCompile>
     <ClCompile Include="..\SharedFiles\dllmain.cpp" />
     <ClCompile Include="..\SharedFiles\SpectatorViewPlugin.cpp" />
+    <ClCompile Include="..\SharedFiles\ChessboardStereoCalibration.cpp">
+      <Filter>Shared Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Shared Files">

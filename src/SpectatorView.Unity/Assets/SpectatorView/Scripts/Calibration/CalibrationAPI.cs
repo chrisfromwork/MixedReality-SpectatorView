@@ -450,4 +450,76 @@ namespace Microsoft.MixedReality.SpectatorView
             return calcExtrinsics;
         }
     }
+
+    public class StereoCalibrationAPI
+    {
+        private const string SpectatorViewOpenCVDll = "SpectatorView.OpenCV";
+
+        [DllImport(SpectatorViewOpenCVDll, EntryPoint = "InitializeChessboardStereoCalibration")]
+        internal static extern bool InitializeChessboardStereoCalibrationNative();
+
+        [DllImport(SpectatorViewOpenCVDll, EntryPoint = "TryCalibrateChessboardStereoCalibration")]
+        internal static extern bool TryCalibrateChessboardStereoCalibrationNative(
+            int numImages,
+            int requiredImages,
+            byte[] images,
+            int width,
+            int height,
+            int pixelSize,
+            int chessboardWidth,
+            int chessboardHeight,
+            float chessboardSideLength,
+            float[] cameraProperties,
+            float[] cameraDistCoeffProperties,
+            float[] cameraTransforms);
+
+        public static StereoCalibrationAPI Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new StereoCalibrationAPI();
+                    instance.Initialize();
+                }
+
+                return instance;
+            }
+        }
+        private static StereoCalibrationAPI instance;
+
+        public void Initialize()
+        {
+            InitializeChessboardStereoCalibrationNative();
+        }
+
+        public bool TryCalibrate(
+            int numImages,
+            int requiredImages,
+            byte[] images,
+            int width,
+            int height,
+            int pixelSize,
+            int chessboardWidth,
+            int chessboardHeight,
+            float chessboardSideLength,
+            float[] cameraProperties,
+            float[] cameraDistCoeffProperties,
+            float[] cameraTransforms)
+        {
+            return TryCalibrateChessboardStereoCalibrationNative(
+                numImages,
+                requiredImages,
+                images,
+                width,
+                height,
+                pixelSize,
+                chessboardWidth,
+                chessboardHeight,
+                chessboardSideLength,
+                cameraProperties,
+                cameraDistCoeffProperties,
+                cameraTransforms);
+        }
+    }
 }

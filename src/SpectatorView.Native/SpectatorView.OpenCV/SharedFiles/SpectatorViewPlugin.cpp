@@ -3,9 +3,11 @@
 #include "SpectatorViewPlugin.h"
 #include "ArUcoMarkerDetector.h"
 #include "Calibration.h"
+#include "ChessboardStereoCalibration.h"
 
 std::unique_ptr<Calibration> calibration;
 std::unique_ptr<ArUcoMarkerDetector> detector;
+std::unique_ptr<ChessboardStereoCalibration> chessboardStereoCalibration;
 
 // Returns True to signal that this dll has been accessed correctly by its caller.
 extern "C" __declspec(dllexport) bool __stdcall Initialize()
@@ -302,4 +304,48 @@ extern "C" __declspec(dllexport) bool __stdcall GetLastErrorMessage(
     }
 
     return false;
+}
+
+extern "C" __declspec(dllexport) void __stdcall InitializeChessboardStereoCalibration()
+{
+	if (!chessboardStereoCalibration)
+	{
+		chessboardStereoCalibration = std::make_unique<ChessboardStereoCalibration>();
+	}
+
+	chessboardStereoCalibration->Initialize();
+}
+
+extern "C" __declspec(dllexport) bool __stdcall TryCalibrateChessboardStereoCalibration(
+	int numImages,
+	int requiredImages,
+	unsigned char *images,
+	int width,
+	int height,
+	int pixelSize,
+	int chessboardWidth,
+	int chessboardHeight,
+	float chessboardSideLength,
+	float *cameraProperties,
+	float *cameraDistCoeffProperties,
+	float *cameraTransforms)
+{
+	if (!chessboardStereoCalibration)
+	{
+		return false;
+	}
+
+	return chessboardStereoCalibration->TryCalibrate(
+		numImages,
+		requiredImages,
+		images,
+		width,
+		height,
+		pixelSize,
+		chessboardWidth,
+		chessboardHeight,
+		chessboardSideLength,
+		cameraProperties,
+		cameraDistCoeffProperties,
+		cameraTransforms);
 }
