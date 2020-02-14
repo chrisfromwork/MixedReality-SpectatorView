@@ -427,8 +427,10 @@ namespace Microsoft.MixedReality.SpectatorView
             }
         }
 
-        private void OnPostRender()
+        private IEnumerator OnPostRender()
         {
+            yield return new WaitForEndOfFrame();
+
             displayOutputTexture.DiscardContents();
 
             RenderTexture sourceTexture = spectatorViewCamera.targetTexture;
