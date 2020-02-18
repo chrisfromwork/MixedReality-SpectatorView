@@ -208,6 +208,7 @@ bool ChessboardStereoCalibration::TryCalibrate(
 	float chessboardSideLength,
 	float *cameraProperties,
 	float *cameraDistCoeffProperties,
+	bool *completed,
 	float *cameraTransforms)
 {
 	cv::Size chessboard_pattern(chessboardWidth, chessboardHeight);
@@ -240,6 +241,7 @@ bool ChessboardStereoCalibration::TryCalibrate(
 	cv::Mat mainCameraMat = color_to_opencv(images, width, height);
 	std::vector<cv::Mat> cameraMats;
 	bool calibratedAllImages = true;
+	bool foundAllChessboards = false;
 	std::vector<Transformation> transformations;
 	for (int i = 1; i < numImages; i++)
 	{
@@ -265,6 +267,10 @@ bool ChessboardStereoCalibration::TryCalibrate(
 				mainCameraMatCorners.at(i - 1).push_back(main_chessboard_corners);
 				cameraMatCorners.at(i - 1).push_back(secondary_chessboard_corners);
 			}
+		}
+		else
+		{
+			foundAllChessboards = false;
 		}
 
 		if (cameraMatCorners.size() > (i - 1) &&
@@ -292,6 +298,7 @@ bool ChessboardStereoCalibration::TryCalibrate(
 
 	if (calibratedAllImages)
 	{
+		*completed = true;
 		int matrixSize = 16;
 		for (int i = 0; i < transformations.size(); i++)
 		{
@@ -321,133 +328,10 @@ bool ChessboardStereoCalibration::TryCalibrate(
 		mainCameraMatCorners.clear();
 		cameraMatCorners.clear();
 	}
-
-	return calibratedAllImages;
-}
-
-bool ChessboardStereoCalibration::TryCalibratePnP(
-	int numImages,
-	int requiredImages,
-	unsigned char *images,
-	int width,
-	int height,
-	int pixelSize,
-	int chessboardWidth,
-	int chessboardHeight,
-	float chessboardSideLength,
-	float *cameraProperties,
-	float *cameraDistCoeffProperties,
-	float *cameraTransforms)
-{
-	cv::Size chessboard_pattern(chessboardWidth, chessboardHeight);
-	float chessboard_square_length = chessboardSideLength;
-	std::vector<cv::Point3f> chessboard_corners_world;
-	for (int h = 0; h < chessboard_pattern.height; ++h)
+	else
 	{
-		for (int w = 0; w < chessboard_pattern.width; ++w)
-		{
-			chessboard_corners_world.emplace_back(
-				cv::Point3f{ w * chessboard_square_length, h * chessboard_square_length, 0.0 });
-		}
+		*completed = false;
 	}
 
-	std::vector<cv::Matx33f> cameraMatrices;
-	std::vector<std::vector<float>> cameraDistCoeffs;
-	for (int i = 0; i < numImages; i++)
-	{
-		cv::Matx33f cameraMat = cv::Matx33f::eye();
-		cameraMat(0, 0) = cameraProperties[i * 4]; // i.fx;
-		cameraMat(1, 1) = cameraProperties[i * 4 + 1]; // i.fy;
-		cameraMat(0, 2) = cameraProperties[i * 4 + 2]; // i.cx;
-		cameraMat(1, 2) = cameraProperties[i * 4 + 3]; // i.cy;
-		cameraMatrices.push_back(cameraMat);
-
-		std::vector<float> cameraDistCoeff{ // i.k1, i.k2, i.p1, i.p2, i.k3, i.k4, i.k5, i.k6 
-			cameraDistCoeffProperties[i * 8],
-			cameraDistCoeffProperties[i * 8 + 1],
-			cameraDistCoeffProperties[i * 8 + 2],
-			cameraDistCoeffProperties[i * 8 + 3],
-			cameraDistCoeffProperties[i * 8 + 4],
-			cameraDistCoeffProperties[i * 8 + 5],
-			cameraDistCoeffProperties[i * 8 + 6],
-			cameraDistCoeffProperties[i * 8 + 7] };
-		cameraDistCoeffs.push_back(cameraDistCoeff);
-	}
-
-	int imageSize = width * height * pixelSize;
-	std::vector<cv::Mat> cameraMats;
-	bool calibratedAllImages = true;
-	std::vector<cv::Mat> tvecs;
-	std::vector<cv::Mat> rvecs;
-	for (int i = 0; i < numImages; i++)
-	{
-		cv::Mat tempMat = color_to_opencv(&(images[i * imageSize]), width, height);
-		std::vector<cv::Point2f> corners;
-		bool foundCorners = cv::findChessboardCorners(tempMat,
-			chessboard_pattern,
-			corners);
-
-		if (foundCorners)
-		{
-			if (cameraMatCornersPnP.size() == i)
-			{
-				cameraMatCornersPnP.push_back({ corners });
-			}
-			else
-			{
-				cameraMatCornersPnP.at(i).push_back(corners);
-			}
-		}
-
-		if (cameraMatCornersPnP.size() > i) // todo - we can no longer use 
-		{
-			std::vector<cv::Point2f> allPointsInImage;
-			for (auto points : cameraMatCornersPnP.at(i))
-			{
-				for (auto point : points)
-				{
-					allPointsInImage.push_back(point);
-				}
-			}
-
-			cv::Mat rvecsMatIterative, tvecsMatIterative;
-			auto iterativeError = cv::solvePnP(
-				chessboard_corners_world,
-				allPointsInImage,
-				cameraMatrices.at(i),
-				cameraDistCoeffs.at(i),
-				rvecsMatIterative,
-				tvecsMatIterative,
-				false,
-				cv::SOLVEPNP_ITERATIVE);
-
-			tvecs.push_back(tvecsMatIterative);
-			rvecs.push_back(rvecsMatIterative);
-		}
-		else
-		{
-			calibratedAllImages = false;
-		}
-	}
-
-	if (calibratedAllImages)
-	{
-		int matrixSize = 16;
-		for (int i = 0; i < tvecs.size() && i < rvecs.size(); i++)
-		{
-			auto t = tvecs.at(i);
-			auto r = rvecs.at(i);
-			cameraTransforms[i * matrixSize] = t.at<double>(0, 0);
-			cameraTransforms[i * matrixSize + 1] = t.at<double>(0, 1);
-			cameraTransforms[i * matrixSize + 2] = t.at<double>(0, 2);
-			cameraTransforms[i * matrixSize + 3] = r.at<double>(0, 0);
-			cameraTransforms[i * matrixSize + 4] = r.at<double>(0, 1);
-			cameraTransforms[i * matrixSize + 5] = r.at<double>(0, 2);
-			// TODO - fix array sizes
-		}
-
-		cameraMatCornersPnP.clear();
-	}
-
-	return calibratedAllImages;
+	return foundAllChessboards;
 }
