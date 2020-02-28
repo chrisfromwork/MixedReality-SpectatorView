@@ -339,6 +339,22 @@ namespace Microsoft.MixedReality.SpectatorView.Editor
                         RenderTitle("Raw Depth Camera Settings", Color.clear);
                         EditorGUILayout.BeginHorizontal();
                         {
+                            GUIContent label = new GUIContent("Depth Time Delay");
+                            compositionManager.TextureManager.percentageOfPreviousDepthFrame = EditorGUILayout.Slider(
+                                label,
+                                compositionManager.TextureManager.percentageOfPreviousDepthFrame, 0, 1);
+                        }
+                        EditorGUILayout.EndHorizontal();
+                        EditorGUILayout.BeginHorizontal();
+                        {
+                            GUIContent label = new GUIContent("Depth Change Threshold");
+                            compositionManager.TextureManager.depthDiffThreshold = EditorGUILayout.Slider(
+                                label,
+                                compositionManager.TextureManager.depthDiffThreshold, 0, 0.3f);
+                        }
+                        EditorGUILayout.EndHorizontal();
+                        EditorGUILayout.BeginHorizontal();
+                        {
                             GUIContent label = new GUIContent("Blur Size");
                             compositionManager.TextureManager.blurSize = EditorGUILayout.Slider(
                                 label,

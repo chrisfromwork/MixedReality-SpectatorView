@@ -177,6 +177,16 @@ namespace Microsoft.MixedReality.SpectatorView
         private Texture2D depthTexture = null;
 
         /// <summary>
+        /// The texture used to cache depth information across frames
+        /// </summary>
+        private RenderTexture cachedDepthTexture = null;
+
+        /// <summary>
+        /// The texture used to help cache depth information across frames
+        /// </summary>
+        private RenderTexture depthTextureHelper = null;
+
+        /// <summary>
         /// The texture used to occlude holograms with a body mask
         /// </summary>
         private Texture2D bodyMaskTexture = null;
@@ -222,6 +232,8 @@ namespace Microsoft.MixedReality.SpectatorView
         public float occlusionMinHologramDepth { get; set; } = 0;
         public float occlusionMaxDepth { get; set; } = 10;
         public float blurSize { get; set; } = 5;
+        public float percentageOfPreviousDepthFrame { get; set; } = 0.3f;
+        public float depthDiffThreshold { get; set; } = 0.1f;
 
         private Material ignoreAlphaMat;
         private Material BGRToRGBMat;
@@ -240,6 +252,7 @@ namespace Microsoft.MixedReality.SpectatorView
         private Material downsampleMat;
         private Material[] downsampleMats;
         private Material colorCorrectionMat;
+        private Material delayMat;
 
         private Camera spectatorViewCamera;
 
@@ -344,6 +357,7 @@ namespace Microsoft.MixedReality.SpectatorView
             alphaBlendMat = LoadMaterial("AlphaBlend");
             textureClearMat = LoadMaterial("TextureClear");
             colorCorrectionMat = LoadMaterial("ColorCorrection");
+            delayMat = LoadMaterial("Delay");
 
             videoFeedColorCorrection = ColorCorrection.GetColorCorrection(VideoFeedColorCorrectionPlayerPrefName);
             occlusionMinHologramDepth = PlayerPrefs.GetFloat($"{nameof(TextureManager)}.{nameof(occlusionMinHologramDepth)}", 0);
@@ -425,6 +439,8 @@ namespace Microsoft.MixedReality.SpectatorView
             compositeTexture = new RenderTexture(frameWidth, frameHeight, (int)Compositor.TextureDepth);
             occlusionMaskTexture = new RenderTexture(frameWidth, frameHeight, (int)Compositor.TextureDepth);
             blurOcclusionTexture = new RenderTexture(frameWidth, frameHeight, (int)Compositor.TextureDepth);
+            cachedDepthTexture = new RenderTexture(frameWidth, frameHeight, (int)Compositor.TextureDepth, RenderTextureFormat.R16);
+            depthTextureHelper = new RenderTexture(frameWidth, frameHeight, (int)Compositor.TextureDepth, RenderTextureFormat.R16);
 
             if (supersampleBuffers.Length > 0)
             {
@@ -489,7 +505,13 @@ namespace Microsoft.MixedReality.SpectatorView
             if (IsOcclusionMaskNeededForPreviewing ||
                 !IsVideoRecordingQuadrantMode)
             {
-                occlusionMaskMat.SetTexture("_DepthTexture", depthTexture);
+                delayMat.SetTexture("_PrevTex", cachedDepthTexture);
+                delayMat.SetFloat("_PercPrev", percentageOfPreviousDepthFrame);
+                delayMat.SetFloat("_Threshold", depthDiffThreshold);
+                Graphics.Blit(depthTexture, depthTextureHelper, delayMat);
+                Graphics.Blit(depthTextureHelper, cachedDepthTexture);
+
+                occlusionMaskMat.SetTexture("_DepthTexture", cachedDepthTexture);
                 occlusionMaskMat.SetTexture("_BodyMaskTexture", bodyMaskTexture);
                 occlusionMaskMat.SetFloat("_MinHologramDepth", occlusionMinHologramDepth);
                 occlusionMaskMat.SetFloat("_MaxOcclusionDepth", occlusionMaxDepth);

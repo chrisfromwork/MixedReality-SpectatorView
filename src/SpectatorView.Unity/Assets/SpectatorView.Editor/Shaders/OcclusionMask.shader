@@ -49,6 +49,9 @@
 
             fixed4 frag (v2f i) : SV_Target
             {
+				// Note: we flip y indices when sampling depth and body mask textures.
+				// WinRT image buffers are vertically flipped when compared to Unity image buffers.
+
                 half4 maskVal = fixed4(0,0,0,0);
 
                 float rawHologramDepth = SAMPLE_DEPTH_TEXTURE(_LastCameraDepthTexture, i.uv);
@@ -65,7 +68,8 @@
 					isHologramOccluded = 1.0f;
 				}
 
-                float bodyMask = _BodyMaskTexture.Sample(sampler_point_clamp, float2(i.uv[0], i.uv[1])).r * 65535;
+                float bodyMask = _BodyMaskTexture.Sample(sampler_point_clamp, float2(i.uv[0], 1-i.uv[1])).r * 65535;
+				bodyMask = bodyMask < _MaxOcclusionDepth && bodyMask < hologramDepth ? 1.0 : bodyMask;
 
                 maskVal.r = max(1 - isHologramOccluded, 1 - bodyMask);
                 
