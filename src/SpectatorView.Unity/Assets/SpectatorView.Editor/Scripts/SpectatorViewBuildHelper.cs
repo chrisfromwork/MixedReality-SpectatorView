@@ -99,8 +99,7 @@ namespace Microsoft.MixedReality.SpectatorView.Editor
                 .Where(assetPath => assetPath.Contains("/SpatialAlignment.ASA/Plugins/Android/"));
             if (androidManifestPaths.Count() != 1)
             {
-                Debug.LogError("Located multiple Azure Spatial Anchors AndroidManifest.xml files. Failed to configure Spectator View for Android.");
-                return;
+                Debug.LogWarning("Located multiple Azure Spatial Anchors AndroidManifest.xml files. Build may fail to configure Spectator View for Android.");
             }
 
             string asaManifestPath = Path.Combine(androidManifestPaths.First());
@@ -176,8 +175,7 @@ namespace Microsoft.MixedReality.SpectatorView.Editor
                 .Where(assetPath => assetPath.Contains("/SpatialAlignment.ASA/Plugins/Android/"));
             if (gradleFiles.Count() != 1)
             {
-                Debug.LogError("Located multiple Azure Spatial Anchors mainTemplate.gradle files. Failed to configure Spectator View for Android.");
-                return;
+                Debug.LogWarning("Located multiple Azure Spatial Anchors mainTemplate.gradle files. Build may fail to configure Spectator View for Android.");
             }
 
             string outputGradleBackupFilePath = Path.Combine(androidPluginsDirectory, "mainTemplate.gradle.backup");
