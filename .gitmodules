@@ -1,12 +1,3 @@
-[submodule "external/MixedRealityToolkit-Unity"]
-	path = external/MixedRealityToolkit-Unity
-	url = https://github.com/microsoft/MixedRealityToolkit-Unity
-	branch = mrtk_development
-	ignore = dirty
-[submodule "external/Azure-Spatial-Anchors-Samples"]
-	path = external/Azure-Spatial-Anchors-Samples
-	url = https://github.com/azure/azure-spatial-anchors-samples
-	ignore = dirty
 [submodule "external/gamecapture"]
 	path = external/gamecapture
 	url = https://github.com/elgatosf/gamecapture.git
